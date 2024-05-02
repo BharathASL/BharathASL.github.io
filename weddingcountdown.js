@@ -54,7 +54,7 @@
 
       },
       background: function (s) {
-        var backgroundStyles = 'body {background: url(' + s.imageUrl + '); background-repeat: no-repeat; background-position: top; background-attachment: fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;}';
+        var backgroundStyles = 'body {background: url(' + s.imageUrl + '); background-repeat: no-repeat; background-position: left; background-attachment: fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;}';
         bkgStyles = d.createElement('style');
         bkgStyles.setAttribute('type', 'text/css');
         bkgStyles.innerHTML = backgroundStyles;

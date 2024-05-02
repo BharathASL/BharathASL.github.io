@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tartan Weddings</title>
+  <meta name="viewport" content="width=device-width, , user-scalable=no">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body ><!-- onload="init2()" -->
+<!-- <img src="test.jpg" width="100%" /> -->
+<!-- <h1>Scotland</h1> -->
+<div id="wrap">
+
+  <div class="inner"></div>
+    <div class="metric have-been-married"></div>
+    <div class="metric days"></div>
+    <div class="metric hours"></div>
+    <div class="metric minutes"></div>
+    <div class="metric seconds"></div>
+    <h2 class="metric tagline"></h2>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<!-- <script src="js/jquery.js"></script> -->
+
+<script>
+  (function(w){
+    w.until = w.until || {};
+    var urlParams = new URLSearchParams(window.location.search),
+    couple = urlParams.get('couple') || 'Default',
+    date = urlParams.get('date'),
+    background = urlParams.get('background'),
+    settings = {
+      coupleName: couple,
+      date: date,
+      imageUrl: background
+    }
+    w.until.settings = settings;
+  })(window);
+  
+</script>
+
+<script src="weddingcountdown.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+@import "colors.scss";
+
+* {
+    transition: 0.5s;
+}
+
+body {
+    height: 100%;
+}
+
+$container-padding-horizontal: 80px;
+
+.container {
+    padding: 0 $container-padding-horizontal !important;
+}
+
+header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    padding: 30px 0;
+    height: 110px;
+    > .nav {
+        justify-self: center;
+        * {
+            padding: 0 10px;
+            @include theme(color, secondary-text, null, !important);
+            text-decoration: none;
+            line-height: 1.5;
+            &:hover,
+            &.active {
+                @include theme(color, text, null, !important);
+                cursor: pointer;
+            }
+        }
+    }
+    > .search {
+        justify-self: end;
+        position: relative;
+        input {
+            padding: 10px 40px 10px 20px;
+            &:focus {
+                width: 300px;
+            }
+        }
+        svg {
+            position: absolute;
+            height: 15px;
+            width: 15px;
+            padding: 12.5px;
+            right: 0;
+            opacity: 0.5;
+            border-radius: 7px;
+        }
+
+        &:focus-within > svg {
+            opacity: 1;
+            @include theme(background, brand);
+            cursor: pointer;
+        }
+    }
+}
+
+main {
+    .banner {
+        height: calc(100vh - 110px);
+        display: grid;
+        grid-template-columns: minmax(auto, 50%) 1fr;
+        align-items: center;
+        img {
+            height: inherit;
+            width: auto;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            margin: -$container-padding-horizontal;
+        }
+    }
+}

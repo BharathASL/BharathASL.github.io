@@ -1,0 +1,45 @@
+# Ignore the .vscode folder (Visual Studio Code settings)
+.vscode/
+
+# Ignore node_modules (if using Node.js)
+node_modules/
+
+# Ignore build or dist directories (if you compile or bundle assets)
+dist/
+build/
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
+
+# Ignore dependency directories (if using frontend tools like npm, yarn, etc.)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore temporary files
+*.tmp
+*.swp
+
+# Ignore coverage directory (if using testing tools)
+coverage/
+
+# Ignore compiled code (if using transpilers)
+*.out
+*.exe
+
+# Ignore environment variable files (optional if applicable)
+.env
+.env.local
+.env.*.local
+
+# Ignore SASS cache files (if applicable)
+.sass-cache/
+
+# Ignore IDE/editor-specific files
+.idea/
+
+css/

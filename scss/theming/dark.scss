@@ -1,0 +1,11 @@
+@import "./functions";
+
+$dark: (
+  background: color(dark-100),
+  secondary-background: color(dark-300),
+  background-3: color(dark-200),
+  text: color(dark-text),
+  secondary-text: color(dark-600),
+  brand: color(dark-brand),
+  brand-text: color(dark-brand-text)
+);

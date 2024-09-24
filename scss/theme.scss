@@ -1,0 +1,38 @@
+@import "colors.scss";
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
+
+html {
+    @include generateThemeVariables;
+    height: 100%;
+}
+
+body {
+    @include theme(background, secondary-background);
+    @include theme(color, text);
+    font-family: "Josefin Sans", sans-serif;
+}
+
+.container {
+    @include theme(background-color, background);
+}
+
+input[type="text"] {
+    @include theme(background, background-3);
+    @include theme(color, text);
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-radius: 7px;
+    width: 200px;
+    height: 40px;
+    padding: 10px 20px;
+    &:hover,
+    &:focus {
+        outline: none;
+    }
+}
+
+.highlight {
+    @include theme(color, brand-text);
+}

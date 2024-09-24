@@ -1,0 +1,11 @@
+@import "./functions";
+
+$light: (
+  background: color(light-100),
+  secondary-background: color(light-300),
+  background-3: color(light-200),
+  text: color(light-text),
+  secondary-text: color(light-600),
+  brand: color(light-brand),
+  brand-text: color(light-brand-text)
+);

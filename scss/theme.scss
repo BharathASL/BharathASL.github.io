@@ -36,3 +36,18 @@ input[type="text"] {
 .highlight {
     @include theme(color, brand-text);
 }
+
+.highlight.btn {
+    @include theme(border, brand-text, 1px solid, !important);
+
+    &:hover {
+        @include theme(background, brand-text, null, !important);
+        @include theme(color, text);
+        transform: scale(0.95);
+    }
+
+    &:active {
+        opacity: .80;
+        transform: scale(0.90);
+    }
+}

@@ -5,7 +5,7 @@
 }
 
 body {
-    height: 100%;
+    min-height: 100%;
 }
 
 $container-padding-horizontal: 80px;
@@ -61,7 +61,7 @@ header {
     }
 }
 
-main {
+div.main {
     .banner {
         height: calc(100vh - 110px);
         display: grid;
@@ -73,6 +73,93 @@ main {
             filter: grayscale(100%);
             opacity: 0.7;
             margin: -$container-padding-horizontal;
+        }
+        position: relative;
+        .social {
+            position: absolute;
+            right: 0;
+            bottom: 50px;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            * {
+                margin: 10px;
+                @include theme(color, brand-text);
+            }
+            .line {
+                display: block;
+                height: 100px;
+                width: 3px;
+                @include theme(background, brand);
+            }
+            svg {
+                width: 20px;
+                height: auto;
+
+                &:hover {
+                    cursor: pointer;
+                    transform: scale(1.2);
+                }
+            }
+        }
+    }
+}
+
+.hr-line {
+    display: block;
+    width: 50px;
+    height: 3px;
+    @include theme(background, brand);
+}
+
+.topic {
+    // h1 {
+
+    // }
+
+    &:not(.skills) > div {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: 1fr auto;
+        column-gap: 1em;
+        font-size: 20px;
+        font-weight: 200;
+        // &:hover {
+        //     @include theme(text-shadow, brand, 0 0 20px, null);
+        // }
+    }
+
+    &.skills {
+        display: flex;
+        flex-direction: column;
+
+        div.filter {
+            text-align: right;
+        }
+
+        div#items {
+            display: grid;
+            gap: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            justify-items: center;
+
+            > div {
+                cursor: pointer;
+                display: grid;
+                grid-auto-flow: row;
+                align-content: space-evenly;
+                justify-content: center;
+                justify-items: center;
+
+                align-self: center;
+
+                @include theme(background, secondary-background);
+
+                width: 200px;
+                height: 200px;
+                border-radius: 10px;
+                box-sizing: border-box;
+            }
         }
     }
 }

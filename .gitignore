@@ -41,5 +41,3 @@ coverage/
 
 # Ignore IDE/editor-specific files
 .idea/
-
-css/

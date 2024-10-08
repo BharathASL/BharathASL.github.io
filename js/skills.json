@@ -1,28 +1,34 @@
 [
   {
     "key": "java",
-    "label": "Java"
+    "label": "Java",
+    "tag": ["language", "programming"]
   },
   {
     "key": "python",
-    "label": "Python"
+    "label": "Python",
+    "tag": ["language"]
   },
   {
     "key": "kotlin",
-    "label": "Kotlin"
+    "label": "Kotlin",
+    "tag": ["language"]
   },
   {
     "key": "nodejs",
-    "label": "Node.js"
+    "label": "Node.js",
+    "tag": ["language"]
   },
   {
     "key": "csharp",
-    "label": "C#"
+    "label": "C#",
+    "tag": ["language"]
   },
   {
     "key": "mysql",
     "label": "MySQL",
-    "class": ["ci-invert"]
+    "class": ["ci-invert"],
+    "tag": ["language"]
   },
   {
     "key": "azure",
@@ -46,7 +52,8 @@
   },
   {
     "key": "css",
-    "label": "CSS"
+    "label": "CSS",
+    "tag": ["language"]
   },
   {
     "key": "docker",
@@ -67,7 +74,8 @@
   },
   {
     "key": "html",
-    "label": "HTML"
+    "label": "HTML",
+    "tag": ["language"]
   },
   {
     "key": "jquery",
@@ -76,7 +84,8 @@
   },
   {
     "key": "js",
-    "label": "Javascript"
+    "label": "Javascript",
+    "tag": ["language"]
   },
   {
     "key": "microsoft",
@@ -92,7 +101,8 @@
   },
   {
     "label": "PHP",
-    "svg-url": "https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg"
+    "svg-url": "https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg",
+    "tag": ["language"]
   },
   {
     "key": "postman",
@@ -104,7 +114,8 @@
   },
   {
     "key": "sass",
-    "label": "SASS"
+    "label": "SASS",
+    "tag": ["language"]
   },
   {
     "key": "spring framework",
@@ -112,7 +123,8 @@
   },
   {
     "key": "ts",
-    "label": "TypeScript"
+    "label": "TypeScript",
+    "tag": ["language"]
   },
   {
     "key": "vscode",

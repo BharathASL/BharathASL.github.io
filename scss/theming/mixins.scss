@@ -1,4 +1,4 @@
-@import './functions';
+@import "./functions";
 
 /*
   @mixin theme($property, $key, $inlineExtra:null, $postExtra:null)
@@ -56,17 +56,24 @@
       background-color: var(--theme-dark-backgroundLight, #141519);
     }
 */
-@mixin theme($property, $key, $inlineExtra:null, $postExtra:null) {
+@mixin theme($property, $key, $inlineExtra: null, $postExtra: null, $transparency: null) {
   @each $theme in $themes {
     @if (themeExists($key, $theme)) {
       $value: getThemeValue($key, $theme);
 
-      //:global(.#{$theme}) & {
-      @at-root .#{$theme} #{&} {
-        #{$property}: #{$inlineExtra} #{$value} #{$postExtra}; //fallback for browsers that shouldn't exist anymore
-        #{$property}: #{$inlineExtra} var(--theme-#{$theme}-#{$key}, #{$value}) #{$postExtra};
+      @if $transparency {
+        $value: rgba($value, $transparency);
+        @at-root .#{$theme} #{&} {
+          #{$property}: #{$inlineExtra} #{$value} #{$postExtra};
+        }
+      } @else {
+        @at-root .#{$theme} #{&} {
+          #{$property}: #{$inlineExtra} #{$value} #{$postExtra}; //fallback for browsers that shouldn't exist anymore
+          #{$property}: #{$inlineExtra} var(--theme-#{$theme}-#{$key}, #{$value}) #{$postExtra};
+        }
       }
-    } @else if $theme != 'default' and $theme != 'light' and $theme != 'dark' { //check for legacy references, don't error on those
+    } @else if $theme != "default" and $theme != "light" and $theme != "dark" {
+      //check for legacy references, don't error on those
       @error "Property #{$key} doesn't exist in #{$theme}";
     }
   }
@@ -84,15 +91,32 @@
   @each $key, $value in $newThemeMap {
     //adds new themeKey if doesn't exist
     @if not map-has-key($themeValues, $key) {
-      $themeValues: map-merge($themeValues, ($key: ( $themeName: $value ))) !global;
+      $themeValues: map-merge(
+        $themeValues,
+        (
+          $key: (
+            $themeName: $value
+          )
+        )
+      ) !global;
     }
     //adds to existing key map
     @else {
       $existingKeyMap: map-get($themeValues, $key);
       //if theme variable doesn't exist, add it
       @if not map-get($existingKeyMap, $themeName) {
-        $newKeyMap: map-merge($existingKeyMap, ( $themeName: $value ));
-        $themeValues: map-merge($themeValues, ( $key: $newKeyMap )) !global;
+        $newKeyMap: map-merge(
+          $existingKeyMap,
+          (
+            $themeName: $value
+          )
+        );
+        $themeValues: map-merge(
+          $themeValues,
+          (
+            $key: $newKeyMap
+          )
+        ) !global;
       }
     }
   }

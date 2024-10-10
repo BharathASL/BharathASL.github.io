@@ -12,6 +12,10 @@ body {
     font-family: "Josefin Sans", sans-serif;
 }
 
+a {
+    @include theme(color, text);
+}
+
 .container {
     @include theme(background-color, background);
 }
@@ -47,7 +51,7 @@ input[type="text"] {
     }
 
     &:active {
-        opacity: .80;
-        transform: scale(0.90);
+        opacity: 0.8;
+        transform: scale(0.9);
     }
 }

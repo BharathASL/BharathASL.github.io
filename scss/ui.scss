@@ -34,7 +34,7 @@ body > .container {
 
 header {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    // grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     padding: 30px 0;
     height: 110px;
@@ -47,7 +47,7 @@ header {
             line-height: 1.5;
             &:hover,
             &.active {
-                @include theme(color, text, null, !important);
+                @include theme(color, brand-text, null, !important);
                 cursor: pointer;
             }
         }
@@ -157,7 +157,7 @@ div.main {
             text-align: right;
         }
 
-        div#items {
+        div.items {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -170,6 +170,7 @@ div.main {
                 align-content: space-evenly;
                 justify-content: center;
                 justify-items: center;
+                text-align: center;
 
                 align-self: center;
 
@@ -259,29 +260,38 @@ div.main {
                 }
 
                 > span {
-                    width: 75px;
-                    height: 35px;
+                    // width: 75px;
+                    // height: 35px;
                     align-content: center;
                     text-align: center;
-                    position: absolute;
-                    left: -($total-extra-left-occupied * 2 + 75px);
-                    top: 0;
+                    font-style: italic;
+                    @include theme(color, brand-text);
+                    // position: absolute;
+                    // left: -($total-extra-left-occupied * 2 + 75px);
+                    // right: 0;
+                    // top: 0;
                     // @include theme(background, secondary-background);
-                    @include theme(background, background);
-
-                    &:after {
-                        content: "";
-                        position: absolute;
-                        width: 25px;
-                        height: 25px;
-                        // @include theme(background, secondary-background);
-                        @include theme(background, background);
-
-                        right: calc(-25px / 2);
-                        top: calc((35px / 2) - (25px / 2));
-                        transform: rotate(45deg);
-                        border-bottom-left-radius: 100%;
+                    // @include theme(background, background);
+                    &::before {
+                        content: "(";
                     }
+                    &::after {
+                        content: ")";
+                    }
+
+                    // &:after {
+                    //     content: "";
+                    //     position: absolute;
+                    //     width: 25px;
+                    //     height: 25px;
+                    //     // @include theme(background, secondary-background);
+                    //     @include theme(background, background);
+
+                    //     right: calc(-25px / 2);
+                    //     top: calc((35px / 2) - (25px / 2));
+                    //     transform: rotate(45deg);
+                    //     border-bottom-left-radius: 100%;
+                    // }
                 }
             }
         }

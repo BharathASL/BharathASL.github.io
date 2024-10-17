@@ -17,6 +17,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script> -->
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dheereshagrwal/colored-icons@1.7.8/src/app/ci.min.css" />
@@ -35,18 +37,18 @@
 <body>
     <div class="container">
         <header>
-            <span>Logo Here</span>
+            <!-- <span>Logo Here</span> -->
             <div class="nav">
-                <a class="active">About</a>
-                <a>Portfolio</a>
-                <a>Contact</a>
+                <a href="#About">About</a>
+                <a href="#Main">Portfolio</a>
+                <a href="#ContactMe">Contact</a>
             </div>
-            <div class="search">
+            <!-- <div class="search">
                 <input type="text" placeholder="Search">
                 <i class="fas fa-search"></i>
-            </div>
+            </div> -->
         </header>
-        <div class="main">
+        <div id="Main" class="main">
             <div class="banner mb-5">
                 <div class="content p-lg-5">
                     <div class="d-inline">
@@ -55,7 +57,9 @@
                     </div>
                     <div class="h3 fw-light mt-3">Seasoned Full-Stack&nbsp;Developer Proficient Across
                         Multiple&nbsp;Languages and Technologies</div>
-                    <button class="mt-5 btn highlight">Contact Me</button>
+                    <a href="#ContactMe">
+                        <button class="mt-5 btn highlight">Contact Me</button>
+                    </a>
                 </div>
                 <img src="assests/images/banner.png" alt="Bharath Sendhurpandi">
                 <div class="social">
@@ -66,7 +70,7 @@
                     <i class="fa-brands fa-whatsapp"></i>
                 </div>
             </div>
-            <div class="topic about mt-5 pt-5">
+            <div id="About" class="topic about mt-5 pt-5">
                 <h1>About</h1>
                 <div>
                     <span class="hr-line mt-2"></span>
@@ -85,141 +89,28 @@
                     <span>Filter</span>
                     <select>
                         <option value="">All</option>
-                        <option value="language">Language</option>
-                        <option value="language">Frameworks</option>
+                        <option value="programming-language">Programming Language</option>
+                        <option value="framework-library">Frameworks & Libraries</option>
+                        <option value="database">Databases</option>
+                        <option value="cloud-platform">Cloud Platforms</option>
+                        <option value="devops-containerization">DevOps & Containerization</option>
+                        <option value="testing-automation">Testing & Automation</option>
+                        <option value="api-web-service">APIs & Web Services</option>
+                        <option value="agile-methodology">Agile Methodologies</option>
+                        <option value="version-control">Version Control</option>
+                        <option value="miscellaneous-tool">Miscellaneous Tools</option>
+                        <option value="operating-system">Operating Systems</option>
                     </select>
                 </div>
-                <div id="items">
+                <div class="items">
                 </div>
             </div>
             <div class="topic experience">
                 <h1>Experience</h1>
                 <div class="items">
-                    <div>
-                        <h3>Senior Python Developer</h3>
-                        <h5>Vuedata, Chennai</h5>
-                        <span>2024</span>
-                        <p>I am a Senior Software Engineer with 6 years of experience in Java, Kotlin, Node.js, and
-                            Python,
-                            along with strong skills in web development and cloud services. I have a passion for machine
-                            learning and deep learning, continually working to expand my knowledge in these areas. I’ve
-                            led
-                            several successful projects, including the Microsoft Edge Shopping experience, where I
-                            improved
-                            automation and data analytics processes. My ability to mentor and optimize code drives me to
-                            create efficient, scalable solutions. I enjoy tackling complex problems and delivering
-                            impactful
-                            results in the tech space.I am a Senior Software Engineer with 6 years of experience in
-                            Java, Kotlin, Node.js, and Python,
-                            along with strong skills in web development and cloud services. I have a passion for machine
-                            learning and deep learning, continually working to expand my knowledge in these areas. I’ve
-                            led
-                            several successful projects, including the Microsoft Edge Shopping experience, where I
-                            improved
-                            automation and data analytics processes. My ability to mentor and optimize code drives me to
-                            create efficient, scalable solutions. I enjoy tackling complex problems and delivering
-                            impactful
-                            results in the tech space.</p>
-                    </div>
-                    <div>
-                        <h3>Senior Python Developer</h3>
-                        <h5>Vuedata, Chennai</h5>
-                        <span>2024</span>
-                        <p>I am a Senior Software Engineer with 6 years of experience in Java, Kotlin, Node.js, and
-                            Python,
-                            along with strong skills in web development and cloud services. I have a passion for machine
-                            learning and deep learning, continually working to expand my knowledge in these areas. I’ve
-                            led
-                            several successful projects, including the Microsoft Edge Shopping experience, where I
-                            improved
-                            automation and data analytics processes. My ability to mentor and optimize code drives me to
-                            create efficient, scalable solutions. I enjoy tackling complex problems and delivering
-                            impactful
-                            results in the tech space.</p>
-                    </div>
-                    <div>
-                        <h3>Senior Python Developer</h3>
-                        <h5>Vuedata, Chennai</h5>
-                        <span>2024</span>
-                        <p>I am a Senior Software Engineer with 6 years of experience in Java, Kotlin, Node.js, and
-                            Python,
-                            along with strong skills in web development and cloud services. I have a passion for machine
-                            learning and deep learning, continually working to expand my knowledge in these areas. I’ve
-                            led
-                            several successful projects, including the Microsoft Edge Shopping experience, where I
-                            improved
-                            automation and data analytics processes. My ability to mentor and optimize code drives me to
-                            create efficient, scalable solutions. I enjoy tackling complex problems and delivering
-                            impactful
-                            results in the tech space.</p>
-                    </div>
-                    <div>
-                        <h3>Senior Python Developer</h3>
-                        <h5>Vuedata, Chennai</h5>
-                        <span>2024</span>
-                        <p>I am a Senior Software Engineer with 6 years of experience in Java, Kotlin, Node.js, and
-                            Python,
-                            along with strong skills in web development and cloud services. I have a passion for machine
-                            learning and deep learning, continually working to expand my knowledge in these areas. I’ve
-                            led
-                            several successful projects, including the Microsoft Edge Shopping experience, where I
-                            improved
-                            automation and data analytics processes. My ability to mentor and optimize code drives me to
-                            create efficient, scalable solutions. I enjoy tackling complex problems and delivering
-                            impactful
-                            results in the tech space.</p>
-                    </div>
-                    <div>
-                        <h3>Senior Python Developer</h3>
-                        <h5>Vuedata, Chennai</h5>
-                        <span>2024</span>
-                        <p>I am a Senior Software Engineer with 6 years of experience in Java, Kotlin, Node.js, and
-                            Python,
-                            along with strong skills in web development and cloud services. I have a passion for machine
-                            learning and deep learning, continually working to expand my knowledge in these areas. I’ve
-                            led
-                            several successful projects, including the Microsoft Edge Shopping experience, where I
-                            improved
-                            automation and data analytics processes. My ability to mentor and optimize code drives me to
-                            create efficient, scalable solutions. I enjoy tackling complex problems and delivering
-                            impactful
-                            results in the tech space.</p>
-                    </div>
-                    <div>
-                        <h3>Senior Python Developer</h3>
-                        <h5>Vuedata, Chennai</h5>
-                        <span>2024</span>
-                        <p>I am a Senior Software Engineer with 6 years of experience in Java, Kotlin, Node.js, and
-                            Python,
-                            along with strong skills in web development and cloud services. I have a passion for machine
-                            learning and deep learning, continually working to expand my knowledge in these areas. I’ve
-                            led
-                            several successful projects, including the Microsoft Edge Shopping experience, where I
-                            improved
-                            automation and data analytics processes. My ability to mentor and optimize code drives me to
-                            create efficient, scalable solutions. I enjoy tackling complex problems and delivering
-                            impactful
-                            results in the tech space.</p>
-                    </div>
-                    <div>
-                        <h3>Senior Python Developer</h3>
-                        <h5>Vuedata, Chennai</h5>
-                        <span>2024</span>
-                        <p>I am a Senior Software Engineer with 6 years of experience in Java, Kotlin, Node.js, and
-                            Python,
-                            along with strong skills in web development and cloud services. I have a passion for machine
-                            learning and deep learning, continually working to expand my knowledge in these areas. I’ve
-                            led
-                            several successful projects, including the Microsoft Edge Shopping experience, where I
-                            improved
-                            automation and data analytics processes. My ability to mentor and optimize code drives me to
-                            create efficient, scalable solutions. I enjoy tackling complex problems and delivering
-                            impactful
-                            results in the tech space.</p>
-                    </div>
                 </div>
             </div>
-            <div class="topic contact">
+            <div id="ContactMe" class="topic contact">
                 <div class="top-title">
                     <div></div>
                     <h1>Contact Me</h1>

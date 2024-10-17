@@ -1,0 +1,32 @@
+[
+  {
+    "role": "Technical Lead",
+    "office": "VueData Technologies",
+    "location": "Bangalore, India",
+    "duration": {
+      "from": "December 2023",
+      "current": true
+    },
+    "description": "As a Technical Lead at VueData Technologies, I have spearheaded several key projects, focusing on data analytics and automation for Microsoft Edge Shopping and other applications. I led a team to automate coupon testing for e-commerce platforms by designing and implementing Azure-based pipelines, utilizing Azure Functions, Docker, Selenium, and GPT for efficient coupon validation. I also managed large datasets from Microsoft Data Lake, optimizing Scope scripts (U-SQL) for performance, and deploying solutions through Azure ADF pipelines, integrating data with PowerBI and Titan for visualizations. Additionally, I developed back-end services for cross-platform applications, ensuring secure and scalable systems using Node.js, CosmosDB, and Azure, delivering high-quality products for diverse markets. My leadership has resulted in significant improvements in process automation and overall system efficiency."
+  },
+  {
+    "role": "Associate IT Analyst",
+    "office": "VueData Technologies",
+    "location": "Bangalore, India",
+    "duration": {
+      "from": "October 2021",
+      "to": "November 2023"
+    },
+    "description": "I worked on various projects, including developing modular enterprise applications for the Singapore Deposit Insurance Corporation Limited (SDIC), where I utilized Kotlin, Java, and MariaDB to ensure scalability and security across systems. I also coordinated both backend and front-end development with ReactJS to streamline client operations. Additionally, at HPE, I developed a platform to track and optimize server sustainability, using sensors to monitor CPU, GPU, and system metrics, and built hub-spoke models to centralize global server data for tracking and visualization. These roles involved working on critical enterprise and sustainability solutions, ensuring system reliability and performance."
+  },
+  {
+    "role": "Software Developer",
+    "office": "GoDB Tech",
+    "location": "Chennai, India",
+    "duration": {
+      "from": "June 2018",
+      "to": "October 2021"
+    },
+    "description": "In my role as a Software Developer across various insurance projects, I focused on developing and integrating critical applications. At GoDB Tech, I created scalable REST APIs for Star Union Dai-ichi Life Insurance, facilitating seamless quote and policy creation while collaborating on database management using SQL Server and Docker. At Watania Insurance, I automated motor insurance claims processing, integrating REST and SOAP APIs with client-facing systems, and developed backend services for claims estimation, settlement, and salvage collection. My experience also includes payment integration for Al Buhaira National Insurance Company using Java HTTP Client and developing applications for salary processing at AL Rostamani, where I integrated REST and SOAP APIs for both back-office and user applications. Additionally, I developed motor, medical, and home insurance applications during my earlier tenure at Watania Insurance, contributing to comprehensive insurance solutions."
+  }
+]

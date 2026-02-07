@@ -68,26 +68,32 @@
 /** end theme generation **/
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
 html {
-  --theme-light-background: #ffffff;
+  --theme-light-background: #ece6df;
   --theme-dark-background: #0d1117;
-  --theme-light-secondary-background: #e9ecef;
+  --theme-light-secondary-background: #e2d7cf;
   --theme-dark-secondary-background: #21262d;
-  --theme-light-background-3: #f8f9fa;
+  --theme-light-background-3: #f2ece6;
   --theme-dark-background-3: #161b22;
-  --theme-light-text: #212529;
+  --theme-light-text: #1f2322;
   --theme-dark-text: #f0f6fc;
-  --theme-light-secondary-text: #6c757d;
+  --theme-light-secondary-text: #5f5a55;
   --theme-dark-secondary-text: #8b949e;
   --theme-light-brand: #ff6b35;
   --theme-dark-brand: #ff6b35;
   --theme-light-brand-text: #ff6b35;
   --theme-dark-brand-text: #ff6b35;
+  --theme-light-background-pattern: url("/assests/images/background-pattern.svg");
+  --theme-dark-background-pattern: url("/assests/images/background-pattern.svg");
+  --theme-light-background-pattern-opacity: 0.12;
+  --theme-dark-background-pattern-opacity: 0.18;
+  --theme-light-background-pattern-filter: none;
+  --theme-dark-background-pattern-filter: none;
   height: 100%;
 }
 
 .light body {
-  background: #e9ecef;
-  background: var(--theme-light-secondary-background, #e9ecef);
+  background: #e2d7cf;
+  background: var(--theme-light-secondary-background, #e2d7cf);
 }
 
 .dark body {
@@ -96,8 +102,8 @@ html {
 }
 
 .light body {
-  color: #212529;
-  color: var(--theme-light-text, #212529);
+  color: #1f2322;
+  color: var(--theme-light-text, #1f2322);
 }
 
 .dark body {
@@ -107,11 +113,53 @@ html {
 
 body {
   font-family: "Josefin Sans", sans-serif;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-repeat: repeat;
+  background-size: 512px 512px;
+  background-position: center;
+}
+
+.light body::before {
+  background-image: url("/assests/images/background-pattern.svg");
+  background-image: var(--theme-light-background-pattern, url("/assests/images/background-pattern.svg"));
+}
+
+.dark body::before {
+  background-image: url("/assests/images/background-pattern.svg");
+  background-image: var(--theme-dark-background-pattern, url("/assests/images/background-pattern.svg"));
+}
+
+.light body::before {
+  opacity: 0.35;
+  opacity: var(--theme-light-background-pattern-opacity, 0.35);
+}
+
+.dark body::before {
+  opacity: 0.18;
+  opacity: var(--theme-dark-background-pattern-opacity, 0.18);
+}
+
+.light body::before {
+  filter: none;
+  filter: var(--theme-light-background-pattern-filter, none);
+}
+
+.dark body::before {
+  filter: none;
+  filter: var(--theme-dark-background-pattern-filter, none);
 }
 
 .light a {
-  color: #212529;
-  color: var(--theme-light-text, #212529);
+  color: #1f2322;
+  color: var(--theme-light-text, #1f2322);
 }
 
 .dark a {
@@ -120,8 +168,8 @@ body {
 }
 
 .light .container {
-  background-color: #ffffff;
-  background-color: var(--theme-light-background, #ffffff);
+  background-color: #ece6df;
+  background-color: var(--theme-light-background, #ece6df);
 }
 
 .dark .container {
@@ -130,8 +178,8 @@ body {
 }
 
 .light input[type=text] {
-  background: #f8f9fa;
-  background: var(--theme-light-background-3, #f8f9fa);
+  background: #f2ece6;
+  background: var(--theme-light-background-3, #f2ece6);
 }
 
 .dark input[type=text] {
@@ -140,8 +188,8 @@ body {
 }
 
 .light input[type=text] {
-  color: #212529;
-  color: var(--theme-light-text, #212529);
+  color: #1f2322;
+  color: var(--theme-light-text, #1f2322);
 }
 
 .dark input[type=text] {

@@ -7,5 +7,8 @@ $dark: (
   text: color(dark-text),
   secondary-text: color(dark-600),
   brand: color(dark-brand),
-  brand-text: color(dark-brand-text)
+  brand-text: color(dark-brand-text),
+  background-pattern: url("/assests/images/background-pattern.svg"),
+  background-pattern-opacity: 0.18,
+  background-pattern-filter: none
 );

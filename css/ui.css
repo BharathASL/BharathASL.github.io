@@ -88,6 +88,8 @@ body {
 
 body > .container {
   padding: 0;
+  position: relative;
+  z-index: 1;
 }
 body > .container > header {
   margin: 0 80px !important;
@@ -113,8 +115,8 @@ header > .nav * {
   padding: 0 10px;
 }
 .light header > .nav * {
-  color: #6c757d !important;
-  color: var(--theme-light-secondary-text, #6c757d) !important;
+  color: #5f5a55 !important;
+  color: var(--theme-light-secondary-text, #5f5a55) !important;
 }
 
 .dark header > .nav * {

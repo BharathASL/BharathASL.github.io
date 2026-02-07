@@ -10,6 +10,21 @@ body {
     @include theme(background, secondary-background);
     @include theme(color, text);
     font-family: "Josefin Sans", sans-serif;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-repeat: repeat;
+    background-size: 512px 512px;
+    background-position: center;
+    @include theme(background-image, background-pattern);
+    @include theme(opacity, background-pattern-opacity);
+    @include theme(filter, background-pattern-filter);
 }
 
 a {

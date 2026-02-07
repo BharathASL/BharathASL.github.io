@@ -9,6 +9,6 @@ $dark: (
   brand: color(dark-brand),
   brand-text: color(dark-brand-text),
   background-pattern: url("/assests/images/background-pattern.svg"),
-  background-pattern-opacity: 0.18,
-  background-pattern-filter: none
+  background-pattern-opacity: 0.08,
+  background-pattern-filter: invert(1) hue-rotate(180deg)
 );

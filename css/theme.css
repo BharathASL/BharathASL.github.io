@@ -84,10 +84,10 @@ html {
   --theme-dark-brand-text: #ff6b35;
   --theme-light-background-pattern: url("/assests/images/background-pattern.svg");
   --theme-dark-background-pattern: url("/assests/images/background-pattern.svg");
-  --theme-light-background-pattern-opacity: 0.12;
-  --theme-dark-background-pattern-opacity: 0.18;
-  --theme-light-background-pattern-filter: none;
-  --theme-dark-background-pattern-filter: none;
+  --theme-light-background-pattern-opacity: 0.05;
+  --theme-dark-background-pattern-opacity: 0.08;
+  --theme-light-background-pattern-filter: grayscale(1) opacity(0.3);
+  --theme-dark-background-pattern-filter: invert(1) hue-rotate(180deg);
   height: 100%;
 }
 
@@ -126,7 +126,6 @@ body::before {
   background-size: 512px 512px;
   background-position: center;
 }
-
 .light body::before {
   background-image: url("/assests/images/background-pattern.svg");
   background-image: var(--theme-light-background-pattern, url("/assests/images/background-pattern.svg"));
@@ -138,23 +137,23 @@ body::before {
 }
 
 .light body::before {
-  opacity: 0.35;
-  opacity: var(--theme-light-background-pattern-opacity, 0.35);
+  opacity: 0.05;
+  opacity: var(--theme-light-background-pattern-opacity, 0.05);
 }
 
 .dark body::before {
-  opacity: 0.18;
-  opacity: var(--theme-dark-background-pattern-opacity, 0.18);
+  opacity: 0.08;
+  opacity: var(--theme-dark-background-pattern-opacity, 0.08);
 }
 
 .light body::before {
-  filter: none;
-  filter: var(--theme-light-background-pattern-filter, none);
+  filter: grayscale(1) opacity(0.3);
+  filter: var(--theme-light-background-pattern-filter, grayscale(1) opacity(0.3));
 }
 
 .dark body::before {
-  filter: none;
-  filter: var(--theme-dark-background-pattern-filter, none);
+  filter: invert(1) hue-rotate(180deg);
+  filter: var(--theme-dark-background-pattern-filter, invert(1) hue-rotate(180deg));
 }
 
 .light a {
@@ -242,8 +241,8 @@ input[type=text]:hover, input[type=text]:focus {
 }
 
 .light .highlight.btn:hover {
-  color: #212529;
-  color: var(--theme-light-text, #212529);
+  color: #1f2322;
+  color: var(--theme-light-text, #1f2322);
 }
 
 .dark .highlight.btn:hover {

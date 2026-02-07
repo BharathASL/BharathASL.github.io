@@ -87,9 +87,9 @@ body {
 }
 
 body > .container {
-  padding: 0;
   position: relative;
   z-index: 1;
+  padding: 0;
 }
 body > .container > header {
   margin: 0 80px !important;
@@ -294,8 +294,8 @@ div.main .banner .social svg:hover {
   align-self: center;
 }
 .light .topic.skills div.items > div {
-  background: #e9ecef;
-  background: var(--theme-light-secondary-background, #e9ecef);
+  background: #e2d7cf;
+  background: var(--theme-light-secondary-background, #e2d7cf);
 }
 
 .dark .topic.skills div.items > div {
@@ -346,8 +346,8 @@ div.main .banner .social svg:hover {
   padding: 0 80px !important;
 }
 .light .topic.experience {
-  background: #e9ecef;
-  background: var(--theme-light-secondary-background, #e9ecef);
+  background: #e2d7cf;
+  background: var(--theme-light-secondary-background, #e2d7cf);
 }
 
 .dark .topic.experience {
@@ -369,7 +369,7 @@ div.main .banner .social svg:hover {
   margin: 0 200px;
 }
 .light .topic.experience > div.items > div {
-  border-left: 3px solid rgba(33, 37, 41, 0.75);
+  border-left: 3px solid rgba(31, 35, 34, 0.75);
 }
 
 .dark .topic.experience > div.items > div {
@@ -420,8 +420,8 @@ div.main .banner .social svg:hover {
   height: 56px;
 }
 .light .topic.experience > div.items > div::after {
-  background: #e9ecef;
-  background: var(--theme-light-secondary-background, #e9ecef);
+  background: #e2d7cf;
+  background: var(--theme-light-secondary-background, #e2d7cf);
 }
 
 .dark .topic.experience > div.items > div::after {
@@ -520,8 +520,8 @@ div.main .banner .social svg:hover {
   border-radius: 4px;
 }
 .light .topic.contact > .items > * {
-  background: #e9ecef;
-  background: var(--theme-light-secondary-background, #e9ecef);
+  background: #e2d7cf;
+  background: var(--theme-light-secondary-background, #e2d7cf);
 }
 
 .dark .topic.contact > .items > * {
@@ -550,8 +550,8 @@ div.main .banner .social svg:hover {
 }
 
 .light .topic.contact > .items > *:hover {
-  color: #212529;
-  color: var(--theme-light-text, #212529);
+  color: #1f2322;
+  color: var(--theme-light-text, #1f2322);
 }
 
 .dark .topic.contact > .items > *:hover {
@@ -567,8 +567,8 @@ footer {
   margin: 0 !important;
 }
 .light footer {
-  background: #e9ecef;
-  background: var(--theme-light-secondary-background, #e9ecef);
+  background: #e2d7cf;
+  background: var(--theme-light-secondary-background, #e2d7cf);
 }
 
 .dark footer {

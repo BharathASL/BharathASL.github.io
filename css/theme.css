@@ -1,1 +1,214 @@
-@import"https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap";html{--theme-light-background: #979898;--theme-dark-background: #272829;--theme-light-secondary-background: #adaeae;--theme-dark-secondary-background: #515253;--theme-light-background-3: #a2a3a3;--theme-dark-background-3: #3b3c3d;--theme-light-text: black;--theme-dark-text: white;--theme-light-secondary-text: #d0d0d0;--theme-dark-secondary-text: #979898;--theme-light-brand: #f0bf6c;--theme-dark-brand: #f0bf6c;--theme-light-brand-text: #f0bf6c;--theme-dark-brand-text: #f0bf6c;height:100%}body{font-family:"Josefin Sans",sans-serif}.light body{background:#adaeae;background:var(--theme-light-secondary-background, #adaeae)}.dark body{background:#515253;background:var(--theme-dark-secondary-background, #515253)}.light body{color:black;color:var(--theme-light-text, black)}.dark body{color:white;color:var(--theme-dark-text, white)}.light a{color:black;color:var(--theme-light-text, black)}.dark a{color:white;color:var(--theme-dark-text, white)}.light .container{background-color:#979898;background-color:var(--theme-light-background, #979898)}.dark .container{background-color:#272829;background-color:var(--theme-dark-background, #272829)}input[type=text]{border:none;box-shadow:none;border-radius:7px;width:200px;height:40px;padding:10px 20px}.light input[type=text]{background:#a2a3a3;background:var(--theme-light-background-3, #a2a3a3)}.dark input[type=text]{background:#3b3c3d;background:var(--theme-dark-background-3, #3b3c3d)}.light input[type=text]{color:black;color:var(--theme-light-text, black)}.dark input[type=text]{color:white;color:var(--theme-dark-text, white)}input[type=text]:hover,input[type=text]:focus{outline:none}.light .highlight{color:#f0bf6c;color:var(--theme-light-brand-text, #f0bf6c)}.dark .highlight{color:#f0bf6c;color:var(--theme-dark-brand-text, #f0bf6c)}.light .highlight.btn{border:1px solid #f0bf6c !important;border:1px solid var(--theme-light-brand-text, #f0bf6c) !important}.dark .highlight.btn{border:1px solid #f0bf6c !important;border:1px solid var(--theme-dark-brand-text, #f0bf6c) !important}.highlight.btn:hover{transform:scale(0.95)}.light .highlight.btn:hover{background:#f0bf6c !important;background:var(--theme-light-brand-text, #f0bf6c) !important}.dark .highlight.btn:hover{background:#f0bf6c !important;background:var(--theme-dark-brand-text, #f0bf6c) !important}.light .highlight.btn:hover{color:black;color:var(--theme-light-text, black)}.dark .highlight.btn:hover{color:white;color:var(--theme-dark-text, white)}.highlight.btn:active{opacity:.8;transform:scale(0.9)}/*# sourceMappingURL=theme.css.map */
+/*
+  @mixin theme($property, $key, $inlineExtra:null, $postExtra:null)
+  Assigns a property a theme value for each defined theme.
+
+  Example usage:
+    .mySelector {
+      padding: 6px;
+      @include theme(background-color, backgroundLight);
+      @include theme(border, borderDark, 1px solid);
+    }
+
+  sass generated equivalent:
+    .mySelector {
+      padding: 6px;
+
+      :global(.light) & {
+        border: 1px solid color(woodsmoke);
+        border: 1px solid var(--theme-light-borderDark, color(woodsmoke));
+      }
+      :global(.light) & {
+        background-color: color(alabaster);
+        background-color: var(--theme-light-backgroundLight, color(alabaster));
+      }
+
+      :global(.dark) & {
+        border: 1px solid color(alabaster);
+        border: 1px solid var(--theme-dark-borderDark, color(alabaster));
+      }
+      :global(.dark) & {
+        background-color: color(woodsmoke);
+        background-color: var(--theme-dark-backgroundLight, color(woodsmoke));
+      }
+    }
+
+  browser output:
+    .mySelector {
+      padding: 6px;
+    }
+    .light .mySelector {
+      border: 1px solid #141519;
+      border: 1px solid var(--theme-light-borderDark, #141519);
+    }
+    .light .mySelector {
+      background-color: #FCFCFC;
+      background-color: var(--theme-light-backgroundLight, #FCFCFC);
+    }
+
+    .dark .mySelector {
+      border: 1px solid #FCFCFC;
+      border: 1px solid var(--theme-dark-borderDark, #FCFCFC);
+    }
+    .dark .mySelector {
+      background-color: #141519;
+      background-color: var(--theme-dark-backgroundLight, #141519);
+    }
+*/
+/*
+  @mixin generateThemeMappings(themeName: string, themeMap: map)
+  helper function for generating list of theme variables and adding to existing map.
+  This will add a new theme to the themes array and the theme color list.
+*/
+/*
+  @mixin generateThemeVariables
+  Auto-generates the entire list of theme variables for use in var() statements.
+  Really should only be called in the html selector at the app root.
+*/
+/** this section generates a theme map for each theme **/
+/** end theme generation **/
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
+html {
+  --theme-light-background: #979898;
+  --theme-dark-background: #272829;
+  --theme-light-secondary-background: #adaeae;
+  --theme-dark-secondary-background: #515253;
+  --theme-light-background-3: #a2a3a3;
+  --theme-dark-background-3: #3b3c3d;
+  --theme-light-text: black;
+  --theme-dark-text: white;
+  --theme-light-secondary-text: #d0d0d0;
+  --theme-dark-secondary-text: #979898;
+  --theme-light-brand: #f0bf6c;
+  --theme-dark-brand: #f0bf6c;
+  --theme-light-brand-text: #f0bf6c;
+  --theme-dark-brand-text: #f0bf6c;
+  height: 100%;
+}
+
+.light body {
+  background: #adaeae;
+  background: var(--theme-light-secondary-background, #adaeae);
+}
+
+.dark body {
+  background: #515253;
+  background: var(--theme-dark-secondary-background, #515253);
+}
+
+.light body {
+  color: black;
+  color: var(--theme-light-text, black);
+}
+
+.dark body {
+  color: white;
+  color: var(--theme-dark-text, white);
+}
+
+body {
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.light a {
+  color: black;
+  color: var(--theme-light-text, black);
+}
+
+.dark a {
+  color: white;
+  color: var(--theme-dark-text, white);
+}
+
+.light .container {
+  background-color: #979898;
+  background-color: var(--theme-light-background, #979898);
+}
+
+.dark .container {
+  background-color: #272829;
+  background-color: var(--theme-dark-background, #272829);
+}
+
+.light input[type=text] {
+  background: #a2a3a3;
+  background: var(--theme-light-background-3, #a2a3a3);
+}
+
+.dark input[type=text] {
+  background: #3b3c3d;
+  background: var(--theme-dark-background-3, #3b3c3d);
+}
+
+.light input[type=text] {
+  color: black;
+  color: var(--theme-light-text, black);
+}
+
+.dark input[type=text] {
+  color: white;
+  color: var(--theme-dark-text, white);
+}
+
+input[type=text] {
+  border: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  border-radius: 7px;
+  width: 200px;
+  height: 40px;
+  padding: 10px 20px;
+}
+input[type=text]:hover, input[type=text]:focus {
+  outline: none;
+}
+
+.light .highlight {
+  color: #f0bf6c;
+  color: var(--theme-light-brand-text, #f0bf6c);
+}
+
+.dark .highlight {
+  color: #f0bf6c;
+  color: var(--theme-dark-brand-text, #f0bf6c);
+}
+
+.light .highlight.btn {
+  border: 1px solid #f0bf6c !important;
+  border: 1px solid var(--theme-light-brand-text, #f0bf6c) !important;
+}
+
+.dark .highlight.btn {
+  border: 1px solid #f0bf6c !important;
+  border: 1px solid var(--theme-dark-brand-text, #f0bf6c) !important;
+}
+
+.light .highlight.btn:hover {
+  background: #f0bf6c !important;
+  background: var(--theme-light-brand-text, #f0bf6c) !important;
+}
+
+.dark .highlight.btn:hover {
+  background: #f0bf6c !important;
+  background: var(--theme-dark-brand-text, #f0bf6c) !important;
+}
+
+.light .highlight.btn:hover {
+  color: black;
+  color: var(--theme-light-text, black);
+}
+
+.dark .highlight.btn:hover {
+  color: white;
+  color: var(--theme-dark-text, white);
+}
+
+.highlight.btn:hover {
+  transform: scale(0.95);
+}
+.highlight.btn:active {
+  opacity: 0.8;
+  transform: scale(0.9);
+}
+
+/*# sourceMappingURL=theme.css.map */

@@ -24,7 +24,7 @@ body::before {
     background-position: center;
     @include theme(background-image, background-pattern);
     @include theme(opacity, background-pattern-opacity);
-    @include theme(filter, background-pattern-filter);
+    mix-blend-mode: overlay;
 }
 
 a {

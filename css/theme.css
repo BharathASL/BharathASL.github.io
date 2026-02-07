@@ -84,10 +84,8 @@ html {
   --theme-dark-brand-text: #ff6b35;
   --theme-light-background-pattern: url("/assests/images/background-pattern.svg");
   --theme-dark-background-pattern: url("/assests/images/background-pattern.svg");
-  --theme-light-background-pattern-opacity: 0.05;
-  --theme-dark-background-pattern-opacity: 0.08;
-  --theme-light-background-pattern-filter: grayscale(1) opacity(0.3);
-  --theme-dark-background-pattern-filter: invert(1) hue-rotate(180deg);
+  --theme-light-background-pattern-opacity: 0.08;
+  --theme-dark-background-pattern-opacity: 0.15;
   height: 100%;
 }
 
@@ -137,23 +135,17 @@ body::before {
 }
 
 .light body::before {
-  opacity: 0.05;
-  opacity: var(--theme-light-background-pattern-opacity, 0.05);
-}
-
-.dark body::before {
   opacity: 0.08;
-  opacity: var(--theme-dark-background-pattern-opacity, 0.08);
-}
-
-.light body::before {
-  filter: grayscale(1) opacity(0.3);
-  filter: var(--theme-light-background-pattern-filter, grayscale(1) opacity(0.3));
+  opacity: var(--theme-light-background-pattern-opacity, 0.08);
 }
 
 .dark body::before {
-  filter: invert(1) hue-rotate(180deg);
-  filter: var(--theme-dark-background-pattern-filter, invert(1) hue-rotate(180deg));
+  opacity: 0.15;
+  opacity: var(--theme-dark-background-pattern-opacity, 0.15);
+}
+
+body::before {
+  mix-blend-mode: overlay;
 }
 
 .light a {

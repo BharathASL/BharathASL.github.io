@@ -69,40 +69,40 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
 html {
   --theme-light-background: #ffffff;
-  --theme-dark-background: #272829;
-  --theme-light-secondary-background: #eeeeee;
-  --theme-dark-secondary-background: #515253;
-  --theme-light-background-3: #f5f5f5;
-  --theme-dark-background-3: #3b3c3d;
-  --theme-light-text: #1a1a1a;
-  --theme-dark-text: white;
-  --theme-light-secondary-text: #999999;
-  --theme-dark-secondary-text: #979898;
-  --theme-light-brand: #f0bf6c;
-  --theme-dark-brand: #f0bf6c;
-  --theme-light-brand-text: #f0bf6c;
-  --theme-dark-brand-text: #f0bf6c;
+  --theme-dark-background: #0d1117;
+  --theme-light-secondary-background: #e9ecef;
+  --theme-dark-secondary-background: #21262d;
+  --theme-light-background-3: #f8f9fa;
+  --theme-dark-background-3: #161b22;
+  --theme-light-text: #212529;
+  --theme-dark-text: #f0f6fc;
+  --theme-light-secondary-text: #6c757d;
+  --theme-dark-secondary-text: #8b949e;
+  --theme-light-brand: #ff6b35;
+  --theme-dark-brand: #ff6b35;
+  --theme-light-brand-text: #ff6b35;
+  --theme-dark-brand-text: #ff6b35;
   height: 100%;
 }
 
 .light body {
-  background: #eeeeee;
-  background: var(--theme-light-secondary-background, #eeeeee);
+  background: #e9ecef;
+  background: var(--theme-light-secondary-background, #e9ecef);
 }
 
 .dark body {
-  background: #515253;
-  background: var(--theme-dark-secondary-background, #515253);
+  background: #21262d;
+  background: var(--theme-dark-secondary-background, #21262d);
 }
 
 .light body {
-  color: #1a1a1a;
-  color: var(--theme-light-text, #1a1a1a);
+  color: #212529;
+  color: var(--theme-light-text, #212529);
 }
 
 .dark body {
-  color: white;
-  color: var(--theme-dark-text, white);
+  color: #f0f6fc;
+  color: var(--theme-dark-text, #f0f6fc);
 }
 
 body {
@@ -110,13 +110,13 @@ body {
 }
 
 .light a {
-  color: #1a1a1a;
-  color: var(--theme-light-text, #1a1a1a);
+  color: #212529;
+  color: var(--theme-light-text, #212529);
 }
 
 .dark a {
-  color: white;
-  color: var(--theme-dark-text, white);
+  color: #f0f6fc;
+  color: var(--theme-dark-text, #f0f6fc);
 }
 
 .light .container {
@@ -125,28 +125,28 @@ body {
 }
 
 .dark .container {
-  background-color: #272829;
-  background-color: var(--theme-dark-background, #272829);
+  background-color: #0d1117;
+  background-color: var(--theme-dark-background, #0d1117);
 }
 
 .light input[type=text] {
-  background: #f5f5f5;
-  background: var(--theme-light-background-3, #f5f5f5);
+  background: #f8f9fa;
+  background: var(--theme-light-background-3, #f8f9fa);
 }
 
 .dark input[type=text] {
-  background: #3b3c3d;
-  background: var(--theme-dark-background-3, #3b3c3d);
+  background: #161b22;
+  background: var(--theme-dark-background-3, #161b22);
 }
 
 .light input[type=text] {
-  color: #1a1a1a;
-  color: var(--theme-light-text, #1a1a1a);
+  color: #212529;
+  color: var(--theme-light-text, #212529);
 }
 
 .dark input[type=text] {
-  color: white;
-  color: var(--theme-dark-text, white);
+  color: #f0f6fc;
+  color: var(--theme-dark-text, #f0f6fc);
 }
 
 input[type=text] {
@@ -164,43 +164,43 @@ input[type=text]:hover, input[type=text]:focus {
 }
 
 .light .highlight {
-  color: #f0bf6c;
-  color: var(--theme-light-brand-text, #f0bf6c);
+  color: #ff6b35;
+  color: var(--theme-light-brand-text, #ff6b35);
 }
 
 .dark .highlight {
-  color: #f0bf6c;
-  color: var(--theme-dark-brand-text, #f0bf6c);
+  color: #ff6b35;
+  color: var(--theme-dark-brand-text, #ff6b35);
 }
 
 .light .highlight.btn {
-  border: 1px solid #f0bf6c !important;
-  border: 1px solid var(--theme-light-brand-text, #f0bf6c) !important;
+  border: 1px solid #ff6b35 !important;
+  border: 1px solid var(--theme-light-brand-text, #ff6b35) !important;
 }
 
 .dark .highlight.btn {
-  border: 1px solid #f0bf6c !important;
-  border: 1px solid var(--theme-dark-brand-text, #f0bf6c) !important;
+  border: 1px solid #ff6b35 !important;
+  border: 1px solid var(--theme-dark-brand-text, #ff6b35) !important;
 }
 
 .light .highlight.btn:hover {
-  background: #f0bf6c !important;
-  background: var(--theme-light-brand-text, #f0bf6c) !important;
+  background: #ff6b35 !important;
+  background: var(--theme-light-brand-text, #ff6b35) !important;
 }
 
 .dark .highlight.btn:hover {
-  background: #f0bf6c !important;
-  background: var(--theme-dark-brand-text, #f0bf6c) !important;
+  background: #ff6b35 !important;
+  background: var(--theme-dark-brand-text, #ff6b35) !important;
 }
 
 .light .highlight.btn:hover {
-  color: #1a1a1a;
-  color: var(--theme-light-text, #1a1a1a);
+  color: #212529;
+  color: var(--theme-light-text, #212529);
 }
 
 .dark .highlight.btn:hover {
-  color: white;
-  color: var(--theme-dark-text, white);
+  color: #f0f6fc;
+  color: var(--theme-dark-text, #f0f6fc);
 }
 
 .highlight.btn:hover {

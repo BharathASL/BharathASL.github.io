@@ -113,8 +113,8 @@ header > .nav * {
   padding: 0 10px;
 }
 .light header > .nav * {
-  color: #d0d0d0 !important;
-  color: var(--theme-light-secondary-text, #d0d0d0) !important;
+  color: #999999 !important;
+  color: var(--theme-light-secondary-text, #999999) !important;
 }
 
 .dark header > .nav * {
@@ -292,8 +292,8 @@ div.main .banner .social svg:hover {
   align-self: center;
 }
 .light .topic.skills div.items > div {
-  background: #adaeae;
-  background: var(--theme-light-secondary-background, #adaeae);
+  background: #eeeeee;
+  background: var(--theme-light-secondary-background, #eeeeee);
 }
 
 .dark .topic.skills div.items > div {
@@ -344,8 +344,8 @@ div.main .banner .social svg:hover {
   padding: 0 80px !important;
 }
 .light .topic.experience {
-  background: #adaeae;
-  background: var(--theme-light-secondary-background, #adaeae);
+  background: #eeeeee;
+  background: var(--theme-light-secondary-background, #eeeeee);
 }
 
 .dark .topic.experience {
@@ -367,7 +367,7 @@ div.main .banner .social svg:hover {
   margin: 0 200px;
 }
 .light .topic.experience > div.items > div {
-  border-left: 3px solid rgba(0, 0, 0, 0.75);
+  border-left: 3px solid rgba(26, 26, 26, 0.75);
 }
 
 .dark .topic.experience > div.items > div {
@@ -418,8 +418,8 @@ div.main .banner .social svg:hover {
   height: 56px;
 }
 .light .topic.experience > div.items > div::after {
-  background: #adaeae;
-  background: var(--theme-light-secondary-background, #adaeae);
+  background: #eeeeee;
+  background: var(--theme-light-secondary-background, #eeeeee);
 }
 
 .dark .topic.experience > div.items > div::after {
@@ -518,8 +518,8 @@ div.main .banner .social svg:hover {
   border-radius: 4px;
 }
 .light .topic.contact > .items > * {
-  background: #adaeae;
-  background: var(--theme-light-secondary-background, #adaeae);
+  background: #eeeeee;
+  background: var(--theme-light-secondary-background, #eeeeee);
 }
 
 .dark .topic.contact > .items > * {
@@ -548,8 +548,8 @@ div.main .banner .social svg:hover {
 }
 
 .light .topic.contact > .items > *:hover {
-  color: black;
-  color: var(--theme-light-text, black);
+  color: #1a1a1a;
+  color: var(--theme-light-text, #1a1a1a);
 }
 
 .dark .topic.contact > .items > *:hover {
@@ -565,8 +565,8 @@ footer {
   margin: 0 !important;
 }
 .light footer {
-  background: #adaeae;
-  background: var(--theme-light-secondary-background, #adaeae);
+  background: #eeeeee;
+  background: var(--theme-light-secondary-background, #eeeeee);
 }
 
 .dark footer {

@@ -68,15 +68,15 @@
 /** end theme generation **/
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
 html {
-  --theme-light-background: #979898;
+  --theme-light-background: #ffffff;
   --theme-dark-background: #272829;
-  --theme-light-secondary-background: #adaeae;
+  --theme-light-secondary-background: #eeeeee;
   --theme-dark-secondary-background: #515253;
-  --theme-light-background-3: #a2a3a3;
+  --theme-light-background-3: #f5f5f5;
   --theme-dark-background-3: #3b3c3d;
-  --theme-light-text: black;
+  --theme-light-text: #1a1a1a;
   --theme-dark-text: white;
-  --theme-light-secondary-text: #d0d0d0;
+  --theme-light-secondary-text: #999999;
   --theme-dark-secondary-text: #979898;
   --theme-light-brand: #f0bf6c;
   --theme-dark-brand: #f0bf6c;
@@ -86,8 +86,8 @@ html {
 }
 
 .light body {
-  background: #adaeae;
-  background: var(--theme-light-secondary-background, #adaeae);
+  background: #eeeeee;
+  background: var(--theme-light-secondary-background, #eeeeee);
 }
 
 .dark body {
@@ -96,8 +96,8 @@ html {
 }
 
 .light body {
-  color: black;
-  color: var(--theme-light-text, black);
+  color: #1a1a1a;
+  color: var(--theme-light-text, #1a1a1a);
 }
 
 .dark body {
@@ -110,8 +110,8 @@ body {
 }
 
 .light a {
-  color: black;
-  color: var(--theme-light-text, black);
+  color: #1a1a1a;
+  color: var(--theme-light-text, #1a1a1a);
 }
 
 .dark a {
@@ -120,8 +120,8 @@ body {
 }
 
 .light .container {
-  background-color: #979898;
-  background-color: var(--theme-light-background, #979898);
+  background-color: #ffffff;
+  background-color: var(--theme-light-background, #ffffff);
 }
 
 .dark .container {
@@ -130,8 +130,8 @@ body {
 }
 
 .light input[type=text] {
-  background: #a2a3a3;
-  background: var(--theme-light-background-3, #a2a3a3);
+  background: #f5f5f5;
+  background: var(--theme-light-background-3, #f5f5f5);
 }
 
 .dark input[type=text] {
@@ -140,8 +140,8 @@ body {
 }
 
 .light input[type=text] {
-  color: black;
-  color: var(--theme-light-text, black);
+  color: #1a1a1a;
+  color: var(--theme-light-text, #1a1a1a);
 }
 
 .dark input[type=text] {
@@ -194,8 +194,8 @@ input[type=text]:hover, input[type=text]:focus {
 }
 
 .light .highlight.btn:hover {
-  color: black;
-  color: var(--theme-light-text, black);
+  color: #1a1a1a;
+  color: var(--theme-light-text, #1a1a1a);
 }
 
 .dark .highlight.btn:hover {

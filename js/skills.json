@@ -56,7 +56,7 @@
   },
   {
     "label": "Quarkus (Java & Kotlin)",
-    "svg-url": "https://quarkus.io/assets/images/brand/quarkus_icon_default.svg",
+    "svg-url": "https://raw.githubusercontent.com/commonhaus/artwork/refs/heads/main/projects/quarkus/icon/quarkus_icon_default.svg",
     "tag": ["framework-library"]
   },
   {

@@ -16,6 +16,8 @@ $container-padding-horizontal: 80px;
 
 body > .container {
     @include theme(box-shadow, brand, 0 0 20px -10px, null, 0.5);
+    position: relative;
+    z-index: 1;
     padding: 0;
 
     > header {

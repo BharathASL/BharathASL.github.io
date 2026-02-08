@@ -7,5 +7,7 @@ $light: (
   text: color(light-text),
   secondary-text: color(light-600),
   brand: color(light-brand),
-  brand-text: color(light-brand-text)
+  brand-text: color(light-brand-text),
+  background-pattern: url("/assests/images/background-pattern.svg"),
+  background-pattern-opacity: 0.08
 );

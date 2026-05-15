@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bharath Portfolio</title>
+    <title>Bharath | Full-Stack Developer</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
@@ -19,34 +19,27 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script> -->
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dheereshagrwal/colored-icons@1.7.8/src/app/ci.min.css" />
 
     <link rel="stylesheet" href="/css/theme.css">
     <link rel="stylesheet" href="/css/ui.css">
-    <style>
-        .myButton {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-        }
-    </style>
 </head>
 
 <body>
     <div class="container">
         <header>
-            <!-- <span>Logo Here</span> -->
+            <div class="logo"></div>
             <div class="nav">
-                <a href="#About">About</a>
                 <a href="#Main">Portfolio</a>
+                <a href="#About">About</a>
                 <a href="#ContactMe">Contact</a>
             </div>
-            <!-- <div class="search">
-                <input type="text" placeholder="Search">
-                <i class="fas fa-search"></i>
-            </div> -->
+            <div class="header-actions">
+                <button class="theme-toggle" onclick="toggleThemeType()" aria-label="Toggle theme">
+                    <i class="fa-solid fa-sun sun-icon"></i>
+                    <i class="fa-solid fa-moon moon-icon"></i>
+                </button>
+            </div>
         </header>
         <div id="Main" class="main">
             <div class="banner mb-5">
@@ -64,10 +57,15 @@
                 <img src="assests/images/banner.png" alt="Bharath Sendhurpandi">
                 <div class="social">
                     <span class="line"></span>
-                    <i class="fa-regular fa-envelope"></i>
-                    <i class="fa-brands fa-linkedin"></i>
-                    <i class="fa-brands fa-instagram"></i>
-                    <i class="fa-brands fa-whatsapp"></i>
+                    <a href="mailto:bharath.sendhurpandi@gmail.com" aria-label="Email">
+                        <i class="fa-regular fa-envelope"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/bharathasl/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/BharathASL" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
                 </div>
             </div>
             <div id="About" class="topic about mt-5 pt-5">
@@ -76,7 +74,7 @@
                     <span class="hr-line mt-2"></span>
                     <p>I am a Senior Software Engineer with 6 years of experience in Java, Kotlin, Node.js, and Python,
                         along with strong skills in web development and cloud services. I have a passion for machine
-                        learning and deep learning, continually working to expand my knowledge in these areas. I’ve led
+                        learning and deep learning, continually working to expand my knowledge in these areas. I've led
                         several successful projects, including the Microsoft Edge Shopping experience, where I improved
                         automation and data analytics processes. My ability to mentor and optimize code drives me to
                         create efficient, scalable solutions. I enjoy tackling complex problems and delivering impactful
@@ -134,14 +132,10 @@
                         </svg>
                         <span>Indeed</span>
                     </a>
-                    <!-- <a href="https://www.instagram.com/bharath.asl/" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-instagram"></i>
-                        <span>Instagram</span>
-                    </a> -->
-                    <!-- <a href="https://github.com/BharathASL" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/BharathASL" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-github"></i>
                         <span>GitHub</span>
-                    </a> -->
+                    </a>
                     <a href="mailto:bharathasl74185@gmail.com" target="_blank" rel="noopener noreferrer">
                         <i class="fa-regular fa-envelope"></i>
                         <span>bharathasl74185@gmail.com (Personal)</span>
@@ -168,15 +162,10 @@
                 </div>
             </div>
         </div>
-        <footer class="py-5">
+        <footer>
+            <span>&copy; 2024 Bharath Sendhurpandi &mdash; Built with passion</span>
         </footer>
-        <button class="myButton" onclick="toggleThemeType()">Toggle Light/Dark Theme</button>
 
-        <script>
-            function toggleThemeType() {
-                $('html').toggleClass('light').toggleClass('dark');
-            }
-        </script>
         <script src="js/ui.js"></script>
 </body>
 

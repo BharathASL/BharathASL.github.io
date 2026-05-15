@@ -34,10 +34,11 @@ body > .container {
 
 header {
     display: grid;
-    // grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     padding: 30px 0;
     height: 110px;
+
     > .nav {
         justify-self: center;
         * {
@@ -52,41 +53,44 @@ header {
             }
         }
     }
-    > .search {
-        justify-self: end;
-        position: relative;
-        input {
-            padding: 10px 40px 10px 20px;
-            &:focus {
-                width: 300px;
-            }
-        }
-        svg {
-            position: absolute;
-            height: 15px;
-            width: 15px;
-            padding: 12.5px;
-            right: 0;
-            opacity: 0.5;
-            border-radius: 7px;
-        }
 
-        &:focus-within > svg {
-            opacity: 1;
-            @include theme(background, brand);
-            cursor: pointer;
+    > .header-actions {
+        justify-self: end;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .theme-toggle {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.15rem;
+        padding: 8px 10px;
+        border-radius: 50%;
+        line-height: 1;
+        @include theme(color, secondary-text);
+        &:hover {
+            @include theme(color, brand-text);
+            @include theme(background, secondary-background);
         }
     }
 }
 
+.dark .theme-toggle .sun-icon  { display: inline; }
+.dark .theme-toggle .moon-icon { display: none; }
+.light .theme-toggle .sun-icon  { display: none; }
+.light .theme-toggle .moon-icon { display: inline; }
+
 div.main {
     .banner {
         margin-right: $container-padding-horizontal;
-
         height: calc(100vh - 110px);
         display: grid;
         grid-template-columns: minmax(auto, 50%) 1fr;
         align-items: center;
+        position: relative;
+
         img {
             height: inherit;
             width: auto;
@@ -94,7 +98,7 @@ div.main {
             opacity: 0.7;
             margin: -$container-padding-horizontal;
         }
-        position: relative;
+
         .social {
             position: absolute;
             right: 0;
@@ -102,16 +106,19 @@ div.main {
             display: flex;
             flex-flow: column;
             align-items: center;
+
             * {
                 margin: 10px;
                 @include theme(color, brand-text);
             }
+
             .line {
                 display: block;
                 height: 100px;
                 width: 3px;
                 @include theme(background, brand);
             }
+
             svg {
                 width: 20px;
                 height: auto;
@@ -144,9 +151,6 @@ div.main {
         column-gap: 1em;
         font-size: 20px;
         font-weight: 200;
-        // &:hover {
-        //     @include theme(text-shadow, brand, 0 0 20px, null);
-        // }
     }
 
     &.skills {
@@ -171,7 +175,6 @@ div.main {
                 justify-content: center;
                 justify-items: center;
                 text-align: center;
-
                 align-self: center;
 
                 @include theme(background, secondary-background);
@@ -180,13 +183,12 @@ div.main {
                 height: 200px;
                 border-radius: 10px;
                 box-sizing: border-box;
+                transition: all 0.2s;
 
                 &:hover {
                     @include theme(background, brand);
                     @include theme(box-shadow, brand, 0 0 10px 1px);
                 }
-
-                transition: all 0.2s;
 
                 &.hide {
                     scale: 0;
@@ -205,6 +207,7 @@ div.main {
         margin: 0 !important;
         padding: 0 $container-padding-horizontal !important;
         @include theme(background, secondary-background);
+
         > h1 {
             margin: 50px 0;
             position: relative;
@@ -217,7 +220,6 @@ div.main {
             column-gap: 1em;
             font-size: 20px;
             font-weight: 200;
-
             margin: 0 200px;
 
             > div {
@@ -225,14 +227,11 @@ div.main {
                 @include theme(border-left, text, $border-left-size solid, null, 0.75);
                 padding-left: 50px;
                 position: relative;
-
                 margin: 25px 0;
 
-                // Below variabled used only in below ::before & ::after
                 $size: 15px;
                 $box-shadow-blur: 5px;
                 $box-shadow-spread: 5px;
-
                 $total-extra-left-occupied: $size + $box-shadow-blur + $box-shadow-spread + $border-left-size;
 
                 &::before {
@@ -253,45 +252,19 @@ div.main {
                     position: absolute;
                     width: $total-extra-left-occupied * 2;
                     height: $total-extra-left-occupied * 2;
-                    // @include theme(background, background);
                     @include theme(background, secondary-background);
                     left: -(($total-extra-left-occupied * 2) + $border-left-size)/2;
                     top: -$box-shadow-spread/2;
                 }
 
                 > span {
-                    // width: 75px;
-                    // height: 35px;
                     align-content: center;
                     text-align: center;
                     font-style: italic;
                     @include theme(color, brand-text);
-                    // position: absolute;
-                    // left: -($total-extra-left-occupied * 2 + 75px);
-                    // right: 0;
-                    // top: 0;
-                    // @include theme(background, secondary-background);
-                    // @include theme(background, background);
-                    &::before {
-                        content: "(";
-                    }
-                    &::after {
-                        content: ")";
-                    }
 
-                    // &:after {
-                    //     content: "";
-                    //     position: absolute;
-                    //     width: 25px;
-                    //     height: 25px;
-                    //     // @include theme(background, secondary-background);
-                    //     @include theme(background, background);
-
-                    //     right: calc(-25px / 2);
-                    //     top: calc((35px / 2) - (25px / 2));
-                    //     transform: rotate(45deg);
-                    //     border-bottom-left-radius: 100%;
-                    // }
+                    &::before { content: "("; }
+                    &::after  { content: ")"; }
                 }
             }
         }
@@ -300,8 +273,7 @@ div.main {
     &.contact {
         padding-left: 0 !important;
         padding-right: 0 !important;
-        // @include theme(border-top, brand, 3px solid);
-        // @include theme(border-bottom, brand, 3px solid);
+
         > .top-title,
         > .bottom-title {
             display: grid;
@@ -329,6 +301,7 @@ div.main {
             bottom: -15px;
             position: relative;
             z-index: 0;
+
             > div > a:hover {
                 @include theme(color, brand);
                 scale: 0.9;
@@ -361,5 +334,80 @@ div.main {
 
 footer {
     margin: 0 !important;
+    padding: 30px 0 !important;
     @include theme(background, secondary-background);
+    text-align: center;
+    font-size: 14px;
+    @include theme(color, secondary-text);
+}
+
+// Scroll reveal
+.topic {
+    opacity: 0;
+    transform: translateY(24px);
+
+    &.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Mobile
+@media (max-width: 900px) {
+    $mobile-padding: 24px;
+
+    body > .container {
+        > header {
+            margin: 0 $mobile-padding !important;
+        }
+        > footer {
+            padding-left: $mobile-padding !important;
+            padding-right: $mobile-padding !important;
+        }
+        > .main > * {
+            padding: 0 $mobile-padding;
+        }
+    }
+
+    header {
+        height: auto;
+        padding: 16px 0;
+    }
+
+    div.main .banner {
+        margin-right: $mobile-padding;
+        height: auto;
+        min-height: calc(100vh - 70px);
+        grid-template-columns: 1fr;
+        padding: 40px 0 60px;
+
+        img {
+            display: none;
+        }
+
+        .social {
+            position: static;
+            flex-flow: row;
+            justify-content: flex-start;
+            margin-top: 30px;
+
+            .line {
+                display: none;
+            }
+        }
+    }
+
+    .topic.experience > div.items {
+        margin: 0 16px;
+    }
+
+    .topic.contact > .items {
+        padding: 0 16px;
+    }
+
+    .topic.skills div.items > div {
+        width: 140px;
+        height: 140px;
+        margin: 20px;
+    }
 }

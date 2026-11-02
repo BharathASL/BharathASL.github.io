@@ -90,9 +90,15 @@ div.main {
         img {
             height: inherit;
             width: auto;
-            filter: grayscale(100%);
-            opacity: 0.7;
+            filter: grayscale(30%);
+            opacity: 0.9;
             margin: -$container-padding-horizontal;
+            transition: filter 0.3s, opacity 0.3s;
+
+            &:hover {
+                filter: grayscale(0%);
+                opacity: 1;
+            }
         }
         position: relative;
         .social {
@@ -102,7 +108,7 @@ div.main {
             display: flex;
             flex-flow: column;
             align-items: center;
-            * {
+            > * {
                 margin: 10px;
                 @include theme(color, brand-text);
             }
@@ -112,12 +118,13 @@ div.main {
                 width: 3px;
                 @include theme(background, brand);
             }
-            svg {
-                width: 20px;
-                height: auto;
+            a {
+                display: block;
+                font-size: 20px;
+                line-height: 1;
 
-                &:hover {
-                    cursor: pointer;
+                &:hover,
+                &:focus-visible {
                     transform: scale(1.2);
                 }
             }

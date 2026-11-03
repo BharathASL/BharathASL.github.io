@@ -1,6 +1,7 @@
 import { lazy, Suspense, useCallback, useState } from 'react';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 import CharacterFallback from './components/CharacterFallback.jsx';
+import Section from './components/layout/Section.jsx';
 import { supportsWebGL } from './utils/webgl.js';
 
 const CharacterScene = lazy(() => import('./three/CharacterScene.jsx'));
@@ -16,26 +17,32 @@ export default function App() {
   }, []);
 
   return (
-    <main className="placeholder">
-      <div className="placeholder__text">
-        <p className="text-label">Full-stack developer</p>
-        <h1 className="text-display">Bharath S</h1>
-        <p className="text-lead">Portfolio v2 is under construction.</p>
-        <p className="placeholder__status text-small" aria-live="polite">
-          {scene.loaded ? '3D scene ready' : `Loading 3D scene… ${Math.round(scene.progress)}%`}
-        </p>
-      </div>
-      <div className="scene" aria-hidden="true">
-        {use3d ? (
-          <ErrorBoundary fallback={<CharacterFallback />} onError={showFallback}>
-            <Suspense fallback={null}>
-              <CharacterScene onProgress={handleProgress} onContextLost={showFallback} />
-            </Suspense>
-          </ErrorBoundary>
-        ) : (
-          <CharacterFallback />
-        )}
-      </div>
+    <main>
+      <Section className="placeholder" labelledBy="intro-title">
+        <div className="split">
+          <div className="placeholder__text stack">
+            <p className="text-label">Full-stack developer</p>
+            <h1 id="intro-title" className="text-display">
+              Bharath S
+            </h1>
+            <p className="text-lead">Portfolio v2 is under construction.</p>
+            <p className="placeholder__status text-small" aria-live="polite">
+              {scene.loaded ? '3D scene ready' : `Loading 3D scene… ${Math.round(scene.progress)}%`}
+            </p>
+          </div>
+          <div className="scene" aria-hidden="true">
+            {use3d ? (
+              <ErrorBoundary fallback={<CharacterFallback />} onError={showFallback}>
+                <Suspense fallback={null}>
+                  <CharacterScene onProgress={handleProgress} onContextLost={showFallback} />
+                </Suspense>
+              </ErrorBoundary>
+            ) : (
+              <CharacterFallback />
+            )}
+          </div>
+        </div>
+      </Section>
     </main>
   );
 }

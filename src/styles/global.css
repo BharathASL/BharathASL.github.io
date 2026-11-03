@@ -1,5 +1,6 @@
 @import './tokens.css';
 @import './typography.css';
+@import './layout.css';
 
 *,
 *::before,
@@ -35,14 +36,17 @@ img {
 .placeholder {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
+}
+
+.placeholder__text {
+  --stack-gap: var(--space-3);
   text-align: center;
 }
 
 .placeholder p {
+  margin: 0;
   color: var(--color-text-muted);
 }
 
@@ -63,10 +67,8 @@ img {
   object-fit: contain;
 }
 
-@media (min-width: 900px) {
-  .placeholder {
-    grid-template-columns: 1fr 1fr;
-    padding: 2rem 4rem;
+@media (min-width: 1024px) {
+  .placeholder__text {
     text-align: left;
   }
 }

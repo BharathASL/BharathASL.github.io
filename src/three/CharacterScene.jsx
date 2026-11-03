@@ -20,7 +20,7 @@ function ProgressReporter({ onProgress }) {
   return null;
 }
 
-export default function CharacterScene({ onProgress, onContextLost }) {
+export default function CharacterScene({ modelUrl, onProgress, onContextLost }) {
   const container = useRef(null);
   const inView = useInView(container);
   const reducedMotion = useReducedMotion();
@@ -40,9 +40,11 @@ export default function CharacterScene({ onProgress, onContextLost }) {
         <FrameThrottle fps={LOW_POWER_FPS} active={animate && lowPower} />
         <FitCamera />
         <Lights />
-        <Suspense fallback={null}>
-          <Character animate={animate} autoLook={touch} />
-        </Suspense>
+        {modelUrl && (
+          <Suspense fallback={null}>
+            <Character url={modelUrl} animate={animate} autoLook={touch} />
+          </Suspense>
+        )}
       </Canvas>
     </div>
   );

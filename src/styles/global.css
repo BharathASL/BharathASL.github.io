@@ -43,6 +43,23 @@ img {
 .placeholder__text {
   --stack-gap: var(--space-3);
   text-align: center;
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition:
+    opacity 0.8s ease 0.3s,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
+}
+
+.is-ready .placeholder__text {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .placeholder__text {
+    transform: none;
+    transition: opacity 0.2s ease;
+  }
 }
 
 .placeholder p {

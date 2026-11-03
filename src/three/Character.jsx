@@ -4,7 +4,6 @@ import { useGLTF } from '@react-three/drei';
 import { MathUtils } from 'three';
 import { usePointerTarget } from './usePointerTarget.js';
 
-const MODEL_URL = `${import.meta.env.BASE_URL}models/character.glb`;
 const PIVOT_HEIGHT = 0.9;
 const MAX_YAW = 0.5;
 const MAX_PITCH = 0.16;
@@ -13,8 +12,8 @@ const FLOAT = { height: 0.025, speed: 1.3 };
 const SWAY = { angle: 0.012, speed: 0.7 };
 const LOOK_AROUND = { x: 0.6, y: 0.4, speedX: 0.35, speedY: 0.23 };
 
-export default function Character({ animate = true, autoLook = false }) {
-  const { scene } = useGLTF(MODEL_URL, false, true);
+export default function Character({ url, animate = true, autoLook = false }) {
+  const { scene } = useGLTF(url, false, true);
   const body = useRef();
   const canvas = useThree((state) => state.gl.domElement);
   const pointer = usePointerTarget(canvas);
@@ -38,5 +37,3 @@ export default function Character({ animate = true, autoLook = false }) {
     </group>
   );
 }
-
-useGLTF.preload(MODEL_URL, false, true);

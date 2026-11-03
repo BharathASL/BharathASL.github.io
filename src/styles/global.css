@@ -35,13 +35,26 @@ img {
 .placeholder {
   min-height: 100vh;
   display: grid;
-  place-content: center;
-  justify-items: center;
-  gap: 0.5rem;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: 1rem;
   padding: 1rem;
   text-align: center;
 }
 
 .placeholder p {
   color: var(--color-text-muted);
+}
+
+.scene {
+  width: 100%;
+  height: min(70vh, 640px);
+}
+
+@media (min-width: 900px) {
+  .placeholder {
+    grid-template-columns: 1fr 1fr;
+    padding: 2rem 4rem;
+    text-align: left;
+  }
 }

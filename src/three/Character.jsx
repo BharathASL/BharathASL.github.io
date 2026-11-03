@@ -11,8 +11,9 @@ const MAX_PITCH = 0.16;
 const FOLLOW_SMOOTHING = 4;
 const FLOAT = { height: 0.025, speed: 1.3 };
 const SWAY = { angle: 0.012, speed: 0.7 };
+const LOOK_AROUND = { x: 0.6, y: 0.4, speedX: 0.35, speedY: 0.23 };
 
-export default function Character({ animate = true }) {
+export default function Character({ animate = true, autoLook = false }) {
   const { scene } = useGLTF(MODEL_URL, false, true);
   const body = useRef();
   const canvas = useThree((state) => state.gl.domElement);
@@ -23,8 +24,10 @@ export default function Character({ animate = true }) {
     if (!group || !animate) return;
     const time = state.clock.elapsedTime;
     const step = Math.min(delta, 0.1);
-    group.rotation.y = MathUtils.damp(group.rotation.y, pointer.current.x * MAX_YAW, FOLLOW_SMOOTHING, step);
-    group.rotation.x = MathUtils.damp(group.rotation.x, pointer.current.y * MAX_PITCH, FOLLOW_SMOOTHING, step);
+    const lookX = autoLook ? Math.sin(time * LOOK_AROUND.speedX) * LOOK_AROUND.x : pointer.current.x;
+    const lookY = autoLook ? Math.sin(time * LOOK_AROUND.speedY) * LOOK_AROUND.y : pointer.current.y;
+    group.rotation.y = MathUtils.damp(group.rotation.y, lookX * MAX_YAW, FOLLOW_SMOOTHING, step);
+    group.rotation.x = MathUtils.damp(group.rotation.x, lookY * MAX_PITCH, FOLLOW_SMOOTHING, step);
     group.rotation.z = Math.sin(time * SWAY.speed) * SWAY.angle;
     group.position.y = PIVOT_HEIGHT + Math.sin(time * FLOAT.speed) * FLOAT.height;
   });

@@ -1,10 +1,19 @@
 import { lazy, Suspense, useCallback, useState } from 'react';
+import ErrorBoundary from './components/ErrorBoundary.jsx';
+import CharacterFallback from './components/CharacterFallback.jsx';
+import { supportsWebGL } from './utils/webgl.js';
 
 const CharacterScene = lazy(() => import('./three/CharacterScene.jsx'));
+const LOADED = { progress: 100, loaded: true };
 
 export default function App() {
-  const [scene, setScene] = useState({ progress: 0, loaded: false });
+  const [use3d, setUse3d] = useState(supportsWebGL);
+  const [scene, setScene] = useState(() => (use3d ? { progress: 0, loaded: false } : LOADED));
   const handleProgress = useCallback((state) => setScene(state), []);
+  const showFallback = useCallback(() => {
+    setUse3d(false);
+    setScene(LOADED);
+  }, []);
 
   return (
     <main className="placeholder">
@@ -16,9 +25,15 @@ export default function App() {
         </p>
       </div>
       <div className="scene" aria-hidden="true">
-        <Suspense fallback={null}>
-          <CharacterScene onProgress={handleProgress} />
-        </Suspense>
+        {use3d ? (
+          <ErrorBoundary fallback={<CharacterFallback />} onError={showFallback}>
+            <Suspense fallback={null}>
+              <CharacterScene onProgress={handleProgress} onContextLost={showFallback} />
+            </Suspense>
+          </ErrorBoundary>
+        ) : (
+          <CharacterFallback />
+        )}
       </div>
     </main>
   );

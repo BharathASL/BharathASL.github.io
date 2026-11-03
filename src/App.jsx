@@ -3,6 +3,7 @@ import ErrorBoundary from './components/ErrorBoundary.jsx';
 import CharacterFallback from './components/CharacterFallback.jsx';
 import Section from './components/layout/Section.jsx';
 import { supportsWebGL } from './utils/webgl.js';
+import { profile } from './data/profile.js';
 
 const CharacterScene = lazy(() => import('./three/CharacterScene.jsx'));
 const LOADED = { progress: 100, loaded: true };
@@ -21,11 +22,11 @@ export default function App() {
       <Section className="placeholder" labelledBy="intro-title">
         <div className="split">
           <div className="placeholder__text stack">
-            <p className="text-label">Full-stack developer</p>
+            <p className="text-label">{profile.role}</p>
             <h1 id="intro-title" className="text-display">
-              Bharath S
+              {profile.name}
             </h1>
-            <p className="text-lead">Portfolio v2 is under construction.</p>
+            <p className="text-lead">{profile.tagline}</p>
             <p className="placeholder__status text-small" aria-live="polite">
               {scene.loaded ? '3D scene ready' : `Loading 3D scene… ${Math.round(scene.progress)}%`}
             </p>

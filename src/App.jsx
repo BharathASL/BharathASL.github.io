@@ -18,9 +18,10 @@ export default function App() {
   return (
     <main className="placeholder">
       <div className="placeholder__text">
-        <h1>Bharath S</h1>
-        <p>Portfolio v2 is under construction.</p>
-        <p className="placeholder__status" aria-live="polite">
+        <p className="text-label">Full-stack developer</p>
+        <h1 className="text-display">Bharath S</h1>
+        <p className="text-lead">Portfolio v2 is under construction.</p>
+        <p className="placeholder__status text-small" aria-live="polite">
           {scene.loaded ? '3D scene ready' : `Loading 3D scene… ${Math.round(scene.progress)}%`}
         </p>
       </div>

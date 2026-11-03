@@ -23,7 +23,7 @@ A full rebuild of [bharathasl.github.io](https://bharathasl.github.io). v1 is ke
 | Hosting | GitHub Pages, deployed by a GitHub Actions workflow | Agreed |
 | Accent colour | Electric blue: `#60a5fa` (dark theme), `#1d4ed8` (light theme) | Agreed |
 | Themes | Dark default, light mode with saved preference | Agreed |
-| Fonts | Space Grotesk (headings), Inter (body) | Proposed |
+| Fonts | Space Grotesk (headings), Inter (body), self-hosted | Agreed |
 | 3D character | Placeholder model first, later a stylised model of me built in Blender | Agreed |
 | Client names | Not shown anywhere on the site | Agreed |
 

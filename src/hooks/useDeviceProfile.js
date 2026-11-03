@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { media } from '../styles/breakpoints.js';
 
 function readDeviceProfile() {
   const touch = window.matchMedia('(pointer: coarse)').matches;
-  const smallScreen = window.matchMedia('(max-width: 767px)').matches;
+  const smallScreen = window.matchMedia(media.phone).matches;
   const cores = navigator.hardwareConcurrency ?? 8;
   const memoryGb = navigator.deviceMemory ?? 8;
   const saveData = navigator.connection?.saveData === true;

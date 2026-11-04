@@ -13,6 +13,22 @@ body {
   min-height: 100vh;
   background: var(--color-bg);
   color: var(--color-text);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    transition: none;
+  }
+}
+
+.temp-toolbar {
+  position: fixed;
+  top: var(--space-4);
+  right: var(--gutter);
+  z-index: 10;
 }
 
 a {

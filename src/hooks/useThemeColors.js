@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { subscribe } from '../theme/theme.js';
 
 function readThemeColors() {
   const root = document.documentElement;
@@ -14,12 +15,6 @@ function readThemeColors() {
 
 export function useThemeColors() {
   const [colors, setColors] = useState(readThemeColors);
-
-  useEffect(() => {
-    const observer = new MutationObserver(() => setColors(readThemeColors()));
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => observer.disconnect();
-  }, []);
-
+  useEffect(() => subscribe(() => setColors(readThemeColors())), []);
   return colors;
 }

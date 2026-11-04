@@ -57,13 +57,10 @@ export default function Navbar({ name, inert, homeHref = '' }) {
         Skip to content
       </a>
       <div className="site-header__inner container">
-        <a
-          className="site-header__brand"
-          href={`${homeHref}#top`}
-          aria-label={homeHref ? `${name}, home` : `${name}, back to top`}
-          data-magnetic
-        >
+        {/* The visible "BS" stays first in the link's name, so voice control users can say what they see. */}
+        <a className="site-header__brand" href={`${homeHref}#top`} data-magnetic>
           BS
+          <span className="visually-hidden">{homeHref ? `, ${name}, home` : `, ${name}, back to top`}</span>
         </a>
 
         <nav className="site-nav" aria-label="Main">

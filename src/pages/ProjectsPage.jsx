@@ -97,7 +97,7 @@ export default function ProjectsPage() {
           <ul className="projects-grid">
             {shown.map((project, index) => (
               <li key={project.id} className="projects-grid__item">
-                <ProjectCard project={project} index={index} />
+                <ProjectCard project={project} index={index} headingLevel={2} />
               </li>
             ))}
           </ul>

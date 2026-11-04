@@ -9,6 +9,7 @@ import Section from './components/layout/Section.jsx';
 import Hero from './sections/Hero.jsx';
 import About from './sections/About.jsx';
 import Services from './sections/Services.jsx';
+import Career from './sections/Career.jsx';
 import { useDownload } from './hooks/useDownload.js';
 import { useReducedMotion } from './hooks/useReducedMotion.js';
 import { useSmoothScroll } from './hooks/useSmoothScroll.js';
@@ -19,6 +20,7 @@ import { navigation } from './data/navigation.js';
 
 const CharacterScene = lazy(() => import('./three/CharacterScene.jsx'));
 const DOWNLOAD_SHARE = 95;
+const BUILT_SECTIONS = new Set(['about', 'career']);
 
 export default function App() {
   const [use3d, setUse3d] = useState(supportsWebGL);
@@ -69,8 +71,9 @@ export default function App() {
         />
         <About />
         <Services />
+        <Career />
         {navigation
-          .filter((item) => item.id !== 'about')
+          .filter((item) => !BUILT_SECTIONS.has(item.id))
           .map((item) => (
             <Section key={item.id} id={item.id} className="placeholder-section" labelledBy={`${item.id}-title`}>
               <h2 id={`${item.id}-title`}>{item.label}</h2>

@@ -1,6 +1,7 @@
 @import './tokens.css';
 @import './typography.css';
 @import './layout.css';
+@import './buttons.css';
 
 *,
 *::before,
@@ -55,40 +56,6 @@ img {
   height: auto;
 }
 
-.placeholder {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  align-items: center;
-}
-
-.placeholder__text {
-  --stack-gap: var(--space-3);
-  text-align: center;
-  opacity: 0;
-  transform: translateY(1.5rem);
-  transition:
-    opacity 0.8s ease 0.3s,
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
-}
-
-.is-ready .placeholder__text {
-  opacity: 1;
-  transform: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .placeholder__text {
-    transform: none;
-    transition: opacity 0.2s ease;
-  }
-}
-
-.placeholder p {
-  margin: 0;
-  color: var(--color-text-muted);
-}
-
 .scene {
   width: 100%;
   height: min(70vh, 640px);
@@ -104,10 +71,4 @@ img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-}
-
-@media (min-width: 1024px) {
-  .placeholder__text {
-    text-align: left;
-  }
 }

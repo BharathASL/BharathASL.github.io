@@ -1,0 +1,219 @@
+.hero {
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: 100svh;
+  padding-block: calc(var(--header-height) + var(--space-5)) var(--space-9);
+}
+
+.hero__layout {
+  --split-gap: var(--space-5);
+  align-items: center;
+}
+
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.hero__eyebrow {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.hero__title {
+  margin: 0;
+}
+
+.hero__greeting {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-snug);
+  color: var(--color-text-muted);
+}
+
+.hero__roles {
+  font-family: var(--font-heading);
+  /* Keeps the longest role on one line on the smallest phones. */
+  font-size: min(var(--text-h3), 5.5vw);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  color: var(--color-accent);
+}
+
+.hero__tagline {
+  max-width: 32ch;
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.hero__actions {
+  --cluster-gap: var(--space-3);
+  justify-content: center;
+  margin-top: var(--space-3);
+}
+
+.hero__social {
+  --cluster-gap: var(--space-5);
+  justify-content: center;
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero__social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding-block: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.hero__social-link:hover {
+  color: var(--color-accent);
+}
+
+.hero__scene {
+  height: min(60svh, 640px);
+}
+
+.hero__scroll {
+  position: absolute;
+  display: none;
+  bottom: var(--space-5);
+  left: 50%;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  text-decoration: none;
+  transform: translateX(-50%);
+}
+
+.hero__scroll:hover {
+  color: var(--color-accent);
+}
+
+.hero__scroll-line {
+  position: relative;
+  width: 1px;
+  height: 2.5rem;
+  overflow: hidden;
+  background: var(--color-border);
+}
+
+.hero__scroll-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  transform: translateY(-100%);
+  animation: hero-scroll 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes hero-scroll {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  50% {
+    transform: none;
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Simple staggered entrance once the loader has gone. The full text reveal comes with the intro sequence. */
+.hero__reveal,
+.hero__scene,
+.hero__scroll {
+  opacity: 0;
+  transition:
+    opacity 0.8s ease calc(0.2s + var(--i, 0) * 0.08s),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) calc(0.2s + var(--i, 0) * 0.08s);
+}
+
+.hero__reveal {
+  transform: translateY(1.5rem);
+}
+
+.hero__scene {
+  --i: 2;
+}
+
+.hero__scroll {
+  --i: 7;
+}
+
+.is-ready .hero__reveal,
+.is-ready .hero__scene,
+.is-ready .hero__scroll {
+  opacity: 1;
+}
+
+.is-ready .hero__reveal {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__reveal {
+    transform: none;
+  }
+
+  .hero__reveal,
+  .hero__scene,
+  .hero__scroll {
+    transition: opacity 0.2s ease;
+  }
+
+  .hero__scroll-line::after {
+    animation: none;
+    transform: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero__layout {
+    --split-gap: var(--space-7);
+  }
+
+  /* Only on wide screens, where the whole hero fits in the first view. Hidden on short ones so it never covers the buttons. */
+  .hero__scroll {
+    display: flex;
+  }
+
+  .hero__content {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .hero__actions,
+  .hero__social {
+    justify-content: flex-start;
+  }
+
+  .hero__scene {
+    height: min(80svh, 720px);
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 40rem) {
+  .hero__scroll {
+    display: none;
+  }
+}

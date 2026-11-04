@@ -6,7 +6,7 @@ The site is built by Vite and published to GitHub Pages by the `Deploy` workflow
 
 - **Push to `main`**: builds the site and publishes `dist/` to GitHub Pages.
 - **Manual run on any other branch**: builds the site and attaches it to the run as a `site-preview` download. Nothing is published.
-- **Pull requests**: the `CI` workflow runs lint, format, colour and data checks and a build. It never publishes.
+- **Pull requests**: the `CI` workflow runs lint, format, colour and data checks, a build, and browser smoke tests in Chromium, Firefox and WebKit. It never publishes. If the browser tests fail, the run has a `playwright-report` download showing what went wrong.
 
 The site has three pages, all built from the Vite config:
 

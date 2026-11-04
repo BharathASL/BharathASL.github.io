@@ -85,5 +85,14 @@ for (const file of walk(join(root, 'src'))) {
     });
 }
 
+const pageBackgrounds = new Set(Object.values(themes).map((colors) => colors.bg));
+const indexHtml = readFileSync(join(root, 'index.html'), 'utf8');
+for (const hex of indexHtml.match(/#[0-9a-f]{3,8}\b/gi) ?? []) {
+  if (!pageBackgrounds.has(hex.toLowerCase())) {
+    console.log(`\nindex.html uses ${hex}, which is not a --color-bg token`);
+    failed = true;
+  }
+}
+
 console.log(failed ? '\nColour check failed.' : '\nAll colour checks passed.');
 process.exit(failed ? 1 : 0);

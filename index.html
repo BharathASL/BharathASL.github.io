@@ -4,7 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Bharath S, full-stack developer building across web, cloud, data and Android." />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0b0b0f" />
     <title>Bharath S | Full-Stack Developer</title>
+    <script>
+      (function () {
+        var theme = null;
+        try {
+          theme = localStorage.getItem('theme');
+        } catch (e) {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        document.documentElement.dataset.theme = theme;
+        if (theme === 'light') document.querySelector('meta[name="theme-color"]').content = '#fafafa';
+      })();
+    </script>
+    <style>
+      html {
+        background: #0b0b0f;
+        color-scheme: dark;
+      }
+      html[data-theme='light'] {
+        background: #fafafa;
+        color-scheme: light;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

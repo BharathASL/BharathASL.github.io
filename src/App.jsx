@@ -2,6 +2,8 @@ import { lazy, Suspense, useCallback, useEffect, useState } from 'react';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 import CharacterFallback from './components/CharacterFallback.jsx';
 import Loader from './components/Loader.jsx';
+import ThemeToggle from './components/ThemeToggle.jsx';
+import { followSystemTheme } from './theme/theme.js';
 import Section from './components/layout/Section.jsx';
 import { useDownload } from './hooks/useDownload.js';
 import { supportsWebGL } from './utils/webgl.js';
@@ -27,6 +29,8 @@ export default function App() {
     if (model.error) showFallback();
   }, [model.error, showFallback]);
 
+  useEffect(() => followSystemTheme(), []);
+
   const loaded = !use3d || sceneReady;
   const progress = loaded ? 100 : model.progress * DOWNLOAD_SHARE;
 
@@ -35,6 +39,9 @@ export default function App() {
       {loaderVisible && (
         <Loader name={profile.name} progress={progress} loaded={loaded} onExitStart={startIntro} onDone={hideLoader} />
       )}
+      <header className="temp-toolbar" inert={!introReady}>
+        <ThemeToggle />
+      </header>
       <main inert={!introReady} className={introReady ? 'is-ready' : undefined}>
         <Section className="placeholder" labelledBy="intro-title">
           <div className="split">

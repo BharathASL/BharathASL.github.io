@@ -23,6 +23,10 @@ Dates are `YYYY-MM` strings. `end: null` means "Present". Lists are ordered newe
 | `id`, `title`, `description`, `details` | string |
 | `tags` | string[] |
 
+## `sections.js`
+
+`sections`: `{ label, title }` for each section, keyed by section (`services`, …).
+
 ## `experience.js`
 
 `experience`: one entry per company, each with its projects.

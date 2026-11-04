@@ -2,13 +2,14 @@ import { lazy, Suspense, useCallback, useEffect, useState } from 'react';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 import CharacterFallback from './components/CharacterFallback.jsx';
 import Loader from './components/Loader.jsx';
-import ThemeToggle from './components/ThemeToggle.jsx';
+import Navbar from './components/Navbar.jsx';
 import { followSystemTheme } from './theme/theme.js';
 import Section from './components/layout/Section.jsx';
 import { useDownload } from './hooks/useDownload.js';
 import { supportsWebGL } from './utils/webgl.js';
 import { CHARACTER_MODEL_URL } from './utils/assets.js';
 import { profile } from './data/profile.js';
+import { navigation } from './data/navigation.js';
 
 const CharacterScene = lazy(() => import('./three/CharacterScene.jsx'));
 const DOWNLOAD_SHARE = 95;
@@ -39,11 +40,9 @@ export default function App() {
       {loaderVisible && (
         <Loader name={profile.name} progress={progress} loaded={loaded} onExitStart={startIntro} onDone={hideLoader} />
       )}
-      <header className="temp-toolbar" inert={!introReady}>
-        <ThemeToggle />
-      </header>
-      <main inert={!introReady} className={introReady ? 'is-ready' : undefined}>
-        <Section className="placeholder" labelledBy="intro-title">
+      <Navbar name={profile.name} inert={!introReady} />
+      <main id="main" tabIndex={-1} inert={!introReady} className={introReady ? 'is-ready' : undefined}>
+        <Section id="top" className="placeholder" labelledBy="intro-title">
           <div className="split">
             <div className="placeholder__text stack">
               <p className="text-label">{profile.role}</p>
@@ -69,6 +68,12 @@ export default function App() {
             </div>
           </div>
         </Section>
+        {navigation.map((item) => (
+          <Section key={item.id} id={item.id} className="placeholder-section" labelledBy={`${item.id}-title`}>
+            <h2 id={`${item.id}-title`}>{item.label}</h2>
+            <p>Coming soon.</p>
+          </Section>
+        ))}
       </main>
     </>
   );

@@ -24,11 +24,17 @@ body {
   }
 }
 
-.temp-toolbar {
-  position: fixed;
-  top: var(--space-4);
-  right: var(--gutter);
-  z-index: 10;
+main:focus {
+  outline: none;
+}
+
+.placeholder-section {
+  min-height: 70vh;
+  border-top: 1px solid var(--color-border);
+}
+
+.placeholder-section p {
+  color: var(--color-text-muted);
 }
 
 a {

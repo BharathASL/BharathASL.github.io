@@ -15,9 +15,10 @@ const DRAW_POINT = 'top 60%';
 // Grows each company's timeline line with the scroll and marks the projects it has reached.
 function useTimelineDraw(root, enabled) {
   useLayoutEffect(() => {
-    if (!enabled || !root.current) return undefined;
+    const element = root.current;
+    if (!enabled || !element) return undefined;
     const context = gsap.context(() => {
-      root.current.querySelectorAll('.timeline').forEach((timeline) => {
+      element.querySelectorAll('.timeline').forEach((timeline) => {
         timeline.classList.add('is-drawing');
         ScrollTrigger.create({
           trigger: timeline,
@@ -35,14 +36,14 @@ function useTimelineDraw(root, enabled) {
           });
         });
       });
-    }, root);
+    }, element);
     return () => {
       context.revert();
-      root.current?.querySelectorAll('.timeline').forEach((timeline) => {
+      element.querySelectorAll('.timeline').forEach((timeline) => {
         timeline.classList.remove('is-drawing');
         timeline.style.removeProperty('--line-progress');
       });
-      root.current?.querySelectorAll('.is-reached').forEach((project) => project.classList.remove('is-reached'));
+      element.querySelectorAll('.is-reached').forEach((project) => project.classList.remove('is-reached'));
     };
   }, [root, enabled]);
 }

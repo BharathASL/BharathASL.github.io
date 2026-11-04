@@ -26,22 +26,20 @@ const CharacterScene = lazy(() => import('./three/CharacterScene.jsx'));
 const DOWNLOAD_SHARE = 95;
 
 export default function App() {
-  const [use3d, setUse3d] = useState(supportsWebGL);
+  const [webglOk, setWebglOk] = useState(supportsWebGL);
   const [sceneReady, setSceneReady] = useState(false);
   const [loaderVisible, setLoaderVisible] = useState(true);
   const [introReady, setIntroReady] = useState(false);
   const [heroAnchor, setHeroAnchor] = useState(null);
   const [aboutAnchor, setAboutAnchor] = useState(null);
-  const model = useDownload(CHARACTER_MODEL_URL, { enabled: use3d, type: 'model/gltf-binary' });
+  const model = useDownload(CHARACTER_MODEL_URL, { enabled: webglOk, type: 'model/gltf-binary' });
+  // The static image replaces the 3D scene when WebGL is missing or fails, or the model cannot be downloaded.
+  const use3d = webglOk && !model.error;
 
-  const showFallback = useCallback(() => setUse3d(false), []);
+  const showFallback = useCallback(() => setWebglOk(false), []);
   const handleProgress = useCallback(({ loaded }) => setSceneReady(loaded), []);
   const startIntro = useCallback(() => setIntroReady(true), []);
   const hideLoader = useCallback(() => setLoaderVisible(false), []);
-
-  useEffect(() => {
-    if (model.error) showFallback();
-  }, [model.error, showFallback]);
 
   useEffect(() => followSystemTheme(), []);
 
@@ -84,7 +82,12 @@ export default function App() {
             </ErrorBoundary>
           </div>
         )}
-        <Hero ready={introReady} nextId={navigation[0]?.id} sceneRef={setHeroAnchor} scene={use3d ? null : <CharacterFallback />} />
+        <Hero
+          ready={introReady}
+          nextId={navigation[0]?.id}
+          sceneRef={setHeroAnchor}
+          scene={use3d ? null : <CharacterFallback />}
+        />
         <About stageRef={setAboutAnchor} />
         <Services />
         <Career />

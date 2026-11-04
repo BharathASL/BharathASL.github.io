@@ -72,7 +72,8 @@ experience.forEach((company, ci) => {
     month(at, p.start, 'start');
     month(at, p.end, 'end', { nullable: true });
     if (endKey(p.end) < p.start) fail(at, 'end is before start');
-    if (p.start < company.start || endKey(p.end) > endKey(company.end)) fail(at, 'project dates fall outside the company dates');
+    if (p.start < company.start || endKey(p.end) > endKey(company.end))
+      fail(at, 'project dates fall outside the company dates');
     const following = company.projects[pi + 1];
     if (following && following.start > p.start) fail(at, 'projects must be ordered newest first');
     list(at, p.highlights, 'highlights', { allowEmpty: true });
@@ -89,7 +90,8 @@ projects.forEach((p) => {
   ['title', 'summary'].forEach((f) => text(where, p[f], f));
   if (!(p.category in PROJECT_CATEGORIES)) fail(where, `unknown category "${p.category}"`);
   if (!STATUSES.includes(p.status)) fail(where, `status must be one of ${STATUSES.join(', ')}`);
-  if (p.experienceId && !experienceIds.has(p.experienceId)) fail(where, `experienceId "${p.experienceId}" does not exist`);
+  if (p.experienceId && !experienceIds.has(p.experienceId))
+    fail(where, `experienceId "${p.experienceId}" does not exist`);
   list(where, p.tech, 'tech', { allowEmpty: true });
   Object.entries(p.links ?? {}).forEach(([k, v]) => url(where, v, `links.${k}`));
   if (p.todo) todos.push(`${where}: placeholder, details to be added`);

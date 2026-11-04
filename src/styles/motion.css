@@ -62,7 +62,8 @@ html.has-reveal [data-reveal='fade'].is-revealed {
 }
 
 html.has-reveal [data-reveal='stagger'].is-revealed > * {
-  animation: reveal-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--reveal-delay, 0s) + var(--reveal-i, 0) * 0.1s) both;
+  animation: reveal-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--reveal-delay, 0s) + var(--reveal-i, 0) * 0.1s)
+    both;
 }
 
 html.has-reveal [data-reveal='words'] .split-text__inner {

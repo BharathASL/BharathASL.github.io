@@ -26,7 +26,7 @@ export default function CharacterScene({ modelUrl, hero, about, onProgress, onCo
   const reducedMotion = useReducedMotion();
   const { touch, lowPower } = useDeviceProfile();
   const [onScreen, setOnScreen] = useState(true);
-  const face = useRef({ x: 0, y: 0 });
+  const faceRef = useRef({ x: 0, y: 0 });
   const animate = onScreen && !reducedMotion;
 
   return (
@@ -37,14 +37,16 @@ export default function CharacterScene({ modelUrl, hero, about, onProgress, onCo
         frameloop={animate && !lowPower ? 'always' : 'demand'}
         camera={CAMERA}
         gl={{ antialias: !lowPower, alpha: true, powerPreference: lowPower ? 'default' : 'high-performance' }}
-        onCreated={({ gl }) => gl.domElement.addEventListener('webglcontextlost', () => onContextLost?.(), { once: true })}
+        onCreated={({ gl }) =>
+          gl.domElement.addEventListener('webglcontextlost', () => onContextLost?.(), { once: true })
+        }
       >
         <FrameThrottle fps={LOW_POWER_FPS} active={animate && lowPower} />
         <Lights />
         {modelUrl && (
-          <ScrollRig hero={hero} about={about} motion={!reducedMotion} face={face} onVisibleChange={setOnScreen}>
+          <ScrollRig hero={hero} about={about} motion={!reducedMotion} faceRef={faceRef} onVisibleChange={setOnScreen}>
             <Suspense fallback={null}>
-              <Character url={modelUrl} face={face} animate={animate} autoLook={touch} />
+              <Character url={modelUrl} faceRef={faceRef} animate={animate} autoLook={touch} />
             </Suspense>
           </ScrollRig>
         )}

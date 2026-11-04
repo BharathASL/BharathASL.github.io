@@ -15,7 +15,8 @@ export const sections = {
   contact: {
     label: 'Contact',
     title: 'Have a project in mind? Let’s talk.',
-    intro: 'I’m happy to hear about new roles, freelance work or just an interesting problem. Email is the quickest way to reach me.',
+    intro:
+      'I’m happy to hear about new roles, freelance work or just an interesting problem. Email is the quickest way to reach me.',
   },
   projects: {
     label: 'Projects',

@@ -17,15 +17,15 @@ A full rebuild of [bharathasl.github.io](https://bharathasl.github.io). v1 is ke
 
 ## Decisions
 
-| Area | Decision | Status |
-|------|----------|--------|
-| Stack | Vite + React, React Three Fiber (Three.js), GSAP + ScrollTrigger, Lenis | Agreed |
-| Hosting | GitHub Pages, deployed by a GitHub Actions workflow | Agreed |
-| Accent colour | Electric blue: `#60a5fa` (dark theme), `#1d4ed8` (light theme) | Agreed |
-| Themes | Dark default, light mode with saved preference | Agreed |
-| Fonts | Space Grotesk (headings), Inter (body), self-hosted | Agreed |
-| 3D character | Placeholder model first, later a stylised model of me built in Blender | Agreed |
-| Client names | Not shown anywhere on the site | Agreed |
+| Area          | Decision                                                                | Status |
+| ------------- | ----------------------------------------------------------------------- | ------ |
+| Stack         | Vite + React, React Three Fiber (Three.js), GSAP + ScrollTrigger, Lenis | Agreed |
+| Hosting       | GitHub Pages, deployed by a GitHub Actions workflow                     | Agreed |
+| Accent colour | Electric blue: `#60a5fa` (dark theme), `#1d4ed8` (light theme)          | Agreed |
+| Themes        | Dark default, light mode with saved preference                          | Agreed |
+| Fonts         | Space Grotesk (headings), Inter (body), self-hosted                     | Agreed |
+| 3D character  | Placeholder model first, later a stylised model of me built in Blender  | Agreed |
+| Client names  | Not shown anywhere on the site                                          | Agreed |
 
 ## Page structure
 
@@ -46,16 +46,16 @@ A full rebuild of [bharathasl.github.io](https://bharathasl.github.io). v1 is ke
 
 **VueData Technologies** (Oct 2021 - Present)
 
-| Period | Project | Role |
-|--------|---------|------|
-| Dec 2025 - Present | Android keyboard app: Unified Search, a bottom sheet with an "All" tab for recent emojis, GIFs and media, plus keyword search grouped by type | Android Developer |
-| May 2025 - Dec 2025 | Sports lesson tutorial platform | Full-Stack Developer |
-| Mar 2025 - May 2025 | Real-time customer support POC (LiveKit, Twilio) | Developer (POC) |
-| May 2024 - Mar 2025 | Shopping analytics for a major web browser: petabyte-scale pipelines, Scope, ADF, Power BI | Data Analytics |
-| Feb 2024 - May 2024 | Coupon auto-apply automation: Azure Functions, Docker, Selenium, AI-based selector extraction | Team Lead |
-| Dec 2023 - Feb 2024 | Skilled-professionals marketplace app: system design and backend (Node.js, Azure, CosmosDB) | Team Lead |
-| Sep 2022 - Nov 2023 | Deposit insurance enterprise system for a national financial body (Kotlin, Java, MariaDB, React) | Software Developer |
-| Oct 2021 - Sep 2022 | Server sustainability platform: carbon footprint, energy and CPU/GPU metrics, hub-and-spoke data model | Software Developer |
+| Period              | Project                                                                                                                                       | Role                 |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| Dec 2025 - Present  | Android keyboard app: Unified Search, a bottom sheet with an "All" tab for recent emojis, GIFs and media, plus keyword search grouped by type | Android Developer    |
+| May 2025 - Dec 2025 | Sports lesson tutorial platform                                                                                                               | Full-Stack Developer |
+| Mar 2025 - May 2025 | Real-time customer support POC (LiveKit, Twilio)                                                                                              | Developer (POC)      |
+| May 2024 - Mar 2025 | Shopping analytics for a major web browser: petabyte-scale pipelines, Scope, ADF, Power BI                                                    | Data Analytics       |
+| Feb 2024 - May 2024 | Coupon auto-apply automation: Azure Functions, Docker, Selenium, AI-based selector extraction                                                 | Team Lead            |
+| Dec 2023 - Feb 2024 | Skilled-professionals marketplace app: system design and backend (Node.js, Azure, CosmosDB)                                                   | Team Lead            |
+| Sep 2022 - Nov 2023 | Deposit insurance enterprise system for a national financial body (Kotlin, Java, MariaDB, React)                                              | Software Developer   |
+| Oct 2021 - Sep 2022 | Server sustainability platform: carbon footprint, energy and CPU/GPU metrics, hub-and-spoke data model                                        | Software Developer   |
 
 **GoDB Tech** (Jun 2018 - Oct 2021)
 
@@ -100,6 +100,7 @@ Names, descriptions, links and media to be filled in.
 
 - `redesign/v2` is the integration branch for the whole rebuild. `main` keeps serving v1 until launch.
 - Each task gets its own branch from `redesign/v2`, named `v2/<issue-number>-<short-name>` (for example `v2/21-vite-setup`), and is merged back through a pull request.
+- Every pull request runs CI: `npm run lint`, `npm run format:check`, the colour and data checks, and a build. Run `npm run format` to fix formatting.
 - Launch is a single pull request from `redesign/v2` into `main`.
 - Work is tracked in the private "Portfolio v2" GitHub project: one epic per area below, tasks as sub-issues, with blocked-by links between tasks.
 

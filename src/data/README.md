@@ -13,6 +13,7 @@ Dates are `YYYY-MM` strings. `end: null` means "Present". Lists are ordered newe
 | `name`, `role`, `tagline`, `location` | string | |
 | `careerStart` | `YYYY-MM` | Used to calculate `yearsOfExperience` |
 | `roles` | string[] | Rotating titles in the hero |
+| `aboutHeading` | string | Heading of the About section |
 | `about` | string[] | One string per paragraph |
 
 `services`: the "What I Do" cards.

@@ -40,6 +40,7 @@ text('profile', profile.role, 'role');
 text('profile', profile.tagline, 'tagline');
 month('profile', profile.careerStart, 'careerStart');
 list('profile', profile.roles, 'roles');
+text('profile', profile.aboutHeading, 'aboutHeading');
 list('profile', profile.about, 'about');
 
 services.forEach((s) => {

@@ -1,0 +1,83 @@
+.about {
+  border-top: 1px solid var(--color-border);
+}
+
+.about__stage {
+  display: none;
+}
+
+.about__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.about__label {
+  margin: 0;
+  color: var(--color-accent);
+}
+
+.about__title {
+  max-width: 20ch;
+}
+
+.about__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 60ch;
+  color: var(--color-text-muted);
+}
+
+.about__body p {
+  margin: 0;
+}
+
+.about__body p:first-child {
+  font-size: var(--text-lg);
+  color: var(--color-text);
+}
+
+.about__facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin: var(--space-3) 0 0;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+
+/* Value above the label visually, while screen readers still read the label first. */
+.about__fact {
+  display: grid;
+  align-content: start;
+  gap: var(--space-1);
+}
+
+.about__fact-value {
+  order: -1;
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.about__fact-label {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 1024px) {
+  .about {
+    display: grid;
+    align-items: center;
+    min-height: 100svh;
+  }
+
+  .about__stage {
+    display: block;
+    min-height: min(70svh, 640px);
+  }
+}

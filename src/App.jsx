@@ -7,6 +7,7 @@ import Cursor from './components/Cursor.jsx';
 import { followSystemTheme } from './theme/theme.js';
 import Section from './components/layout/Section.jsx';
 import Hero from './sections/Hero.jsx';
+import About from './sections/About.jsx';
 import { useDownload } from './hooks/useDownload.js';
 import { useReducedMotion } from './hooks/useReducedMotion.js';
 import { useSmoothScroll } from './hooks/useSmoothScroll.js';
@@ -65,12 +66,15 @@ export default function App() {
             )
           }
         />
-        {navigation.map((item) => (
-          <Section key={item.id} id={item.id} className="placeholder-section" labelledBy={`${item.id}-title`}>
-            <h2 id={`${item.id}-title`}>{item.label}</h2>
-            <p>Coming soon.</p>
-          </Section>
-        ))}
+        <About />
+        {navigation
+          .filter((item) => item.id !== 'about')
+          .map((item) => (
+            <Section key={item.id} id={item.id} className="placeholder-section" labelledBy={`${item.id}-title`}>
+              <h2 id={`${item.id}-title`}>{item.label}</h2>
+              <p>Coming soon.</p>
+            </Section>
+          ))}
       </main>
     </>
   );

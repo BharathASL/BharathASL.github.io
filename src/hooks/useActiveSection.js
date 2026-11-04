@@ -2,15 +2,17 @@ import { useEffect, useState } from 'react';
 
 const READING_BAND = '-40% 0px -55% 0px';
 
+// The section crossing the reading band is active. Once the footer is in view, the last section is,
+// since a short last section may never reach the band. Only observers, so no layout reads while scrolling.
 export function useActiveSection(ids) {
   const [active, setActive] = useState(null);
 
   useEffect(() => {
     const crossing = new Map();
-    const atBottom = () => window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
-    const update = () => setActive(atBottom() ? ids.at(-1) : (ids.find((id) => crossing.get(id)) ?? null));
+    let atBottom = false;
+    const update = () => setActive(atBottom ? ids.at(-1) : (ids.find((id) => crossing.get(id)) ?? null));
 
-    const observer = new IntersectionObserver(
+    const sections = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => crossing.set(entry.target.id, entry.isIntersecting));
         update();
@@ -19,13 +21,19 @@ export function useActiveSection(ids) {
     );
     ids.forEach((id) => {
       const element = document.getElementById(id);
-      if (element) observer.observe(element);
+      if (element) sections.observe(element);
     });
-    window.addEventListener('scroll', update, { passive: true });
+
+    const footer = document.querySelector('.site-footer');
+    const bottom = new IntersectionObserver(([entry]) => {
+      atBottom = entry.isIntersecting;
+      update();
+    });
+    if (footer) bottom.observe(footer);
 
     return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', update);
+      sections.disconnect();
+      bottom.disconnect();
     };
   }, [ids]);
 

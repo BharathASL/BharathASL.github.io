@@ -3,7 +3,6 @@ import { experience } from '../src/data/experience.js';
 import { projects, PROJECT_CATEGORIES } from '../src/data/projects.js';
 import { skillGroups } from '../src/data/skills.js';
 import { contact, socialLinks } from '../src/data/links.js';
-import { credits } from '../src/data/credits.js';
 import { sections } from '../src/data/sections.js';
 
 const errors = [];
@@ -112,13 +111,6 @@ socialLinks.forEach((l) => {
   uniqueId(`links/${l.id}`, l.id);
   text(`links/${l.id}`, l.label, 'label');
   url(`links/${l.id}`, l.url, 'url');
-});
-
-credits.forEach((c, i) => {
-  ['work', 'author', 'license'].forEach((f) => text(`credits/${i}`, c[f], f));
-  url(`credits/${i}`, c.licenseUrl, 'licenseUrl');
-  if (c.url === undefined) todos.push(`credits/${i}: link to the original work not added yet`);
-  else url(`credits/${i}`, c.url, 'url');
 });
 
 if (todos.length) console.log(`Still to fill in (${todos.length}):\n  ${todos.join('\n  ')}\n`);

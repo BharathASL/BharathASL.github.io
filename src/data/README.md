@@ -70,7 +70,3 @@ Project:
 
 - `contact`: `{ email, cv }` (`cv` is `null` until the PDF is added)
 - `socialLinks`: `{ id, label, url }[]`
-
-## `credits.js`
-
-`credits`: `{ work, author, license, licenseUrl, url?, note }[]`. A record of third-party work used on the site; it is not shown on the site. `url` links to the original work.

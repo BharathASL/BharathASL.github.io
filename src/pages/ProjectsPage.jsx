@@ -37,7 +37,7 @@ export default function ProjectsPage() {
   const [filter, setFilter] = useState(readFilter);
   const reducedMotion = useReducedMotion();
   useSmoothScroll({ enabled: !reducedMotion, paused: false });
-  useScrollReveal(!reducedMotion);
+  useScrollReveal();
 
   useEffect(() => followSystemTheme(), []);
 

@@ -17,7 +17,7 @@
   vertical-align: top;
 }
 
-/* Scroll reveals. Only with has-motion, so nothing stays hidden if scripts fail or motion is reduced.
+/* Scroll reveals. Only with has-reveal, so nothing stays hidden if scripts fail.
    Animations use `translate`, which leaves `transform` free for hover effects. */
 /* Each keyframe ends explicitly visible, because the resting style before a reveal is hidden. */
 @keyframes reveal-up {
@@ -32,6 +32,16 @@
   }
 }
 
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes reveal-word {
   from {
     translate: 0 110%;
@@ -42,24 +52,48 @@
   }
 }
 
-html.has-motion [data-reveal='fade'],
-html.has-motion [data-reveal='stagger'] > * {
+html.has-reveal [data-reveal='fade'],
+html.has-reveal [data-reveal='stagger'] > * {
   opacity: 0;
 }
 
-html.has-motion [data-reveal='fade'].is-revealed {
+html.has-reveal [data-reveal='fade'].is-revealed {
   animation: reveal-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s) both;
 }
 
-html.has-motion [data-reveal='stagger'].is-revealed > * {
+html.has-reveal [data-reveal='stagger'].is-revealed > * {
   animation: reveal-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--reveal-delay, 0s) + var(--reveal-i, 0) * 0.1s) both;
 }
 
-html.has-motion [data-reveal='words'] .split-text__inner {
+html.has-reveal [data-reveal='words'] .split-text__inner {
   translate: 0 110%;
 }
 
-html.has-motion [data-reveal='words'].is-revealed .split-text__inner {
+html.has-reveal [data-reveal='words'].is-revealed .split-text__inner {
   animation: reveal-word 1s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--reveal-delay, 0s) + var(--i, 0) * 0.05s) both;
   translate: none;
+}
+
+/* Reduced motion: no movement, no staggering, just a short fade. */
+@media (prefers-reduced-motion: reduce) {
+  html.has-reveal [data-reveal='fade'].is-revealed,
+  html.has-reveal [data-reveal='stagger'].is-revealed > * {
+    animation: reveal-fade 0.5s ease both;
+  }
+
+  html.has-reveal [data-reveal='words'] .split-text__inner {
+    translate: none;
+  }
+
+  html.has-reveal [data-reveal='words'] {
+    opacity: 0;
+  }
+
+  html.has-reveal [data-reveal='words'].is-revealed {
+    animation: reveal-fade 0.5s ease both;
+  }
+
+  html.has-reveal [data-reveal='words'].is-revealed .split-text__inner {
+    animation: none;
+  }
 }

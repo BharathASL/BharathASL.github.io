@@ -153,21 +153,33 @@
   }
 }
 
-html.has-motion .hero__greeting .split-text__inner {
+html.has-reveal .hero__greeting .split-text__inner {
   translate: 0 110%;
 }
 
-html.has-motion .is-ready .hero__greeting .split-text__inner {
+html.has-reveal .is-ready .hero__greeting .split-text__inner {
   animation: reveal-word 0.9s cubic-bezier(0.22, 1, 0.36, 1) calc(0.15s + var(--i) * 0.06s) both;
   translate: none;
 }
 
-html.has-motion .hero__name .split-text__char {
+html.has-reveal .hero__name .split-text__char {
   opacity: 0;
 }
 
-html.has-motion .is-ready .hero__name .split-text__char {
+html.has-reveal .is-ready .hero__name .split-text__char {
   animation: hero-char 0.9s cubic-bezier(0.22, 1, 0.36, 1) calc(0.3s + var(--i) * 0.045s) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.has-reveal .hero__greeting .split-text__inner,
+  html.has-reveal .is-ready .hero__greeting .split-text__inner {
+    translate: none;
+    animation: none;
+  }
+
+  html.has-reveal .is-ready .hero__name .split-text__char {
+    animation: reveal-fade 0.5s ease 0.1s both;
+  }
 }
 
 /* The other hero parts fade up in order once the loader has gone. */

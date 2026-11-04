@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 
 const ROOT_MARGIN = '0px 0px -12% 0px';
 
-// Reveals every [data-reveal] element the first time it scrolls into view.
-// Without the has-motion class (reduced motion, or before this runs) everything is simply visible.
-export function useScrollReveal(enabled) {
+// Reveals every [data-reveal] element the first time it scrolls into view. With reduced motion the
+// reveals are plain fades (see motion.css). Without the has-reveal class, for example if scripts fail,
+// everything is simply visible.
+export function useScrollReveal() {
   useEffect(() => {
-    if (!enabled) return undefined;
     const html = document.documentElement;
     const elements = [...document.querySelectorAll('[data-reveal]')];
 
@@ -25,11 +25,11 @@ export function useScrollReveal(enabled) {
       { rootMargin: ROOT_MARGIN },
     );
     elements.forEach((element) => observer.observe(element));
-    html.classList.add('has-motion');
+    html.classList.add('has-reveal');
 
     return () => {
       observer.disconnect();
-      html.classList.remove('has-motion');
+      html.classList.remove('has-reveal');
     };
-  }, [enabled]);
+  }, []);
 }

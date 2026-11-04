@@ -12,6 +12,7 @@ export default defineConfig({
       input: {
         main: page('./index.html'),
         projects: page('./projects/index.html'),
+        notFound: page('./404.html'),
       },
     },
   },

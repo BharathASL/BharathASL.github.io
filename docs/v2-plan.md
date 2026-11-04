@@ -37,7 +37,7 @@ A full rebuild of [bharathasl.github.io](https://bharathasl.github.io). v1 is ke
 6. **Career**: timeline that draws itself on scroll, projects grouped under each company.
 7. **Work**: pinned horizontal strip of project cards (work projects and Ninja6-MC).
 8. **Tech Stack**: grouped skills.
-9. **Contact + Footer**: email, LinkedIn, GitHub, CV download, credits.
+9. **Contact + Footer**: email, LinkedIn, GitHub, CV download.
 10. **/projects**: grid of all projects.
 
 ## Content
@@ -71,7 +71,7 @@ Names, descriptions, links and media to be filled in.
 
 ## 3D character
 
-- **Placeholder**: "Alex (Minecraft) T-Pose" by Bo Nakamura, CC BY 4.0. Credit shown in the footer while it is in use. Simplified to a web budget and renamed before committing.
+- **Placeholder**: a temporary model until the final one is ready. Simplified to a web budget and renamed before committing.
 - **Final**: stylised model of me (Blender), rigged with Mixamo. Expected names used by the code:
   - Bones: `Hips`, `Spine`, `Spine1`, `Spine2`, `Neck`, `Head`, `LeftArm`, `LeftForeArm`, `LeftHand`, `RightArm`, `RightForeArm`, `RightHand`
   - Actions: `Idle`, `Typing`
@@ -114,7 +114,3 @@ Names, descriptions, links and media to be filled in.
 5. Sections
 6. Motion
 7. Quality & launch
-
-## Credits
-
-- Placeholder 3D model: "Alex (Minecraft) T-Pose 3D Model" by Bo Nakamura, licensed under CC BY 4.0.

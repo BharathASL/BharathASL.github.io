@@ -13,7 +13,7 @@
   max-width: 22ch;
 }
 
-/* Stacked on phones, a grid on larger screens. The pinned horizontal strip is added with the scroll motion. */
+/* Stacked on phones, a grid on tablets, and a pinned sideways strip on desktop (see the end of this file). */
 .work__track {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -107,5 +107,75 @@
 
   .work__all:hover .work__all-arrow {
     transform: none;
+  }
+}
+
+.work__progress {
+  display: none;
+}
+
+/* Desktop strip: one row of cards that moves sideways while the section is pinned.
+   The script adds is-strip when it sets up the pin, so the grid stays if it does not run. */
+@media (min-width: 1024px) and (min-height: 650px) and (prefers-reduced-motion: no-preference) {
+  .work.is-strip {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100svh;
+    /* Tighter than other sections, so header and cards fit the screen while pinned. */
+    padding-block: calc(var(--header-height) + var(--space-3)) var(--space-4);
+    overflow-x: clip;
+  }
+
+  .work.is-strip .work__header {
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+
+  .work.is-strip .work__title {
+    max-width: none;
+  }
+
+  .work.is-strip .work__viewport {
+    overflow: visible;
+  }
+
+  .work.is-strip .work__track {
+    display: flex;
+    gap: var(--space-5);
+    width: max-content;
+    will-change: transform;
+  }
+
+  .work.is-strip .work__item {
+    flex: none;
+    width: clamp(21rem, 32vw, 28rem);
+  }
+
+  /* Covers shrink on short screens so the whole card stays visible. */
+  .work.is-strip .project-card__cover {
+    aspect-ratio: auto;
+    height: clamp(5rem, 18svh, 12rem);
+  }
+
+  .work.is-strip .work__all {
+    min-height: 0;
+  }
+
+  .work.is-strip .work__progress {
+    display: block;
+    height: 2px;
+    margin-top: var(--space-4);
+    overflow: hidden;
+    border-radius: 1px;
+    background: var(--color-border);
+  }
+
+  .work.is-strip .work__progress-bar {
+    display: block;
+    height: 100%;
+    background: var(--color-accent);
+    transform: scaleX(var(--strip-progress, 0));
+    transform-origin: left;
   }
 }

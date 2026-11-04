@@ -54,7 +54,8 @@
   list-style: none;
 }
 
-.timeline::before {
+.timeline::before,
+.timeline::after {
   content: '';
   position: absolute;
   top: 0.5rem;
@@ -64,8 +65,29 @@
   background: linear-gradient(to bottom, var(--color-accent), var(--color-border) 30%);
 }
 
+.timeline::after {
+  display: none;
+}
+
+/* While drawing: a faint track, with the accent line filling it as you scroll. */
+.timeline.is-drawing::before {
+  background: var(--color-border);
+}
+
+.timeline.is-drawing::after {
+  display: block;
+  width: 2px;
+  margin-left: -0.5px;
+  background: linear-gradient(to bottom, var(--color-accent-hover), var(--color-accent));
+  box-shadow: 0 0 0.75rem var(--color-glow);
+  transform: scaleY(var(--line-progress, 0));
+  transform-origin: top;
+}
+
 .career-project {
   position: relative;
+  /* Above the timeline line, which would otherwise show through the dots. */
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
@@ -77,9 +99,23 @@
   left: calc(-1 * (var(--rail) / 2 + var(--space-4)) - var(--dot-size) / 2);
   width: var(--dot-size);
   height: var(--dot-size);
+  z-index: 1;
   border: 2px solid var(--color-accent);
   border-radius: 50%;
   background: var(--color-bg);
+}
+
+.timeline.is-drawing .career-project__dot {
+  border-color: var(--color-border);
+  transition:
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.timeline.is-drawing .career-project.is-reached .career-project__dot {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 0.35rem var(--color-glow);
 }
 
 .career-project[data-current='true'] .career-project__dot {

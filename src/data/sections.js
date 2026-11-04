@@ -8,6 +8,10 @@ export const sections = {
     label: 'Selected work',
     title: 'Things I’ve built, at work and on my own.',
   },
+  stack: {
+    label: 'Tech stack',
+    title: 'The tools I reach for most.',
+  },
   services: {
     label: 'What I do',
     title: 'Three areas I work across, often in the same project.',

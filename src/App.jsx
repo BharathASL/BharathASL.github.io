@@ -11,6 +11,7 @@ import About from './sections/About.jsx';
 import Services from './sections/Services.jsx';
 import Career from './sections/Career.jsx';
 import Work from './sections/Work.jsx';
+import TechStack from './sections/TechStack.jsx';
 import { useDownload } from './hooks/useDownload.js';
 import { useReducedMotion } from './hooks/useReducedMotion.js';
 import { useSmoothScroll } from './hooks/useSmoothScroll.js';
@@ -74,6 +75,7 @@ export default function App() {
         <Services />
         <Career />
         <Work />
+        <TechStack />
         {navigation
           .filter((item) => !BUILT_SECTIONS.has(item.id))
           .map((item) => (

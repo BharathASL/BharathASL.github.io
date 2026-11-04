@@ -56,7 +56,7 @@ export default function App() {
 
   const reducedMotion = useReducedMotion();
   useSmoothScroll({ enabled: !reducedMotion, paused: !introReady });
-  useScrollReveal(!reducedMotion);
+  useScrollReveal();
 
   const loaded = !use3d || sceneReady;
   const progress = loaded ? 100 : model.progress * DOWNLOAD_SHARE;

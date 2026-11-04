@@ -1,4 +1,5 @@
 import Section from '../components/layout/Section.jsx';
+import SplitText from '../components/SplitText.jsx';
 import { skillGroups } from '../data/skills.js';
 import { sections } from '../data/sections.js';
 import './TechStack.css';
@@ -25,17 +26,21 @@ export default function TechStack() {
   return (
     <Section id="stack" className="stack-section" labelledBy="stack-title">
       <div className="stack-section__header">
-        <p className="section-label text-label">{copy.label}</p>
-        <h2 id="stack-title" className="stack-section__title">
-          {copy.title}
+        <p className="section-label text-label" data-reveal="fade">
+          {copy.label}
+        </p>
+        <h2 id="stack-title" className="stack-section__title" data-reveal="words">
+          <SplitText text={copy.title} />
         </h2>
       </div>
 
-      <Marquee />
+      <div data-reveal="fade">
+        <Marquee />
+      </div>
 
       <div className="stack-groups">
         {skillGroups.map((group) => (
-          <section key={group.id} className="stack-group" aria-labelledby={`stack-${group.id}`}>
+          <section key={group.id} className="stack-group" aria-labelledby={`stack-${group.id}`} data-reveal="fade">
             <h3 id={`stack-${group.id}`} className="stack-group__title">
               {group.title}
               <span className="stack-group__count" aria-hidden="true">

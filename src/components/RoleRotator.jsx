@@ -29,7 +29,11 @@ export default function RoleRotator({ roles, active = true, className = '', ...r
           const state = i === index ? 'is-active' : i === previous ? 'is-leaving' : undefined;
           return (
             <span key={role} className={['role-rotator__item', state].filter(Boolean).join(' ')}>
-              {role}
+              {[...role].map((char, charIndex) => (
+                <span key={charIndex} className="role-rotator__char" style={{ '--i': charIndex }}>
+                  {char === ' ' ? '\u00a0' : char}
+                </span>
+              ))}
             </span>
           );
         })}

@@ -1,5 +1,6 @@
 import Section from '../components/layout/Section.jsx';
 import RoleRotator from '../components/RoleRotator.jsx';
+import SplitText from '../components/SplitText.jsx';
 import { profile } from '../data/profile.js';
 import { contact, socialLinks } from '../data/links.js';
 import './Hero.css';
@@ -28,15 +29,20 @@ export default function Hero({ ready, scene, nextId }) {
           <p className="hero__eyebrow text-label hero__reveal" style={{ '--i': 0 }}>
             Based in {profile.location} · {profile.yearsOfExperience}+ years building software
           </p>
-          <h1 id="hero-title" className="hero__title text-display hero__reveal" style={{ '--i': 1 }}>
-            <span className="hero__greeting">Hi, I’m</span> {profile.name}
+          <h1 id="hero-title" className="hero__title text-display">
+            <span className="hero__greeting">
+              <SplitText text="Hi, I’m" />
+            </span>{' '}
+            <span className="hero__name">
+              <SplitText text={profile.name} by="chars" />
+            </span>
           </h1>
-          <RoleRotator className="hero__roles hero__reveal" style={{ '--i': 2 }} roles={profile.roles} active={ready} />
-          <p className="hero__tagline text-lead hero__reveal" style={{ '--i': 3 }}>
+          <RoleRotator className="hero__roles hero__reveal" style={{ '--i': 6 }} roles={profile.roles} active={ready} />
+          <p className="hero__tagline text-lead hero__reveal" style={{ '--i': 7 }}>
             {profile.tagline}
           </p>
 
-          <div className="hero__actions cluster hero__reveal" style={{ '--i': 4 }}>
+          <div className="hero__actions cluster hero__reveal" style={{ '--i': 8 }}>
             <a className="button button--primary" href={`mailto:${contact.email}`} data-magnetic>
               Get in touch
               <ArrowIcon />
@@ -53,7 +59,7 @@ export default function Hero({ ready, scene, nextId }) {
             )}
           </div>
 
-          <ul className="hero__social cluster hero__reveal" style={{ '--i': 5 }} aria-label="Profiles">
+          <ul className="hero__social cluster hero__reveal" style={{ '--i': 9 }} aria-label="Profiles">
             {socialLinks.map((link) => (
               <li key={link.id}>
                 <a className="hero__social-link" href={link.url} target="_blank" rel="noreferrer">

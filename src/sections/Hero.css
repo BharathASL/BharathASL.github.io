@@ -138,7 +138,39 @@
   }
 }
 
-/* Simple staggered entrance once the loader has gone. The full text reveal comes with the intro sequence. */
+/* Intro: after the loader, the greeting rises, the name appears letter by letter, then the rest follows. */
+@keyframes hero-char {
+  from {
+    opacity: 0;
+    translate: 0 0.35em;
+    filter: blur(10px);
+  }
+
+  to {
+    opacity: 1;
+    translate: none;
+    filter: none;
+  }
+}
+
+html.has-motion .hero__greeting .split-text__inner {
+  translate: 0 110%;
+}
+
+html.has-motion .is-ready .hero__greeting .split-text__inner {
+  animation: reveal-word 0.9s cubic-bezier(0.22, 1, 0.36, 1) calc(0.15s + var(--i) * 0.06s) both;
+  translate: none;
+}
+
+html.has-motion .hero__name .split-text__char {
+  opacity: 0;
+}
+
+html.has-motion .is-ready .hero__name .split-text__char {
+  animation: hero-char 0.9s cubic-bezier(0.22, 1, 0.36, 1) calc(0.3s + var(--i) * 0.045s) both;
+}
+
+/* The other hero parts fade up in order once the loader has gone. */
 .hero__reveal,
 .hero__scene,
 .hero__scroll {
@@ -157,7 +189,7 @@
 }
 
 .hero__scroll {
-  --i: 7;
+  --i: 11;
 }
 
 .is-ready .hero__reveal,

@@ -16,6 +16,7 @@ import Footer from './components/Footer.jsx';
 import { useDownload } from './hooks/useDownload.js';
 import { useReducedMotion } from './hooks/useReducedMotion.js';
 import { useSmoothScroll } from './hooks/useSmoothScroll.js';
+import { useScrollReveal } from './hooks/useScrollReveal.js';
 import { supportsWebGL } from './utils/webgl.js';
 import { CHARACTER_MODEL_URL } from './utils/assets.js';
 import { profile } from './data/profile.js';
@@ -53,6 +54,7 @@ export default function App() {
 
   const reducedMotion = useReducedMotion();
   useSmoothScroll({ enabled: !reducedMotion, paused: !introReady });
+  useScrollReveal(!reducedMotion);
 
   const loaded = !use3d || sceneReady;
   const progress = loaded ? 100 : model.progress * DOWNLOAD_SHARE;

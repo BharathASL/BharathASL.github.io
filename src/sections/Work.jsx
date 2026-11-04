@@ -1,4 +1,5 @@
 import Section from '../components/layout/Section.jsx';
+import SplitText from '../components/SplitText.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
 import { sections } from '../data/sections.js';
 import { featuredProjects, visibleProjects, PROJECTS_PAGE_URL } from '../utils/projects.js';
@@ -10,13 +11,15 @@ export default function Work() {
   return (
     <Section id="work" className="work" labelledBy="work-title">
       <div className="work__header">
-        <p className="section-label text-label">{copy.label}</p>
-        <h2 id="work-title" className="work__title">
-          {copy.title}
+        <p className="section-label text-label" data-reveal="fade">
+          {copy.label}
+        </p>
+        <h2 id="work-title" className="work__title" data-reveal="words">
+          <SplitText text={copy.title} />
         </h2>
       </div>
 
-      <ol className="work__track">
+      <ol className="work__track" data-reveal="stagger">
         {featuredProjects.map((project, index) => (
           <li key={project.id} className="work__item">
             <ProjectCard project={project} index={index} />

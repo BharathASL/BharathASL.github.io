@@ -3,6 +3,7 @@ import ErrorBoundary from './components/ErrorBoundary.jsx';
 import CharacterFallback from './components/CharacterFallback.jsx';
 import Loader from './components/Loader.jsx';
 import Navbar from './components/Navbar.jsx';
+import Cursor from './components/Cursor.jsx';
 import { followSystemTheme } from './theme/theme.js';
 import Section from './components/layout/Section.jsx';
 import { useDownload } from './hooks/useDownload.js';
@@ -45,6 +46,7 @@ export default function App() {
       {loaderVisible && (
         <Loader name={profile.name} progress={progress} loaded={loaded} onExitStart={startIntro} onDone={hideLoader} />
       )}
+      <Cursor />
       <Navbar name={profile.name} inert={!introReady} />
       <main id="main" tabIndex={-1} inert={!introReady} className={introReady ? 'is-ready' : undefined}>
         <Section id="top" className="placeholder" labelledBy="intro-title">

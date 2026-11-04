@@ -56,7 +56,7 @@ export default function Navbar({ name, inert }) {
         Skip to content
       </a>
       <div className="site-header__inner container">
-        <a className="site-header__brand" href="#top" aria-label={`${name}, back to top`}>
+        <a className="site-header__brand" href="#top" aria-label={`${name}, back to top`} data-magnetic>
           BS
         </a>
 
@@ -84,6 +84,7 @@ export default function Navbar({ name, inert }) {
             ref={menuButton}
             type="button"
             className="menu-button"
+            data-magnetic
             aria-expanded={open}
             aria-controls={menuId}
             aria-label={open ? 'Close menu' : 'Open menu'}

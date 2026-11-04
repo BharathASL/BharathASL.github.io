@@ -35,7 +35,14 @@ export default function ThemeToggle({ className = '' }) {
   const label = `Switch to ${next} theme`;
 
   return (
-    <button type="button" className={`theme-toggle ${className}`.trim()} onClick={toggleTheme} aria-label={label} title={label}>
+    <button
+      type="button"
+      className={`theme-toggle ${className}`.trim()}
+      onClick={toggleTheme}
+      aria-label={label}
+      title={label}
+      data-magnetic
+    >
       {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
     </button>
   );

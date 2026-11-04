@@ -27,7 +27,9 @@ function GeneratedCover({ number }) {
   );
 }
 
-export default function ProjectCard({ project, index }) {
+// headingLevel follows the page: 3 under a section heading, 2 directly under the page title.
+export default function ProjectCard({ project, index, headingLevel = 3 }) {
+  const Heading = `h${headingLevel}`;
   const number = String(index + 1).padStart(2, '0');
   const links = Object.entries(project.links ?? {}).filter(([, url]) => url);
 
@@ -52,9 +54,9 @@ export default function ProjectCard({ project, index }) {
           {project.status === 'in-progress' && <span className="project-card__status">In progress</span>}
           {project.todo && <span className="project-card__status project-card__status--draft">Draft</span>}
         </p>
-        <h3 id={`project-${project.id}`} className="project-card__title">
+        <Heading id={`project-${project.id}`} className="project-card__title">
           {project.title}
-        </h3>
+        </Heading>
         <p className="project-card__summary">{project.summary}</p>
 
         {project.tech.length > 0 && (

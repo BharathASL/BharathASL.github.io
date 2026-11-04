@@ -16,13 +16,15 @@ function useWorkStrip(section, viewport, track, progress) {
   useLayoutEffect(() => {
     const media = gsap.matchMedia();
     media.add(STRIP, () => {
-      section.current.classList.add('is-strip');
-      const distance = () => Math.max(0, track.current.scrollWidth - viewport.current.clientWidth);
-      gsap.to(track.current, {
+      const element = section.current;
+      const row = track.current;
+      element.classList.add('is-strip');
+      const distance = () => Math.max(0, row.scrollWidth - viewport.current.clientWidth);
+      const tween = gsap.to(row, {
         x: () => -distance(),
         ease: 'none',
         scrollTrigger: {
-          trigger: section.current,
+          trigger: element,
           start: 'top top',
           end: () => `+=${distance()}`,
           pin: true,
@@ -31,7 +33,24 @@ function useWorkStrip(section, viewport, track, progress) {
           onUpdate: (self) => progress.current?.style.setProperty('--strip-progress', self.progress.toFixed(4)),
         },
       });
-      return () => section.current?.classList.remove('is-strip');
+
+      // Keyboard users: when a card off to the side gets focus, scroll to where it is in view.
+      const showFocused = (event) => {
+        const item = event.target.closest('.work__item');
+        const trigger = tween.scrollTrigger;
+        const total = distance();
+        if (!item || !trigger || !total) return;
+        const shift = gsap.utils.clamp(0, total, item.offsetLeft + item.offsetWidth - viewport.current.clientWidth);
+        if (Math.abs(-gsap.getProperty(row, 'x') - shift) < 1 && trigger.isActive) return;
+        window.scrollTo({ top: trigger.start + (shift / total) * (trigger.end - trigger.start), behavior: 'instant' });
+        tween.progress(shift / total);
+      };
+      row.addEventListener('focusin', showFocused);
+
+      return () => {
+        row.removeEventListener('focusin', showFocused);
+        element.classList.remove('is-strip');
+      };
     });
     return () => media.revert();
   }, [section, viewport, track, progress]);

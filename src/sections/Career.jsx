@@ -11,6 +11,7 @@ import './Career.css';
 const copy = sections.career;
 // The line fills up to this point on screen, and each dot lights up as the line reaches it.
 const DRAW_POINT = 'top 60%';
+const DOT_MARGIN = '0px 0px -40% 0px';
 
 // Grows each company's timeline line with the scroll and marks the projects it has reached.
 function useTimelineDraw(root, enabled) {
@@ -27,17 +28,21 @@ function useTimelineDraw(root, enabled) {
           onUpdate: (self) => timeline.style.setProperty('--line-progress', self.progress.toFixed(4)),
           onRefresh: (self) => timeline.style.setProperty('--line-progress', self.progress.toFixed(4)),
         });
-        timeline.querySelectorAll('.career-project').forEach((project) => {
-          ScrollTrigger.create({
-            trigger: project,
-            start: DRAW_POINT,
-            onEnter: () => project.classList.add('is-reached'),
-            onLeaveBack: () => project.classList.remove('is-reached'),
-          });
-        });
       });
     }, element);
+
+    // A dot is reached once its project's top is above the draw point, and stays reached when it scrolls off the top.
+    const dots = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(({ target, boundingClientRect, rootBounds }) => {
+          target.classList.toggle('is-reached', boundingClientRect.top < rootBounds.bottom);
+        });
+      },
+      { rootMargin: DOT_MARGIN },
+    );
+    element.querySelectorAll('.timeline .career-project').forEach((project) => dots.observe(project));
     return () => {
+      dots.disconnect();
       context.revert();
       element.querySelectorAll('.timeline').forEach((timeline) => {
         timeline.classList.remove('is-drawing');

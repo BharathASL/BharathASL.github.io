@@ -25,11 +25,14 @@ import { navigation } from './data/navigation.js';
 const CharacterScene = lazy(() => import('./three/CharacterScene.jsx'));
 const DOWNLOAD_SHARE = 95;
 
+// Checked once on load. The loader only exists to cover the 3D download, so without 3D the page shows at once.
+const STARTS_WITH_3D = supportsWebGL();
+
 export default function App() {
-  const [webglOk, setWebglOk] = useState(supportsWebGL);
+  const [webglOk, setWebglOk] = useState(STARTS_WITH_3D);
   const [sceneReady, setSceneReady] = useState(false);
-  const [loaderVisible, setLoaderVisible] = useState(true);
-  const [introReady, setIntroReady] = useState(false);
+  const [loaderVisible, setLoaderVisible] = useState(STARTS_WITH_3D);
+  const [introReady, setIntroReady] = useState(!STARTS_WITH_3D);
   const [heroAnchor, setHeroAnchor] = useState(null);
   const [aboutAnchor, setAboutAnchor] = useState(null);
   const model = useDownload(CHARACTER_MODEL_URL, { enabled: webglOk, type: 'model/gltf-binary' });

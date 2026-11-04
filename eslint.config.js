@@ -32,7 +32,7 @@ export default [
     ...reactRefresh.configs.vite,
   },
   {
-    files: ['scripts/**/*.mjs', 'vite.config.js', 'eslint.config.js'],
+    files: ['scripts/**/*.{js,mjs}', 'vite.config.js', 'eslint.config.js'],
     languageOptions: { globals: globals.node },
   },
   // Turns off style rules that Prettier handles.

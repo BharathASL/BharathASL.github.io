@@ -101,7 +101,7 @@ Names, descriptions, links and media to be filled in.
 - `redesign/v2` is the integration branch for the whole rebuild. `main` keeps serving v1 until launch.
 - Each task gets its own branch from `redesign/v2`, named `v2/<issue-number>-<short-name>` (for example `v2/21-vite-setup`), and is merged back through a pull request.
 - Every pull request runs CI: `npm run lint`, `npm run format:check`, the colour and data checks, and a build. Run `npm run format` to fix formatting.
-- Launch is a single pull request from `redesign/v2` into `main`.
+- Launch is a single pull request from `redesign/v2` into `main`. See [deploy.md](deploy.md) for the launch-day steps and how to roll back.
 - Work is tracked in the private "Portfolio v2" GitHub project: one epic per area below, tasks as sub-issues, with blocked-by links between tasks.
 
 ## Epics

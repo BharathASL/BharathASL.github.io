@@ -1,0 +1,39 @@
+.not-found {
+  display: grid;
+  align-items: center;
+  min-height: 100svh;
+  padding-block: calc(var(--header-height) + var(--space-7)) var(--space-8);
+}
+
+.not-found__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.not-found__code {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(6rem, 3rem + 15vw, 14rem);
+  font-weight: var(--weight-bold);
+  line-height: 0.9;
+  letter-spacing: var(--tracking-tight);
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-accent);
+}
+
+.not-found__title {
+  font-size: var(--text-h1);
+}
+
+.not-found__text {
+  max-width: 40ch;
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.not-found__actions {
+  --cluster-gap: var(--space-3);
+  margin-top: var(--space-3);
+}

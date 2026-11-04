@@ -86,7 +86,7 @@ for (const file of walk(join(root, 'src'))) {
 }
 
 const pageBackgrounds = new Set(Object.values(themes).map((colors) => colors.bg));
-for (const page of ['index.html', 'projects/index.html']) {
+for (const page of ['index.html', 'projects/index.html', '404.html']) {
   const html = readFileSync(join(root, page), 'utf8');
   for (const hex of html.match(/#[0-9a-f]{3,8}\b/gi) ?? []) {
     if (!pageBackgrounds.has(hex.toLowerCase())) {

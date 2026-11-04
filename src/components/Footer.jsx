@@ -1,4 +1,3 @@
-import { credits } from '../data/credits.js';
 import './Footer.css';
 
 export default function Footer({ name, inert }) {
@@ -16,30 +15,6 @@ export default function Footer({ name, inert }) {
             <span aria-hidden="true"> ↑</span>
           </a>
         </div>
-
-        {credits.length > 0 && (
-          <div className="site-footer__credits">
-            <h2 className="site-footer__credits-title">Credits</h2>
-            <ul>
-              {credits.map((credit) => (
-                <li key={credit.work}>
-                  {credit.url ? (
-                    <a href={credit.url} target="_blank" rel="noreferrer">
-                      {credit.work}
-                    </a>
-                  ) : (
-                    credit.work
-                  )}{' '}
-                  by {credit.author}, licensed under{' '}
-                  <a href={credit.licenseUrl} target="_blank" rel="noreferrer">
-                    {credit.license}
-                  </a>
-                  .{credit.note && ` ${credit.note}`}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
     </footer>
   );

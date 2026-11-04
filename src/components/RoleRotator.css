@@ -12,25 +12,36 @@
 .role-rotator__item {
   grid-area: 1 / 1;
   white-space: nowrap;
-  opacity: 0;
-  transform: translateY(100%);
-  transition:
-    opacity 0.5s ease,
-    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  visibility: hidden;
 }
 
-.role-rotator__item.is-active {
-  opacity: 1;
-  transform: none;
-}
-
+.role-rotator__item.is-active,
 .role-rotator__item.is-leaving {
-  transform: translateY(-100%);
+  visibility: visible;
+}
+
+/* Letters roll in from below one after another, and the old role rolls out upwards. */
+.role-rotator__char {
+  display: inline-block;
+  opacity: 0;
+  translate: 0 100%;
+  transition:
+    opacity 0.4s ease,
+    translate 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i) * 0.025s);
+}
+
+.role-rotator__item.is-active .role-rotator__char {
+  opacity: 1;
+  translate: none;
+}
+
+.role-rotator__item.is-leaving .role-rotator__char {
+  translate: 0 -100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .role-rotator__item {
-    transform: none;
+  .role-rotator__char {
     transition: none;
   }
 }

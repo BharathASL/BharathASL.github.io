@@ -4,12 +4,14 @@ import Footer from '../components/Footer.jsx';
 import Cursor from '../components/Cursor.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
 import Section from '../components/layout/Section.jsx';
+import SplitText from '../components/SplitText.jsx';
 import { profile } from '../data/profile.js';
 import { sections } from '../data/sections.js';
 import { PROJECT_CATEGORIES } from '../data/projects.js';
 import { followSystemTheme } from '../theme/theme.js';
 import { useReducedMotion } from '../hooks/useReducedMotion.js';
 import { useSmoothScroll } from '../hooks/useSmoothScroll.js';
+import { useScrollReveal } from '../hooks/useScrollReveal.js';
 import { visibleProjects } from '../utils/projects.js';
 import './ProjectsPage.css';
 
@@ -35,6 +37,7 @@ export default function ProjectsPage() {
   const [filter, setFilter] = useState(readFilter);
   const reducedMotion = useReducedMotion();
   useSmoothScroll({ enabled: !reducedMotion, paused: false });
+  useScrollReveal(!reducedMotion);
 
   useEffect(() => followSystemTheme(), []);
 
@@ -59,11 +62,15 @@ export default function ProjectsPage() {
           </a>
 
           <div className="projects-page__header">
-            <p className="section-label text-label">{copy.label}</p>
-            <h1 id="projects-title" className="projects-page__title">
-              {copy.title}
+            <p className="section-label text-label" data-reveal="fade">
+              {copy.label}
+            </p>
+            <h1 id="projects-title" className="projects-page__title" data-reveal="words">
+              <SplitText text={copy.title} />
             </h1>
-            <p className="projects-page__intro text-lead">{copy.intro}</p>
+            <p className="projects-page__intro text-lead" data-reveal="fade" style={{ '--reveal-delay': '0.3s' }}>
+              {copy.intro}
+            </p>
           </div>
 
           {showFilters && (

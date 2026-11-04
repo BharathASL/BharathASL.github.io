@@ -1,4 +1,5 @@
 import Section from '../components/layout/Section.jsx';
+import SplitText from '../components/SplitText.jsx';
 import { experience } from '../data/experience.js';
 import { sections } from '../data/sections.js';
 import { formatDuration, formatMonth } from '../utils/dates.js';
@@ -20,7 +21,7 @@ function Project({ project }) {
   const current = !project.end;
 
   return (
-    <li className="career-project" data-current={current ? 'true' : undefined}>
+    <li className="career-project" data-current={current ? 'true' : undefined} data-reveal="fade">
       <span className="career-project__dot" aria-hidden="true" />
       <p className="career-project__period">
         <Period start={project.start} end={project.end} />
@@ -58,16 +59,18 @@ export default function Career() {
   return (
     <Section id="career" className="career" labelledBy="career-title">
       <div className="career__header">
-        <p className="section-label text-label">{copy.label}</p>
-        <h2 id="career-title" className="career__title">
-          {copy.title}
+        <p className="section-label text-label" data-reveal="fade">
+          {copy.label}
+        </p>
+        <h2 id="career-title" className="career__title" data-reveal="words">
+          <SplitText text={copy.title} />
         </h2>
       </div>
 
       <div className="career__companies">
         {experience.map((company) => (
           <article key={company.id} className="career-company" aria-labelledby={`company-${company.id}`}>
-            <header className="career-company__info">
+            <header className="career-company__info" data-reveal="fade">
               <h3 id={`company-${company.id}`} className="career-company__name">
                 {company.company}
               </h3>

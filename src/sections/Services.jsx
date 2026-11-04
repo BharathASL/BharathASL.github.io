@@ -1,5 +1,6 @@
 import { useId, useRef, useState } from 'react';
 import Section from '../components/layout/Section.jsx';
+import SplitText from '../components/SplitText.jsx';
 import { services } from '../data/profile.js';
 import { sections } from '../data/sections.js';
 import './Services.css';
@@ -63,14 +64,17 @@ export default function Services() {
   return (
     <Section id="services" className="services" labelledBy="services-title">
       <div className="services__header">
-        <p className="section-label text-label">{copy.label}</p>
-        <h2 id="services-title" className="services__title">
-          {copy.title}
+        <p className="section-label text-label" data-reveal="fade">
+          {copy.label}
+        </p>
+        <h2 id="services-title" className="services__title" data-reveal="words">
+          <SplitText text={copy.title} />
         </h2>
       </div>
 
       <ul
         className="services__list"
+        data-reveal="stagger"
         onPointerDown={(event) => {
           pointer.current = event.pointerType;
         }}

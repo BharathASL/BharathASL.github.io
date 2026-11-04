@@ -1,11 +1,51 @@
+import { useLayoutEffect, useRef } from 'react';
 import Section from '../components/layout/Section.jsx';
 import SplitText from '../components/SplitText.jsx';
 import { experience } from '../data/experience.js';
 import { sections } from '../data/sections.js';
 import { formatDuration, formatMonth } from '../utils/dates.js';
+import { gsap, ScrollTrigger } from '../motion/gsap.js';
+import { useReducedMotion } from '../hooks/useReducedMotion.js';
 import './Career.css';
 
 const copy = sections.career;
+// The line fills up to this point on screen, and each dot lights up as the line reaches it.
+const DRAW_POINT = 'top 60%';
+
+// Grows each company's timeline line with the scroll and marks the projects it has reached.
+function useTimelineDraw(root, enabled) {
+  useLayoutEffect(() => {
+    if (!enabled || !root.current) return undefined;
+    const context = gsap.context(() => {
+      root.current.querySelectorAll('.timeline').forEach((timeline) => {
+        timeline.classList.add('is-drawing');
+        ScrollTrigger.create({
+          trigger: timeline,
+          start: DRAW_POINT,
+          end: 'bottom 60%',
+          onUpdate: (self) => timeline.style.setProperty('--line-progress', self.progress.toFixed(4)),
+          onRefresh: (self) => timeline.style.setProperty('--line-progress', self.progress.toFixed(4)),
+        });
+        timeline.querySelectorAll('.career-project').forEach((project) => {
+          ScrollTrigger.create({
+            trigger: project,
+            start: DRAW_POINT,
+            onEnter: () => project.classList.add('is-reached'),
+            onLeaveBack: () => project.classList.remove('is-reached'),
+          });
+        });
+      });
+    }, root);
+    return () => {
+      context.revert();
+      root.current?.querySelectorAll('.timeline').forEach((timeline) => {
+        timeline.classList.remove('is-drawing');
+        timeline.style.removeProperty('--line-progress');
+      });
+      root.current?.querySelectorAll('.is-reached').forEach((project) => project.classList.remove('is-reached'));
+    };
+  }, [root, enabled]);
+}
 
 function Period({ start, end }) {
   return (
@@ -56,8 +96,12 @@ function Project({ project }) {
 }
 
 export default function Career() {
+  const root = useRef(null);
+  const reducedMotion = useReducedMotion();
+  useTimelineDraw(root, !reducedMotion);
+
   return (
-    <Section id="career" className="career" labelledBy="career-title">
+    <Section ref={root} id="career" className="career" labelledBy="career-title">
       <div className="career__header">
         <p className="section-label text-label" data-reveal="fade">
           {copy.label}

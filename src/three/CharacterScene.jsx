@@ -1,15 +1,16 @@
-import { Suspense, useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useProgress } from '@react-three/drei';
 import Character from './Character.jsx';
 import Lights from './Lights.jsx';
-import FitCamera from './FitCamera.jsx';
+import ScrollRig from './ScrollRig.jsx';
 import FrameThrottle from './FrameThrottle.jsx';
-import { useInView } from '../hooks/useInView.js';
+import { CAMERA_DISTANCE } from './scrollRig.js';
 import { useReducedMotion } from '../hooks/useReducedMotion.js';
 import { useDeviceProfile } from '../hooks/useDeviceProfile.js';
 
-const CAMERA = { fov: 35, near: 0.1, far: 50 };
+// A narrow field of view keeps the character from looking stretched near the screen edges.
+const CAMERA = { fov: 22, near: 0.1, far: 50, position: [0, 0, CAMERA_DISTANCE] };
 const LOW_POWER_FPS = 30;
 
 function ProgressReporter({ onProgress }) {
@@ -20,30 +21,32 @@ function ProgressReporter({ onProgress }) {
   return null;
 }
 
-export default function CharacterScene({ modelUrl, onProgress, onContextLost }) {
-  const container = useRef(null);
-  const inView = useInView(container);
+// Full-screen canvas behind the page. The character follows the hero box and the About space as you scroll.
+export default function CharacterScene({ modelUrl, hero, about, onProgress, onContextLost }) {
   const reducedMotion = useReducedMotion();
   const { touch, lowPower } = useDeviceProfile();
-  const animate = inView && !reducedMotion;
+  const [onScreen, setOnScreen] = useState(true);
+  const face = useRef({ x: 0, y: 0 });
+  const animate = onScreen && !reducedMotion;
 
   return (
-    <div ref={container} className="scene__canvas">
+    <div className="scene-layer__canvas">
       <ProgressReporter onProgress={onProgress} />
       <Canvas
-        dpr={lowPower ? [1, 1.25] : [1, 1.75]}
+        dpr={lowPower ? [1, 1.25] : [1, 1.5]}
         frameloop={animate && !lowPower ? 'always' : 'demand'}
         camera={CAMERA}
         gl={{ antialias: !lowPower, alpha: true, powerPreference: lowPower ? 'default' : 'high-performance' }}
         onCreated={({ gl }) => gl.domElement.addEventListener('webglcontextlost', () => onContextLost?.(), { once: true })}
       >
         <FrameThrottle fps={LOW_POWER_FPS} active={animate && lowPower} />
-        <FitCamera />
         <Lights />
         {modelUrl && (
-          <Suspense fallback={null}>
-            <Character url={modelUrl} animate={animate} autoLook={touch} />
-          </Suspense>
+          <ScrollRig hero={hero} about={about} motion={!reducedMotion} face={face} onVisibleChange={setOnScreen}>
+            <Suspense fallback={null}>
+              <Character url={modelUrl} face={face} animate={animate} autoLook={touch} />
+            </Suspense>
+          </ScrollRig>
         )}
       </Canvas>
     </div>

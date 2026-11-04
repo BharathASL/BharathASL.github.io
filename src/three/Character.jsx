@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import { MathUtils } from 'three';
 import { usePointerTarget } from './usePointerTarget.js';
@@ -12,11 +12,10 @@ const FLOAT = { height: 0.025, speed: 1.3 };
 const SWAY = { angle: 0.012, speed: 0.7 };
 const LOOK_AROUND = { x: 0.6, y: 0.4, speedX: 0.35, speedY: 0.23 };
 
-export default function Character({ url, animate = true, autoLook = false }) {
+export default function Character({ url, face, animate = true, autoLook = false }) {
   const { scene } = useGLTF(url, false, true);
   const body = useRef();
-  const canvas = useThree((state) => state.gl.domElement);
-  const pointer = usePointerTarget(canvas);
+  const pointer = usePointerTarget(face);
 
   useFrame((state, delta) => {
     const group = body.current;

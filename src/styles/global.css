@@ -53,9 +53,34 @@ img {
   height: min(70vh, 640px);
 }
 
-.scene__canvas {
+/* The 3D canvas sits behind the page and the sections sit above it, so cards can pass in front of the character. */
+.scene-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease 0.3s;
+}
+
+.is-ready .scene-layer {
+  opacity: 1;
+}
+
+.scene-layer__canvas {
   width: 100%;
   height: 100%;
+}
+
+main > .section {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-layer {
+    transition: opacity 0.2s ease;
+  }
 }
 
 .scene__fallback {

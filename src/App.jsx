@@ -30,6 +30,8 @@ export default function App() {
   const [sceneReady, setSceneReady] = useState(false);
   const [loaderVisible, setLoaderVisible] = useState(true);
   const [introReady, setIntroReady] = useState(false);
+  const [heroAnchor, setHeroAnchor] = useState(null);
+  const [aboutAnchor, setAboutAnchor] = useState(null);
   const model = useDownload(CHARACTER_MODEL_URL, { enabled: use3d, type: 'model/gltf-binary' });
 
   const showFallback = useCallback(() => setUse3d(false), []);
@@ -67,22 +69,23 @@ export default function App() {
       <Cursor />
       <Navbar name={profile.name} inert={!introReady} />
       <main id="main" tabIndex={-1} inert={!introReady} className={introReady ? 'is-ready' : undefined}>
-        <Hero
-          ready={introReady}
-          nextId={navigation[0]?.id}
-          scene={
-            use3d ? (
-              <ErrorBoundary fallback={<CharacterFallback />} onError={showFallback}>
-                <Suspense fallback={null}>
-                  <CharacterScene modelUrl={model.objectUrl} onProgress={handleProgress} onContextLost={showFallback} />
-                </Suspense>
-              </ErrorBoundary>
-            ) : (
-              <CharacterFallback />
-            )
-          }
-        />
-        <About />
+        {use3d && (
+          <div className="scene-layer" aria-hidden="true">
+            <ErrorBoundary fallback={null} onError={showFallback}>
+              <Suspense fallback={null}>
+                <CharacterScene
+                  modelUrl={model.objectUrl}
+                  hero={heroAnchor}
+                  about={aboutAnchor}
+                  onProgress={handleProgress}
+                  onContextLost={showFallback}
+                />
+              </Suspense>
+            </ErrorBoundary>
+          </div>
+        )}
+        <Hero ready={introReady} nextId={navigation[0]?.id} sceneRef={setHeroAnchor} scene={use3d ? null : <CharacterFallback />} />
+        <About stageRef={setAboutAnchor} />
         <Services />
         <Career />
         <Work />

@@ -12,6 +12,11 @@ export const sections = {
     label: 'Tech stack',
     title: 'The tools I reach for most.',
   },
+  contact: {
+    label: 'Contact',
+    title: 'Have a project in mind? Let’s talk.',
+    intro: 'I’m happy to hear about new roles, freelance work or just an interesting problem. Email is the quickest way to reach me.',
+  },
   services: {
     label: 'What I do',
     title: 'Three areas I work across, often in the same project.',

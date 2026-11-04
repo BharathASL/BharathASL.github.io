@@ -1,0 +1,181 @@
+.work {
+  border-top: 1px solid var(--color-border);
+}
+
+.work__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-7);
+}
+
+.work__title {
+  max-width: 22ch;
+}
+
+/* Stacked on phones, a grid on tablets, and a pinned sideways strip on desktop (see the end of this file). */
+.work__track {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.work__item {
+  min-width: 0;
+}
+
+.work__all {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-6);
+  height: 100%;
+  min-height: 14rem;
+  padding: var(--space-6);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text);
+  text-decoration: none;
+  transition:
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.work__all:hover {
+  border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  color: var(--color-text);
+}
+
+.work__all-count {
+  font-family: var(--font-heading);
+  font-size: var(--text-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-accent);
+}
+
+.work__all-label {
+  font-family: var(--font-heading);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-semibold);
+}
+
+.work__all-arrow {
+  display: inline-grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.work__all:hover .work__all-arrow {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  transform: translateX(6px);
+}
+
+@media (min-width: 640px) {
+  .work__track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .work__track {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work__all,
+  .work__all-arrow {
+    transition: none;
+  }
+
+  .work__all:hover .work__all-arrow {
+    transform: none;
+  }
+}
+
+.work__progress {
+  display: none;
+}
+
+/* Desktop strip: one row of cards that moves sideways while the section is pinned.
+   The script adds is-strip when it sets up the pin, so the grid stays if it does not run. */
+@media (min-width: 1024px) and (min-height: 650px) and (prefers-reduced-motion: no-preference) {
+  .work.is-strip {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100svh;
+    /* Tighter than other sections, so header and cards fit the screen while pinned. */
+    padding-block: calc(var(--header-height) + var(--space-3)) var(--space-4);
+    overflow-x: clip;
+  }
+
+  .work.is-strip .work__header {
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+
+  .work.is-strip .work__title {
+    max-width: none;
+  }
+
+  .work.is-strip .work__viewport {
+    overflow: visible;
+  }
+
+  .work.is-strip .work__track {
+    display: flex;
+    gap: var(--space-5);
+    width: max-content;
+    will-change: transform;
+  }
+
+  .work.is-strip .work__item {
+    flex: none;
+    width: clamp(21rem, 32vw, 28rem);
+  }
+
+  /* Covers shrink on short screens so the whole card stays visible. */
+  .work.is-strip .project-card__cover {
+    aspect-ratio: auto;
+    height: clamp(5rem, 18svh, 12rem);
+  }
+
+  .work.is-strip .work__all {
+    min-height: 0;
+  }
+
+  .work.is-strip .work__progress {
+    display: block;
+    height: 2px;
+    margin-top: var(--space-4);
+    overflow: hidden;
+    border-radius: 1px;
+    background: var(--color-border);
+  }
+
+  .work.is-strip .work__progress-bar {
+    display: block;
+    height: 100%;
+    background: var(--color-accent);
+    transform: scaleX(var(--strip-progress, 0));
+    transform-origin: left;
+  }
+}

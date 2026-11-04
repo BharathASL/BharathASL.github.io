@@ -1,0 +1,75 @@
+html.has-custom-cursor,
+html.has-custom-cursor a,
+html.has-custom-cursor button,
+html.has-custom-cursor [role='button'],
+html.has-custom-cursor label,
+html.has-custom-cursor summary {
+  cursor: none;
+}
+
+html.has-custom-cursor :is(input, textarea, select, [contenteditable='true']) {
+  cursor: auto;
+}
+
+.cursor {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cursor.is-visible {
+  opacity: 1;
+}
+
+.cursor.is-hidden {
+  opacity: 0;
+}
+
+.cursor__ring,
+.cursor__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.cursor__ring {
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid color-mix(in srgb, var(--color-text) 45%, transparent);
+  transition:
+    width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.cursor__dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  background: var(--color-accent);
+  transition:
+    width 0.2s ease,
+    height 0.2s ease;
+}
+
+.cursor.is-hover .cursor__ring {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+}
+
+.cursor.is-hover .cursor__dot {
+  width: 0;
+  height: 0;
+}
+
+.cursor.is-pressed .cursor__ring {
+  width: 1.75rem;
+  height: 1.75rem;
+}

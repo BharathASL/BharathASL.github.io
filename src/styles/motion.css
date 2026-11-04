@@ -1,0 +1,100 @@
+/* Split text */
+.split-text__word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.split-text__inner,
+.split-text__char {
+  display: inline-block;
+}
+
+/* Words rise out of a mask. The padding keeps descenders from being clipped. */
+.split-text--words .split-text__word {
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+  vertical-align: top;
+}
+
+/* Scroll reveals. Only with has-reveal, so nothing stays hidden if scripts fail.
+   Animations use `translate`, which leaves `transform` free for hover effects. */
+/* Each keyframe ends explicitly visible, because the resting style before a reveal is hidden. */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    translate: 0 1.5rem;
+  }
+
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes reveal-word {
+  from {
+    translate: 0 110%;
+  }
+
+  to {
+    translate: none;
+  }
+}
+
+html.has-reveal [data-reveal='fade'],
+html.has-reveal [data-reveal='stagger'] > * {
+  opacity: 0;
+}
+
+html.has-reveal [data-reveal='fade'].is-revealed {
+  animation: reveal-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s) both;
+}
+
+html.has-reveal [data-reveal='stagger'].is-revealed > * {
+  animation: reveal-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--reveal-delay, 0s) + var(--reveal-i, 0) * 0.1s)
+    both;
+}
+
+html.has-reveal [data-reveal='words'] .split-text__inner {
+  translate: 0 110%;
+}
+
+html.has-reveal [data-reveal='words'].is-revealed .split-text__inner {
+  animation: reveal-word 1s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--reveal-delay, 0s) + var(--i, 0) * 0.05s) both;
+  translate: none;
+}
+
+/* Reduced motion: no movement, no staggering, just a short fade. */
+@media (prefers-reduced-motion: reduce) {
+  html.has-reveal [data-reveal='fade'].is-revealed,
+  html.has-reveal [data-reveal='stagger'].is-revealed > * {
+    animation: reveal-fade 0.5s ease both;
+  }
+
+  html.has-reveal [data-reveal='words'] .split-text__inner {
+    translate: none;
+  }
+
+  html.has-reveal [data-reveal='words'] {
+    opacity: 0;
+  }
+
+  html.has-reveal [data-reveal='words'].is-revealed {
+    animation: reveal-fade 0.5s ease both;
+  }
+
+  html.has-reveal [data-reveal='words'].is-revealed .split-text__inner {
+    animation: none;
+  }
+}

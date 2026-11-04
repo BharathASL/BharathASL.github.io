@@ -1,0 +1,47 @@
+.role-rotator {
+  margin: 0;
+}
+
+/* Every role sits in the same grid cell, so the box keeps the size of the longest one. */
+.role-rotator__track {
+  display: inline-grid;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.role-rotator__item {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+  visibility: hidden;
+}
+
+.role-rotator__item.is-active,
+.role-rotator__item.is-leaving {
+  visibility: visible;
+}
+
+/* Letters roll in from below one after another, and the old role rolls out upwards. */
+.role-rotator__char {
+  display: inline-block;
+  opacity: 0;
+  translate: 0 100%;
+  transition:
+    opacity 0.4s ease,
+    translate 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i) * 0.025s);
+}
+
+.role-rotator__item.is-active .role-rotator__char {
+  opacity: 1;
+  translate: none;
+}
+
+.role-rotator__item.is-leaving .role-rotator__char {
+  translate: 0 -100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .role-rotator__char {
+    transition: none;
+  }
+}

@@ -6,6 +6,8 @@ import Navbar from './components/Navbar.jsx';
 import { followSystemTheme } from './theme/theme.js';
 import Section from './components/layout/Section.jsx';
 import { useDownload } from './hooks/useDownload.js';
+import { useReducedMotion } from './hooks/useReducedMotion.js';
+import { useSmoothScroll } from './hooks/useSmoothScroll.js';
 import { supportsWebGL } from './utils/webgl.js';
 import { CHARACTER_MODEL_URL } from './utils/assets.js';
 import { profile } from './data/profile.js';
@@ -31,6 +33,9 @@ export default function App() {
   }, [model.error, showFallback]);
 
   useEffect(() => followSystemTheme(), []);
+
+  const reducedMotion = useReducedMotion();
+  useSmoothScroll({ enabled: !reducedMotion, paused: !introReady });
 
   const loaded = !use3d || sceneReady;
   const progress = loaded ? 100 : model.progress * DOWNLOAD_SHARE;

@@ -4,6 +4,7 @@ import { projects, PROJECT_CATEGORIES } from '../src/data/projects.js';
 import { skillGroups } from '../src/data/skills.js';
 import { contact, socialLinks } from '../src/data/links.js';
 import { credits } from '../src/data/credits.js';
+import { sections } from '../src/data/sections.js';
 
 const errors = [];
 const todos = [];
@@ -42,6 +43,11 @@ month('profile', profile.careerStart, 'careerStart');
 list('profile', profile.roles, 'roles');
 text('profile', profile.aboutHeading, 'aboutHeading');
 list('profile', profile.about, 'about');
+
+Object.entries(sections).forEach(([key, s]) => {
+  text(`sections/${key}`, s.label, 'label');
+  text(`sections/${key}`, s.title, 'title');
+});
 
 services.forEach((s) => {
   const where = `services/${s.id}`;

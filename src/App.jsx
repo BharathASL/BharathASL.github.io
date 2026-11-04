@@ -8,6 +8,7 @@ import { followSystemTheme } from './theme/theme.js';
 import Section from './components/layout/Section.jsx';
 import Hero from './sections/Hero.jsx';
 import About from './sections/About.jsx';
+import Services from './sections/Services.jsx';
 import { useDownload } from './hooks/useDownload.js';
 import { useReducedMotion } from './hooks/useReducedMotion.js';
 import { useSmoothScroll } from './hooks/useSmoothScroll.js';
@@ -67,6 +68,7 @@ export default function App() {
           }
         />
         <About />
+        <Services />
         {navigation
           .filter((item) => item.id !== 'about')
           .map((item) => (

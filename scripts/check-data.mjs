@@ -115,6 +115,8 @@ socialLinks.forEach((l) => {
 credits.forEach((c, i) => {
   ['work', 'author', 'license'].forEach((f) => text(`credits/${i}`, c[f], f));
   url(`credits/${i}`, c.licenseUrl, 'licenseUrl');
+  if (c.url === undefined) todos.push(`credits/${i}: link to the original work not added yet`);
+  else url(`credits/${i}`, c.url, 'url');
 });
 
 if (todos.length) console.log(`Still to fill in (${todos.length}):\n  ${todos.join('\n  ')}\n`);

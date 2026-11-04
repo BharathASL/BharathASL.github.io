@@ -1,0 +1,119 @@
+.contact {
+  position: relative;
+  border-top: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+/* Soft accent glow behind the section. */
+.contact::before {
+  content: '';
+  position: absolute;
+  inset: auto -20% -60% -20%;
+  height: 120%;
+  background: radial-gradient(closest-side, var(--color-glow), transparent);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.contact__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+}
+
+.contact__title {
+  max-width: 16ch;
+  font-size: var(--text-h1);
+}
+
+.contact__intro {
+  max-width: 48ch;
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.contact__email {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.contact__email-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  max-width: 100%;
+  font-family: var(--font-heading);
+  font-size: clamp(1.125rem, 0.6rem + 2.6vw, 2.5rem);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-snug);
+  color: var(--color-text);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+  overflow-wrap: anywhere;
+  transition: color 0.2s ease;
+}
+
+.contact__email-link:hover {
+  color: var(--color-accent);
+}
+
+.contact__email-link svg {
+  flex: none;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact__email-link:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.contact__copy[data-copied='true'] {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.contact__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.contact__link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact__email-link,
+  .contact__email-link svg,
+  .contact__link {
+    transition: none;
+  }
+}

@@ -5,13 +5,14 @@ import Loader from './components/Loader.jsx';
 import Navbar from './components/Navbar.jsx';
 import Cursor from './components/Cursor.jsx';
 import { followSystemTheme } from './theme/theme.js';
-import Section from './components/layout/Section.jsx';
 import Hero from './sections/Hero.jsx';
 import About from './sections/About.jsx';
 import Services from './sections/Services.jsx';
 import Career from './sections/Career.jsx';
 import Work from './sections/Work.jsx';
 import TechStack from './sections/TechStack.jsx';
+import Contact from './sections/Contact.jsx';
+import Footer from './components/Footer.jsx';
 import { useDownload } from './hooks/useDownload.js';
 import { useReducedMotion } from './hooks/useReducedMotion.js';
 import { useSmoothScroll } from './hooks/useSmoothScroll.js';
@@ -22,7 +23,6 @@ import { navigation } from './data/navigation.js';
 
 const CharacterScene = lazy(() => import('./three/CharacterScene.jsx'));
 const DOWNLOAD_SHARE = 95;
-const BUILT_SECTIONS = new Set(['about', 'career', 'work']);
 
 export default function App() {
   const [use3d, setUse3d] = useState(supportsWebGL);
@@ -76,15 +76,9 @@ export default function App() {
         <Career />
         <Work />
         <TechStack />
-        {navigation
-          .filter((item) => !BUILT_SECTIONS.has(item.id))
-          .map((item) => (
-            <Section key={item.id} id={item.id} className="placeholder-section" labelledBy={`${item.id}-title`}>
-              <h2 id={`${item.id}-title`}>{item.label}</h2>
-              <p>Coming soon.</p>
-            </Section>
-          ))}
+        <Contact />
       </main>
+      <Footer name={profile.name} inert={!introReady} />
     </>
   );
 }

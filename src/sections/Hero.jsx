@@ -21,7 +21,7 @@ function DownloadIcon() {
   );
 }
 
-export default function Hero({ ready, scene, nextId }) {
+export default function Hero({ ready, scene, sceneRef, nextId }) {
   return (
     <Section id="top" className="hero" labelledBy="hero-title">
       <div className="hero__layout split">
@@ -72,7 +72,7 @@ export default function Hero({ ready, scene, nextId }) {
           </ul>
         </div>
 
-        <div className="hero__scene scene" aria-hidden="true">
+        <div ref={sceneRef} className="hero__scene scene" aria-hidden="true">
           {scene}
         </div>
       </div>

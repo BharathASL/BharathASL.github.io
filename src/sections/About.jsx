@@ -12,12 +12,12 @@ const facts = [
   { value: `${experience.length}`, label: 'Companies' },
 ];
 
-export default function About() {
+export default function About({ stageRef }) {
   return (
     <Section id="about" className="about" labelledBy="about-title">
       <div className="about__layout split">
         {/* Empty on purpose: the 3D character moves into this space as the section scrolls in. */}
-        <div className="about__stage" data-character-anchor="about" aria-hidden="true" />
+        <div ref={stageRef} className="about__stage" aria-hidden="true" />
 
         <div className="about__content">
           <p className="about__label text-label" data-reveal="fade">

@@ -3,17 +3,15 @@ import { useEffect, useRef } from 'react';
 const clamp = (value) => Math.max(-1, Math.min(1, value));
 
 // Pointer position relative to the character's face on screen, in the range -1..1 on each axis.
-export function usePointerTarget(element, faceHeight = 0.25) {
+// `face` is a ref holding the face position in screen pixels, kept up to date by the scene.
+export function usePointerTarget(face) {
   const target = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const onMove = (event) => {
       if (event.pointerType === 'touch') return;
-      const rect = element.getBoundingClientRect();
-      const faceX = rect.left + rect.width / 2;
-      const faceY = rect.top + rect.height * faceHeight;
-      target.current.x = clamp((event.clientX - faceX) / (window.innerWidth / 2));
-      target.current.y = clamp((event.clientY - faceY) / (window.innerHeight / 2));
+      target.current.x = clamp((event.clientX - face.current.x) / (window.innerWidth / 2));
+      target.current.y = clamp((event.clientY - face.current.y) / (window.innerHeight / 2));
     };
     const onLeave = (event) => {
       if (event.relatedTarget) return;
@@ -27,7 +25,7 @@ export function usePointerTarget(element, faceHeight = 0.25) {
       window.removeEventListener('pointermove', onMove);
       document.removeEventListener('mouseout', onLeave);
     };
-  }, [element, faceHeight]);
+  }, [face]);
 
   return target;
 }

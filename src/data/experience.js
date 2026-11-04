@@ -77,10 +77,7 @@ export const experience = [
         start: '2023-12',
         end: '2024-02',
         summary: 'Backend for a cross-platform app connecting people with skilled professionals in the US and India.',
-        highlights: [
-          'Led system design, API development and security.',
-          'Managed a small team of backend developers.',
-        ],
+        highlights: ['Led system design, API development and security.', 'Managed a small team of backend developers.'],
         tech: ['Node.js', 'Azure', 'CosmosDB'],
       },
       {
@@ -135,7 +132,9 @@ export const experience = [
         start: '2020-02',
         end: '2021-04',
         summary: 'Automated motor insurance claims processing.',
-        highlights: ['Built backend services for claims estimation, settlement and salvage collection, integrated over REST and SOAP.'],
+        highlights: [
+          'Built backend services for claims estimation, settlement and salvage collection, integrated over REST and SOAP.',
+        ],
         tech: ['REST', 'SOAP'],
       },
       {

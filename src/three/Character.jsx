@@ -12,10 +12,10 @@ const FLOAT = { height: 0.025, speed: 1.3 };
 const SWAY = { angle: 0.012, speed: 0.7 };
 const LOOK_AROUND = { x: 0.6, y: 0.4, speedX: 0.35, speedY: 0.23 };
 
-export default function Character({ url, face, animate = true, autoLook = false }) {
+export default function Character({ url, faceRef, animate = true, autoLook = false }) {
   const { scene } = useGLTF(url, false, true);
   const body = useRef();
-  const pointer = usePointerTarget(face);
+  const pointer = usePointerTarget(faceRef);
 
   useFrame((state, delta) => {
     const group = body.current;

@@ -44,8 +44,7 @@ export function computeRig({ hero, about, viewport, fov, motion }) {
   // Screen pixels to world units on the plane the character stands on.
   const worldPerPx = (2 * CAMERA_DISTANCE * Math.tan(MathUtils.degToRad(fov) / 2)) / viewport.height;
   const zoom = 1 + Math.sin(eased * Math.PI) * MID_ZOOM;
-  const scale =
-    Math.min((box.height * FILL) / SUBJECT.height, (box.width * FILL) / SUBJECT.width) * worldPerPx * zoom;
+  const scale = Math.min((box.height * FILL) / SUBJECT.height, (box.width * FILL) / SUBJECT.width) * worldPerPx * zoom;
 
   const visible =
     box.y + box.height / 2 > 0 && box.y - box.height / 2 < viewport.height && box.width > 0 && box.height > 0;

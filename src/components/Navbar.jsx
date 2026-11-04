@@ -57,7 +57,12 @@ export default function Navbar({ name, inert, homeHref = '' }) {
         Skip to content
       </a>
       <div className="site-header__inner container">
-        <a className="site-header__brand" href={`${homeHref}#top`} aria-label={homeHref ? `${name}, home` : `${name}, back to top`} data-magnetic>
+        <a
+          className="site-header__brand"
+          href={`${homeHref}#top`}
+          aria-label={homeHref ? `${name}, home` : `${name}, back to top`}
+          data-magnetic
+        >
           BS
         </a>
 

@@ -24,7 +24,13 @@ export default function CopyButton({ text, label, className = '' }) {
 
   return (
     <>
-      <button type="button" className={className} onClick={copy} data-copied={copied ? 'true' : undefined} data-magnetic>
+      <button
+        type="button"
+        className={className}
+        onClick={copy}
+        data-copied={copied ? 'true' : undefined}
+        data-magnetic
+      >
         {copied ? 'Copied' : label}
       </button>
       <span className="visually-hidden" role="status">

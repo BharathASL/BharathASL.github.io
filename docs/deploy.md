@@ -61,3 +61,23 @@ v1 is kept at the `v1` tag.
 2. In **Settings → Pages**, set **Source** to "Deploy from a branch", branch `v1-site`, folder `/ (root)`.
 
 To go back to v2 afterwards, set **Source** to **GitHub Actions** again and re-run the latest `Deploy` run on `main`.
+
+## Share preview and icons
+
+- `public/social-preview.jpg` is the 1200x630 image shown when the site is shared. It is rendered from `scripts/social-image/template.html`, which has its own copy of the name, role and tagline. After changing those, or swapping the character, update the template and run:
+
+  ```bash
+  npm install --no-save playwright
+  ```
+
+  ```bash
+  npx playwright install chromium
+  ```
+
+  ```bash
+  node scripts/social-image/render.mjs
+  ```
+
+- Page titles, descriptions and canonical links live in each page's HTML file (`index.html`, `projects/index.html`). The Open Graph and Twitter tags are generated from them at build time by `scripts/seo-head.js`.
+- Icons (`favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`) are in `public/`. `robots.txt` and `sitemap.xml` are there too; add new pages to the sitemap.
+- To check how a shared link looks after launch, use the [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/).

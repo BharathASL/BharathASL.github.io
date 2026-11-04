@@ -1,0 +1,36 @@
+.role-rotator {
+  margin: 0;
+}
+
+/* Every role sits in the same grid cell, so the box keeps the size of the longest one. */
+.role-rotator__track {
+  display: inline-grid;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.role-rotator__item {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(100%);
+  transition:
+    opacity 0.5s ease,
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.role-rotator__item.is-active {
+  opacity: 1;
+  transform: none;
+}
+
+.role-rotator__item.is-leaving {
+  transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .role-rotator__item {
+    transform: none;
+    transition: none;
+  }
+}

@@ -6,6 +6,7 @@ import Navbar from './components/Navbar.jsx';
 import Cursor from './components/Cursor.jsx';
 import { followSystemTheme } from './theme/theme.js';
 import Section from './components/layout/Section.jsx';
+import Hero from './sections/Hero.jsx';
 import { useDownload } from './hooks/useDownload.js';
 import { useReducedMotion } from './hooks/useReducedMotion.js';
 import { useSmoothScroll } from './hooks/useSmoothScroll.js';
@@ -49,32 +50,21 @@ export default function App() {
       <Cursor />
       <Navbar name={profile.name} inert={!introReady} />
       <main id="main" tabIndex={-1} inert={!introReady} className={introReady ? 'is-ready' : undefined}>
-        <Section id="top" className="placeholder" labelledBy="intro-title">
-          <div className="split">
-            <div className="placeholder__text stack">
-              <p className="text-label">{profile.role}</p>
-              <h1 id="intro-title" className="text-display">
-                {profile.name}
-              </h1>
-              <p className="text-lead">{profile.tagline}</p>
-            </div>
-            <div className="scene" aria-hidden="true">
-              {use3d ? (
-                <ErrorBoundary fallback={<CharacterFallback />} onError={showFallback}>
-                  <Suspense fallback={null}>
-                    <CharacterScene
-                      modelUrl={model.objectUrl}
-                      onProgress={handleProgress}
-                      onContextLost={showFallback}
-                    />
-                  </Suspense>
-                </ErrorBoundary>
-              ) : (
-                <CharacterFallback />
-              )}
-            </div>
-          </div>
-        </Section>
+        <Hero
+          ready={introReady}
+          nextId={navigation[0]?.id}
+          scene={
+            use3d ? (
+              <ErrorBoundary fallback={<CharacterFallback />} onError={showFallback}>
+                <Suspense fallback={null}>
+                  <CharacterScene modelUrl={model.objectUrl} onProgress={handleProgress} onContextLost={showFallback} />
+                </Suspense>
+              </ErrorBoundary>
+            ) : (
+              <CharacterFallback />
+            )
+          }
+        />
         {navigation.map((item) => (
           <Section key={item.id} id={item.id} className="placeholder-section" labelledBy={`${item.id}-title`}>
             <h2 id={`${item.id}-title`}>{item.label}</h2>

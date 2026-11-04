@@ -11,6 +11,7 @@ export const profile = {
   location: 'India',
   tagline: 'I build software across web, cloud, data and Android.',
   roles: ['Full-Stack Developer', 'Android Developer', 'Backend & Cloud Engineer'],
+  aboutHeading: 'From backend systems to the phone in your pocket.',
   about: [
     `I’m a full-stack developer who has spent the last ${YEARS}+ years shipping software for insurance, finance, sustainability, e-commerce and mobile products.`,
     'I’ve built REST and SOAP backends, enterprise systems and real-time prototypes, processed petabyte-scale data, and led small teams. Today I work on core features of an Android keyboard used by a large audience.',

@@ -25,7 +25,7 @@ Dates are `YYYY-MM` strings. `end: null` means "Present". Lists are ordered newe
 
 ## `sections.js`
 
-`sections`: `{ label, title, intro? }` for each section, keyed by section (`services`, `career`, `work`, `stack`, `contact`).
+`sections`: `{ label, title, intro? }` for each section, keyed by section (`services`, `career`, `work`, `stack`, `contact`, `projects`).
 
 ## `experience.js`
 

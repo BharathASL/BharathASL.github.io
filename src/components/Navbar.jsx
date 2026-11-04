@@ -8,7 +8,8 @@ import './Navbar.css';
 
 const SECTION_IDS = navigation.map((item) => item.id);
 
-export default function Navbar({ name, inert }) {
+// On other pages, homeHref points the links back to the sections on the home page.
+export default function Navbar({ name, inert, homeHref = '' }) {
   const [open, setOpen] = useState(false);
   const scrolled = useScrolled();
   const active = useActiveSection(SECTION_IDS);
@@ -56,7 +57,7 @@ export default function Navbar({ name, inert }) {
         Skip to content
       </a>
       <div className="site-header__inner container">
-        <a className="site-header__brand" href="#top" aria-label={`${name}, back to top`} data-magnetic>
+        <a className="site-header__brand" href={`${homeHref}#top`} aria-label={homeHref ? `${name}, home` : `${name}, back to top`} data-magnetic>
           BS
         </a>
 
@@ -67,7 +68,7 @@ export default function Navbar({ name, inert }) {
                 <a
                   ref={index === 0 ? firstLink : undefined}
                   className="site-nav__link"
-                  href={`#${item.id}`}
+                  href={`${homeHref}#${item.id}`}
                   aria-current={active === item.id ? 'true' : undefined}
                   onClick={() => setOpen(false)}
                 >

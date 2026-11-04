@@ -42,6 +42,15 @@ export default function App() {
 
   useEffect(() => followSystemTheme(), []);
 
+  // The loader locks scrolling, so a link like /#career from another page can only jump once it has gone.
+  useEffect(() => {
+    if (!introReady || !window.location.hash) return undefined;
+    const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+    if (!target) return undefined;
+    const frame = requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
+    return () => cancelAnimationFrame(frame);
+  }, [introReady]);
+
   const reducedMotion = useReducedMotion();
   useSmoothScroll({ enabled: !reducedMotion, paused: !introReady });
 

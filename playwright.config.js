@@ -1,0 +1,32 @@
+import { defineConfig, devices } from '@playwright/test';
+
+// Smoke tests across browsers and screen sizes, against the production build.
+// Run locally with `npm run test:browsers` (needs `npx playwright install` once).
+export default defineConfig({
+  testDir: 'tests',
+  fullyParallel: true,
+  forbidOnly: Boolean(process.env.CI),
+  retries: process.env.CI ? 1 : 0,
+  reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'list',
+  timeout: 60_000,
+  use: {
+    baseURL: 'http://localhost:4173',
+    trace: 'retain-on-failure',
+  },
+  webServer: {
+    command: 'npm run build && npm run preview -- --port 4173 --strictPort',
+    url: 'http://localhost:4173',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120_000,
+  },
+  projects: [
+    { name: 'chrome', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
+    { name: 'edge', use: { ...devices['Desktop Edge'], channel: undefined, viewport: { width: 1366, height: 768 } } },
+    { name: 'firefox', use: { ...devices['Desktop Firefox'], viewport: { width: 1440, height: 900 } } },
+    { name: 'safari', use: { ...devices['Desktop Safari'], viewport: { width: 1440, height: 900 } } },
+    { name: 'wide', use: { ...devices['Desktop Chrome'], viewport: { width: 2560, height: 1440 } } },
+    { name: 'android', use: { ...devices['Pixel 7'] } },
+    { name: 'iphone', use: { ...devices['iPhone 15'] } },
+    { name: 'tablet', use: { ...devices['iPad (gen 7)'] } },
+  ],
+});

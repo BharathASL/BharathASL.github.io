@@ -41,3 +41,6 @@ coverage/
 
 # Ignore IDE/editor-specific files
 .idea/
+# Playwright
+test-results/
+playwright-report/

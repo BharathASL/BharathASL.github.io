@@ -6,7 +6,7 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import prettier from 'eslint-config-prettier';
 
 export default [
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'test-results', 'playwright-report'] },
   js.configs.recommended,
   {
     files: ['**/*.{js,jsx}'],
@@ -32,7 +32,7 @@ export default [
     ...reactRefresh.configs.vite,
   },
   {
-    files: ['scripts/**/*.{js,mjs}', 'vite.config.js', 'eslint.config.js'],
+    files: ['scripts/**/*.{js,mjs}', 'tests/**/*.js', 'vite.config.js', 'eslint.config.js', 'playwright.config.js'],
     languageOptions: { globals: globals.node },
   },
   // Turns off style rules that Prettier handles.

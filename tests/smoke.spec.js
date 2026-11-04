@@ -1,0 +1,97 @@
+import { test, expect } from '@playwright/test';
+
+const THEMES = ['dark', 'light'];
+
+// Collects page errors and console errors, so a test can check none happened.
+function watchErrors(page) {
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  page.on('console', (message) => message.type() === 'error' && errors.push(message.text()));
+  return errors;
+}
+
+// Starts with a theme, on the first load only, so a reload still shows what the visitor picked.
+async function startWithTheme(page, theme) {
+  await page.addInitScript((value) => {
+    if (sessionStorage.getItem('test-theme-set')) return;
+    localStorage.setItem('theme', value);
+    sessionStorage.setItem('test-theme-set', '1');
+  }, theme);
+}
+
+async function openHome(page, theme) {
+  await startWithTheme(page, theme);
+  await page.goto('/');
+  await expect(page.locator('main')).toHaveClass(/is-ready/, { timeout: 30_000 });
+}
+
+const noSidewaysScroll = (page) => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+
+for (const theme of THEMES) {
+  test.describe(`${theme} theme`, () => {
+    test('home page loads with every section', async ({ page }) => {
+      const errors = watchErrors(page);
+      await openHome(page, theme);
+
+      await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+      await expect(page.getByRole('heading', { level: 1 })).toContainText('Bharath S');
+      for (const id of ['about', 'services', 'career', 'work', 'stack', 'contact']) {
+        await expect(page.locator(`#${id}`)).toHaveCount(1);
+      }
+      // Either the 3D character or its image stand-in is on the page.
+      await expect(page.locator('.scene-layer canvas, .scene__fallback').first()).toBeAttached();
+      expect(await noSidewaysScroll(page)).toBeLessThanOrEqual(0);
+      expect(errors).toEqual([]);
+    });
+
+    test('everything is visible after scrolling through', async ({ page }) => {
+      await openHome(page, theme);
+      const height = await page.evaluate(() => document.documentElement.scrollHeight);
+      for (let y = 0; y <= height; y += 500) {
+        await page.evaluate((top) => window.scrollTo(0, top), y);
+        await page.waitForTimeout(50);
+      }
+      await page.waitForTimeout(1500);
+      const hidden = await page.evaluate(
+        () =>
+          [...document.querySelectorAll('[data-reveal]')].filter((element) => getComputedStyle(element).opacity === '0')
+            .length,
+      );
+      expect(hidden).toBe(0);
+      expect(await noSidewaysScroll(page)).toBeLessThanOrEqual(0);
+    });
+
+    test('projects page lists projects', async ({ page }) => {
+      const errors = watchErrors(page);
+      await startWithTheme(page, theme);
+      await page.goto('/projects/');
+      await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+      expect(await page.locator('.projects-grid .project-card').count()).toBeGreaterThan(0);
+      await expect(page.getByRole('link', { name: /back to home/i })).toHaveAttribute('href', '/');
+      expect(await noSidewaysScroll(page)).toBeLessThanOrEqual(0);
+      expect(errors).toEqual([]);
+    });
+  });
+}
+
+test('theme toggle switches and remembers the theme', async ({ page }) => {
+  await openHome(page, 'dark');
+  await page.getByRole('button', { name: /switch to light theme/i }).click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+});
+
+test('navigation reaches the contact section', async ({ page, isMobile }) => {
+  await openHome(page, 'dark');
+  const menu = page.getByRole('button', { name: /open menu/i });
+  if (isMobile || (await menu.isVisible())) await menu.click();
+  await page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Contact' }).click();
+  await expect(page.locator('#contact-title')).toBeInViewport({ timeout: 10_000 });
+});
+
+test('unknown addresses show the 404 page', async ({ page }) => {
+  await page.goto('/404.html');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(/doesn.t exist/);
+  await expect(page.getByRole('link', { name: 'Back to home' })).toHaveAttribute('href', '/');
+});

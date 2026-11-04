@@ -60,7 +60,7 @@ Project:
 | `experienceId` | string, optional | Links a work project to its experience entry |
 | `links` | `{ github?, live?, … }` | https URLs |
 | `cover` | image or `null` | |
-| `todo` | boolean, optional | Placeholder still waiting for details |
+| `todo` | boolean, optional | Placeholder still waiting for details. Shown while developing, hidden on the live site |
 
 ## `skills.js`
 

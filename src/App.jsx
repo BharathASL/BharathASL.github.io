@@ -10,6 +10,7 @@ import Hero from './sections/Hero.jsx';
 import About from './sections/About.jsx';
 import Services from './sections/Services.jsx';
 import Career from './sections/Career.jsx';
+import Work from './sections/Work.jsx';
 import { useDownload } from './hooks/useDownload.js';
 import { useReducedMotion } from './hooks/useReducedMotion.js';
 import { useSmoothScroll } from './hooks/useSmoothScroll.js';
@@ -20,7 +21,7 @@ import { navigation } from './data/navigation.js';
 
 const CharacterScene = lazy(() => import('./three/CharacterScene.jsx'));
 const DOWNLOAD_SHARE = 95;
-const BUILT_SECTIONS = new Set(['about', 'career']);
+const BUILT_SECTIONS = new Set(['about', 'career', 'work']);
 
 export default function App() {
   const [use3d, setUse3d] = useState(supportsWebGL);
@@ -72,6 +73,7 @@ export default function App() {
         <About />
         <Services />
         <Career />
+        <Work />
         {navigation
           .filter((item) => !BUILT_SECTIONS.has(item.id))
           .map((item) => (

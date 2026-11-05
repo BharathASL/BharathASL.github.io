@@ -28,7 +28,10 @@ function useWorkStrip(section, viewport, track, progress) {
           start: 'top top',
           end: () => `+=${distance()}`,
           pin: true,
-          scrub: 0.6,
+          // Get the pin ready a frame early, so it does not jump when the section reaches the top.
+          anticipatePin: 1,
+          // Lenis already eases the page scroll, so a short catch-up here is enough on top of it.
+          scrub: 0.3,
           invalidateOnRefresh: true,
           onUpdate: (self) => progress.current?.style.setProperty('--strip-progress', self.progress.toFixed(4)),
         },

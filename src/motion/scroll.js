@@ -10,6 +10,9 @@ const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: r
 // Scrolls to the top: smoothly through Lenis when it is running, otherwise with the browser's own scrolling.
 export function scrollToTop() {
   if (lenis) {
+    // Sync Lenis with where the page really is first. If the page jumped some other way (End key, scrollbar)
+    // while Lenis was still finishing an earlier glide to the top, it would think it is already there and skip.
+    lenis.reset();
     lenis.scrollTo(0);
     return;
   }

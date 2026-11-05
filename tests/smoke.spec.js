@@ -129,6 +129,8 @@ for (const path of ['/', '/projects/', '/404.html']) {
       await expect.poll(scrollY).toBeGreaterThan(0);
       await backToTop.click();
       await expect.poll(scrollY, { timeout: 10_000 }).toBeLessThan(5);
+      // Let the smooth scroll finish: until it does, Lenis overrides any other scrolling.
+      await expect(page.locator('html')).not.toHaveClass(/lenis-scrolling/, { timeout: 5_000 });
     }
   });
 }

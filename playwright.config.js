@@ -28,7 +28,8 @@ export default defineConfig({
     { name: 'safari', use: { ...devices['Desktop Safari'], viewport: { width: 1440, height: 900 } } },
     { name: 'wide', use: { ...devices['Desktop Chrome'], viewport: { width: 2560, height: 1440 } } },
     { name: 'android', use: { ...devices['Pixel 7'] } },
-    { name: 'iphone', use: { ...devices['iPhone 15'] } },
+    // At 1x: CI's WebKit draws on the CPU, and at the phone's real 3x density it runs out of memory while scrolling.
+    { name: 'iphone', use: { ...devices['iPhone 15'], deviceScaleFactor: 1 } },
     // iPad size in Chromium: CI's WebKit draws on the CPU and is too slow at this high-density size to be reliable.
     // WebKit itself is covered by the safari and iphone projects.
     { name: 'tablet', use: { ...devices['iPad (gen 7)'], browserName: 'chromium' } },

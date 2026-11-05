@@ -3,6 +3,9 @@ import { test, expect } from '@playwright/test';
 
 // Turns the 3D scene on in browsers without a graphics card, so tests also cover the page with the canvas.
 const fakeGpu = readFileSync(new URL('./support/fake-gpu.js', import.meta.url), 'utf8');
+// Turns it off. CI's WebKit has no graphics card but does not say so, and drawing the 3D scene on the CPU makes
+// every step very slow, so tests about layout and scrolling run without it.
+const noWebgl = readFileSync(new URL('./support/no-webgl.js', import.meta.url), 'utf8');
 
 const THEMES = ['dark', 'light'];
 
@@ -24,6 +27,7 @@ async function startWithTheme(page, theme) {
 }
 
 async function openHome(page, theme) {
+  await page.addInitScript(noWebgl);
   await startWithTheme(page, theme);
   await page.goto('/');
   await expect(page.locator('main')).toHaveClass(/is-ready/, { timeout: 30_000 });
@@ -55,8 +59,7 @@ for (const theme of THEMES) {
       expect(errors).toEqual([]);
     });
 
-    test('everything is visible after scrolling through', async ({ page, browserName }) => {
-      test.slow(browserName === 'webkit', 'WebKit draws the 3D scene in software in CI');
+    test('everything is visible after scrolling through', async ({ page }) => {
       await openHome(page, theme);
       const height = await page.evaluate(() => document.documentElement.scrollHeight);
       for (let y = 0; y <= height; y += 500) {
@@ -100,8 +103,7 @@ test('theme toggle switches and remembers the theme', async ({ page }) => {
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 });
 
-test('navigation reaches the contact section', async ({ page, browserName }) => {
-  test.slow(browserName === 'webkit', 'WebKit draws the 3D scene in software in CI');
+test('navigation reaches the contact section', async ({ page }) => {
   await openHome(page, 'dark');
   // Narrow screens use the menu button; tablets and up show the links directly.
   const menu = page.getByRole('button', { name: /open menu/i });
@@ -111,8 +113,10 @@ test('navigation reaches the contact section', async ({ page, browserName }) => 
 });
 
 for (const path of ['/', '/projects/', '/404.html']) {
-  test(`back to top returns to the top of ${path}`, async ({ page }) => {
-    await page.addInitScript(fakeGpu);
+  test(`back to top returns to the top of ${path}`, async ({ page, browserName }) => {
+    // With the 3D scene on, because its canvas once covered the footer and swallowed the click. That is plain
+    // CSS stacking, the same in every engine, so WebKit (very slow with 3D in CI) checks the scrolling without it.
+    await page.addInitScript(browserName === 'webkit' ? noWebgl : fakeGpu);
     await page.goto(path);
     if (path === '/') {
       await expect(page.locator('main')).toHaveClass(/is-ready/, { timeout: 30_000 });

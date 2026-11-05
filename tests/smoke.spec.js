@@ -9,19 +9,6 @@ const noWebgl = readFileSync(new URL('./support/no-webgl.js', import.meta.url), 
 
 const THEMES = ['dark', 'light'];
 
-// CI's WebKit redraws blurred see-through layers (the header once scrolled) on the CPU every scroll frame, which
-// can crash it. Blur is plain CSS that looks the same in every engine, so WebKit tests run without it.
-async function skipBlurInWebkit(page, browserName) {
-  if (browserName !== 'webkit') return;
-  await page.addInitScript(() => {
-    document.addEventListener('DOMContentLoaded', () => {
-      const style = document.createElement('style');
-      style.textContent = '*, *::before, *::after { backdrop-filter: none !important; }';
-      document.head.append(style);
-    });
-  });
-}
-
 // Collects page errors and console errors, so a test can check none happened.
 function watchErrors(page) {
   const errors = [];
@@ -41,7 +28,6 @@ async function startWithTheme(page, theme) {
 
 async function openHome(page, theme) {
   await page.addInitScript(noWebgl);
-  await skipBlurInWebkit(page, page.context().browser()?.browserType().name());
   await startWithTheme(page, theme);
   await page.goto('/');
   await expect(page.locator('main')).toHaveClass(/is-ready/, { timeout: 30_000 });
@@ -151,7 +137,6 @@ for (const path of ['/', '/projects/', '/404.html']) {
     // CSS stacking, the same in every engine, so WebKit (very slow with 3D in CI) checks the scrolling without it.
     test.slow(browserName === 'webkit');
     await page.addInitScript(browserName === 'webkit' ? noWebgl : fakeGpu);
-    await skipBlurInWebkit(page, browserName);
     await page.goto(path);
     if (path === '/') {
       await expect(page.locator('main')).toHaveClass(/is-ready/, { timeout: 30_000 });

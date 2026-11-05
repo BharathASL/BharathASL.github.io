@@ -18,7 +18,7 @@ The site has three pages, all built from the Vite config:
 
 ## Preview a build
 
-Manual runs appear under **Actions → Deploy → Run workflow** once the workflow is on `main`, which happens at launch. Before that, preview locally:
+Manual runs from **Actions → Deploy → Run workflow** on any branch other than `main` build a preview without publishing it. To preview locally instead:
 
 ```bash
 npm ci
@@ -38,15 +38,13 @@ To check a `site-preview` download from a manual run, unzip it and serve the fol
 npx serve site-preview
 ```
 
-## Launch day
+## Making changes
 
-Until launch, GitHub Pages keeps serving v1 straight from the `main` branch. To switch to v2:
+v2 is live, and GitHub Pages is set to deploy from GitHub Actions.
 
-1. Make sure CI is green on `redesign/v2`.
-2. Right before merging, in **Settings → Pages → Build and deployment**, change **Source** from "Deploy from a branch" to **GitHub Actions**. Doing this first matters: if `main` changed while Pages still deployed from the branch, it would publish the unbuilt source files.
-3. Merge the launch pull request from `redesign/v2` into `main`.
-4. Watch **Actions → Deploy**. When it finishes, the run links to the live site.
-5. Check the home page, `/projects/` and a made-up address such as `/nope` (should show the 404 page), in both themes and on a phone.
+1. Branch from `main` and open a pull request back into `main`.
+2. Wait for both CI jobs (`check` and `browsers`) to pass before merging. Merging early ships untested changes straight to the live site.
+3. Merging deploys automatically. Watch **Actions → Deploy**, then check the live site.
 
 ## Rolling back to v1
 
@@ -80,4 +78,4 @@ To go back to v2 afterwards, set **Source** to **GitHub Actions** again and re-r
 
 - Page titles, descriptions and canonical links live in each page's HTML file (`index.html`, `projects/index.html`). The Open Graph and Twitter tags are generated from them at build time by `scripts/seo-head.js`.
 - Icons (`favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`) are in `public/`. `robots.txt` and `sitemap.xml` are there too; add new pages to the sitemap.
-- To check how a shared link looks after launch, use the [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/).
+- To check how a shared link looks, use the [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/).

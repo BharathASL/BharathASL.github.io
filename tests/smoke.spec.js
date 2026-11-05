@@ -1,4 +1,8 @@
+import { readFileSync } from 'node:fs';
 import { test, expect } from '@playwright/test';
+
+// Turns the 3D scene on in browsers without a graphics card, so tests also cover the page with the canvas.
+const fakeGpu = readFileSync(new URL('./support/fake-gpu.js', import.meta.url), 'utf8');
 
 const THEMES = ['dark', 'light'];
 
@@ -51,7 +55,8 @@ for (const theme of THEMES) {
       expect(errors).toEqual([]);
     });
 
-    test('everything is visible after scrolling through', async ({ page }) => {
+    test('everything is visible after scrolling through', async ({ page, browserName }) => {
+      test.slow(browserName === 'webkit', 'WebKit draws the 3D scene in software in CI');
       await openHome(page, theme);
       const height = await page.evaluate(() => document.documentElement.scrollHeight);
       for (let y = 0; y <= height; y += 500) {
@@ -95,7 +100,8 @@ test('theme toggle switches and remembers the theme', async ({ page }) => {
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 });
 
-test('navigation reaches the contact section', async ({ page }) => {
+test('navigation reaches the contact section', async ({ page, browserName }) => {
+  test.slow(browserName === 'webkit', 'WebKit draws the 3D scene in software in CI');
   await openHome(page, 'dark');
   // Narrow screens use the menu button; tablets and up show the links directly.
   const menu = page.getByRole('button', { name: /open menu/i });
@@ -106,22 +112,24 @@ test('navigation reaches the contact section', async ({ page }) => {
 
 for (const path of ['/', '/projects/', '/404.html']) {
   test(`back to top returns to the top of ${path}`, async ({ page }) => {
+    await page.addInitScript(fakeGpu);
     await page.goto(path);
-    if (path === '/') await expect(page.locator('main')).toHaveClass(/is-ready/, { timeout: 30_000 });
-    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
-    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
-    await page
-      .getByRole('contentinfo')
-      .getByRole('link', { name: /back to top/i })
-      .click();
-    await expect.poll(() => page.evaluate(() => window.scrollY), { timeout: 10_000 }).toBeLessThan(5);
-    // Clicking again from the bottom must work too, not only the first time.
-    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
-    await page
-      .getByRole('contentinfo')
-      .getByRole('link', { name: /back to top/i })
-      .click();
-    await expect.poll(() => page.evaluate(() => window.scrollY), { timeout: 10_000 }).toBeLessThan(5);
+    if (path === '/') {
+      await expect(page.locator('main')).toHaveClass(/is-ready/, { timeout: 30_000 });
+      await expect(page.locator('.loader')).toHaveCount(0, { timeout: 15_000 });
+    }
+    const toBottom = () =>
+      page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
+    const backToTop = page.getByRole('contentinfo').getByRole('link', { name: /back to top/i });
+    const scrollY = () => page.evaluate(() => window.scrollY);
+
+    // Twice, because clicking again from the bottom must work too. A real click, so nothing may cover the link.
+    for (let attempt = 0; attempt < 2; attempt += 1) {
+      await toBottom();
+      await expect.poll(scrollY).toBeGreaterThan(0);
+      await backToTop.click();
+      await expect.poll(scrollY, { timeout: 10_000 }).toBeLessThan(5);
+    }
   });
 }
 

@@ -32,7 +32,9 @@ export default function CharacterScene({ modelUrl, hero, about, onProgress, onCo
   return (
     <div className="scene-layer__canvas">
       <ProgressReporter onProgress={onProgress} />
+      {/* The library makes its canvas clickable by default; this one sits behind the page and must never be. */}
       <Canvas
+        style={{ pointerEvents: 'none' }}
         dpr={lowPower ? [1, 1.25] : [1, 1.5]}
         frameloop={animate && !lowPower ? 'always' : 'demand'}
         camera={CAMERA}

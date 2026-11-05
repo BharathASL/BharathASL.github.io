@@ -1,4 +1,7 @@
 .site-footer {
+  /* Above the fixed 3D layer, like the sections. */
+  position: relative;
+  z-index: 1;
   border-top: 1px solid var(--color-border);
   padding-block: var(--space-7);
   color: var(--color-text-muted);

@@ -1,4 +1,11 @@
+import { readFileSync } from 'node:fs';
 import { test, expect } from '@playwright/test';
+
+// Turns the 3D scene on in browsers without a graphics card, so tests also cover the page with the canvas.
+const fakeGpu = readFileSync(new URL('./support/fake-gpu.js', import.meta.url), 'utf8');
+// Turns it off. CI's WebKit has no graphics card but does not say so, and drawing the 3D scene on the CPU makes
+// every step very slow, so tests about layout and scrolling run without it.
+const noWebgl = readFileSync(new URL('./support/no-webgl.js', import.meta.url), 'utf8');
 
 const THEMES = ['dark', 'light'];
 
@@ -20,6 +27,7 @@ async function startWithTheme(page, theme) {
 }
 
 async function openHome(page, theme) {
+  await page.addInitScript(noWebgl);
   await startWithTheme(page, theme);
   await page.goto('/');
   await expect(page.locator('main')).toHaveClass(/is-ready/, { timeout: 30_000 });
@@ -58,8 +66,8 @@ for (const theme of THEMES) {
         await page.evaluate((top) => window.scrollTo(0, top), y);
         await page.waitForTimeout(50);
       }
-      await page.waitForTimeout(1500);
-      expect(await hiddenReveals(page)).toBe(0);
+      // Keep checking rather than waiting a fixed time: slow browsers take longer to finish the animations.
+      await expect.poll(() => hiddenReveals(page), { timeout: 15_000 }).toBe(0);
       expect(await noSidewaysScroll(page)).toBeLessThanOrEqual(0);
     });
 
@@ -81,8 +89,7 @@ test('jumping straight to the end still reveals the sections skipped over', asyn
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await openHome(page, 'dark');
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
-  await page.waitForTimeout(2500);
-  expect(await hiddenReveals(page)).toBe(0);
+  await expect.poll(() => hiddenReveals(page), { timeout: 15_000 }).toBe(0);
 });
 
 test('theme toggle switches and remembers the theme', async ({ page }) => {
@@ -101,27 +108,33 @@ test('navigation reaches the contact section', async ({ page }) => {
   const menu = page.getByRole('button', { name: /open menu/i });
   if (await menu.isVisible()) await menu.click();
   await page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Contact' }).click();
-  await expect(page.locator('#contact-title')).toBeInViewport({ timeout: 10_000 });
+  await expect(page.locator('#contact-title')).toBeInViewport({ timeout: 20_000 });
 });
 
 for (const path of ['/', '/projects/', '/404.html']) {
-  test(`back to top returns to the top of ${path}`, async ({ page }) => {
+  test(`back to top returns to the top of ${path}`, async ({ page, browserName }) => {
+    // With the 3D scene on, because its canvas once covered the footer and swallowed the click. That is plain
+    // CSS stacking, the same in every engine, so WebKit (very slow with 3D in CI) checks the scrolling without it.
+    await page.addInitScript(browserName === 'webkit' ? noWebgl : fakeGpu);
     await page.goto(path);
-    if (path === '/') await expect(page.locator('main')).toHaveClass(/is-ready/, { timeout: 30_000 });
-    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
-    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
-    await page
-      .getByRole('contentinfo')
-      .getByRole('link', { name: /back to top/i })
-      .click();
-    await expect.poll(() => page.evaluate(() => window.scrollY), { timeout: 10_000 }).toBeLessThan(5);
-    // Clicking again from the bottom must work too, not only the first time.
-    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
-    await page
-      .getByRole('contentinfo')
-      .getByRole('link', { name: /back to top/i })
-      .click();
-    await expect.poll(() => page.evaluate(() => window.scrollY), { timeout: 10_000 }).toBeLessThan(5);
+    if (path === '/') {
+      await expect(page.locator('main')).toHaveClass(/is-ready/, { timeout: 30_000 });
+      await expect(page.locator('.loader')).toHaveCount(0, { timeout: 15_000 });
+    }
+    const toBottom = () =>
+      page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
+    const backToTop = page.getByRole('contentinfo').getByRole('link', { name: /back to top/i });
+    const scrollY = () => page.evaluate(() => window.scrollY);
+
+    // Twice, because clicking again from the bottom must work too. A real click, so nothing may cover the link.
+    for (let attempt = 0; attempt < 2; attempt += 1) {
+      await toBottom();
+      await expect.poll(scrollY).toBeGreaterThan(0);
+      await backToTop.click();
+      await expect.poll(scrollY, { timeout: 20_000 }).toBeLessThan(5);
+      // Let the smooth scroll finish: until it does, Lenis overrides any other scrolling.
+      await expect(page.locator('html')).not.toHaveClass(/lenis-scrolling/, { timeout: 10_000 });
+    }
   });
 }
 

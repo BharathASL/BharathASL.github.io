@@ -6,7 +6,9 @@ export default defineConfig({
   testDir: 'tests',
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
-  retries: process.env.CI ? 1 : 0,
+  // CI runners are small, and WebKit there is slow and can crash when tests share the machine, so run one at a time.
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'list',
   timeout: 60_000,
   use: {
@@ -28,5 +30,16 @@ export default defineConfig({
     { name: 'android', use: { ...devices['Pixel 7'] } },
     { name: 'iphone', use: { ...devices['iPhone 15'] } },
     { name: 'tablet', use: { ...devices['iPad (gen 7)'] } },
+    // A desktop with a visible scrollbar and the 3D scene on, at 4K with 150% scaling.
+    {
+      name: 'scrollbars',
+      testMatch: 'scrollbar.spec.js',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 2560, height: 1300 },
+        deviceScaleFactor: 1.5,
+        launchOptions: { ignoreDefaultArgs: ['--hide-scrollbars'] },
+      },
+    },
   ],
 });

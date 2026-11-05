@@ -17,6 +17,7 @@ import { useDownload } from './hooks/useDownload.js';
 import { useReducedMotion } from './hooks/useReducedMotion.js';
 import { useSmoothScroll } from './hooks/useSmoothScroll.js';
 import { useScrollReveal } from './hooks/useScrollReveal.js';
+import { ScrollTrigger } from './motion/gsap.js';
 import { supportsWebGL } from './utils/webgl.js';
 import { CHARACTER_MODEL_URL } from './utils/assets.js';
 import { profile } from './data/profile.js';
@@ -45,6 +46,14 @@ export default function App() {
   const hideLoader = useCallback(() => setLoaderVisible(false), []);
 
   useEffect(() => followSystemTheme(), []);
+
+  // The loader locks scrolling, which hides the scrollbar and makes the page wider. Scroll animations measured
+  // then (like the pinned work strip) would stay one scrollbar too wide, so measure again once it has gone.
+  useEffect(() => {
+    if (loaderVisible) return undefined;
+    const frame = requestAnimationFrame(() => ScrollTrigger.refresh());
+    return () => cancelAnimationFrame(frame);
+  }, [loaderVisible]);
 
   // The loader locks scrolling, so a link like /#career from another page can only jump once it has gone.
   useEffect(() => {

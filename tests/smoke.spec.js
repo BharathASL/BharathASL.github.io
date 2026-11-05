@@ -66,8 +66,8 @@ for (const theme of THEMES) {
         await page.evaluate((top) => window.scrollTo(0, top), y);
         await page.waitForTimeout(50);
       }
-      await page.waitForTimeout(1500);
-      expect(await hiddenReveals(page)).toBe(0);
+      // Keep checking rather than waiting a fixed time: slow browsers take longer to finish the animations.
+      await expect.poll(() => hiddenReveals(page), { timeout: 15_000 }).toBe(0);
       expect(await noSidewaysScroll(page)).toBeLessThanOrEqual(0);
     });
 
@@ -89,8 +89,7 @@ test('jumping straight to the end still reveals the sections skipped over', asyn
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await openHome(page, 'dark');
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
-  await page.waitForTimeout(2500);
-  expect(await hiddenReveals(page)).toBe(0);
+  await expect.poll(() => hiddenReveals(page), { timeout: 15_000 }).toBe(0);
 });
 
 test('theme toggle switches and remembers the theme', async ({ page }) => {
@@ -109,7 +108,7 @@ test('navigation reaches the contact section', async ({ page }) => {
   const menu = page.getByRole('button', { name: /open menu/i });
   if (await menu.isVisible()) await menu.click();
   await page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Contact' }).click();
-  await expect(page.locator('#contact-title')).toBeInViewport({ timeout: 10_000 });
+  await expect(page.locator('#contact-title')).toBeInViewport({ timeout: 20_000 });
 });
 
 for (const path of ['/', '/projects/', '/404.html']) {
@@ -132,9 +131,9 @@ for (const path of ['/', '/projects/', '/404.html']) {
       await toBottom();
       await expect.poll(scrollY).toBeGreaterThan(0);
       await backToTop.click();
-      await expect.poll(scrollY, { timeout: 10_000 }).toBeLessThan(5);
+      await expect.poll(scrollY, { timeout: 20_000 }).toBeLessThan(5);
       // Let the smooth scroll finish: until it does, Lenis overrides any other scrolling.
-      await expect(page.locator('html')).not.toHaveClass(/lenis-scrolling/, { timeout: 5_000 });
+      await expect(page.locator('html')).not.toHaveClass(/lenis-scrolling/, { timeout: 10_000 });
     }
   });
 }

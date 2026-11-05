@@ -6,7 +6,9 @@ export default defineConfig({
   testDir: 'tests',
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
-  retries: process.env.CI ? 1 : 0,
+  // CI runners are small, and WebKit there is slow and can crash when tests share the machine, so run one at a time.
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'list',
   timeout: 60_000,
   use: {

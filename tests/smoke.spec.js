@@ -25,6 +25,13 @@ async function openHome(page, theme) {
   await expect(page.locator('main')).toHaveClass(/is-ready/, { timeout: 30_000 });
 }
 
+const hiddenReveals = (page) =>
+  page.evaluate(
+    () =>
+      [...document.querySelectorAll('[data-reveal]')].filter((element) => getComputedStyle(element).opacity === '0')
+        .length,
+  );
+
 const noSidewaysScroll = (page) => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
 
 for (const theme of THEMES) {
@@ -52,12 +59,7 @@ for (const theme of THEMES) {
         await page.waitForTimeout(50);
       }
       await page.waitForTimeout(1500);
-      const hidden = await page.evaluate(
-        () =>
-          [...document.querySelectorAll('[data-reveal]')].filter((element) => getComputedStyle(element).opacity === '0')
-            .length,
-      );
-      expect(hidden).toBe(0);
+      expect(await hiddenReveals(page)).toBe(0);
       expect(await noSidewaysScroll(page)).toBeLessThanOrEqual(0);
     });
 
@@ -74,18 +76,30 @@ for (const theme of THEMES) {
   });
 }
 
+test('jumping straight to the end still reveals the sections skipped over', async ({ page }) => {
+  // Reduced motion turns off smooth scrolling, so the jump is instant like an End key or scrollbar drag.
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await openHome(page, 'dark');
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  await page.waitForTimeout(2500);
+  expect(await hiddenReveals(page)).toBe(0);
+});
+
 test('theme toggle switches and remembers the theme', async ({ page }) => {
   await openHome(page, 'dark');
-  await page.getByRole('button', { name: /switch to light theme/i }).click();
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  const toggle = page.getByRole('button', { name: /switch to light theme/i });
+  await expect(toggle).toBeEnabled();
+  await toggle.click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light', { timeout: 10_000 });
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 });
 
-test('navigation reaches the contact section', async ({ page, isMobile }) => {
+test('navigation reaches the contact section', async ({ page }) => {
   await openHome(page, 'dark');
+  // Narrow screens use the menu button; tablets and up show the links directly.
   const menu = page.getByRole('button', { name: /open menu/i });
-  if (isMobile || (await menu.isVisible())) await menu.click();
+  if (await menu.isVisible()) await menu.click();
   await page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Contact' }).click();
   await expect(page.locator('#contact-title')).toBeInViewport({ timeout: 10_000 });
 });

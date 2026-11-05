@@ -11,7 +11,8 @@ import './Career.css';
 const copy = sections.career;
 // The line fills up to this point on screen, and each dot lights up as the line reaches it.
 const DRAW_POINT = 'top 60%';
-const DOT_MARGIN = '0px 0px -40% 0px';
+// Everything above the draw point, including far above the screen, so dots skipped over in a jump still light up.
+const DOT_MARGIN = '100000px 0px -40% 0px';
 
 // Grows each company's timeline line with the scroll and marks the projects it has reached.
 function useTimelineDraw(root, enabled) {
@@ -34,8 +35,8 @@ function useTimelineDraw(root, enabled) {
     // A dot is reached once its project's top is above the draw point, and stays reached when it scrolls off the top.
     const dots = new IntersectionObserver(
       (entries) => {
-        entries.forEach(({ target, boundingClientRect, rootBounds }) => {
-          target.classList.toggle('is-reached', boundingClientRect.top < rootBounds.bottom);
+        entries.forEach(({ target, isIntersecting }) => {
+          target.classList.toggle('is-reached', isIntersecting);
         });
       },
       { rootMargin: DOT_MARGIN },

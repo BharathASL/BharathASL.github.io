@@ -18,7 +18,7 @@ export default function NotFoundPage() {
       <Cursor />
       <Navbar name={profile.name} homeHref={HOME} />
       <main id="main" tabIndex={-1} className="not-found">
-        <div className="not-found__inner container">
+        <div id="top" className="not-found__inner container">
           <p className="not-found__code" aria-hidden="true">
             404
           </p>

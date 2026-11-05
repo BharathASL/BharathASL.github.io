@@ -104,6 +104,27 @@ test('navigation reaches the contact section', async ({ page }) => {
   await expect(page.locator('#contact-title')).toBeInViewport({ timeout: 10_000 });
 });
 
+for (const path of ['/', '/projects/', '/404.html']) {
+  test(`back to top returns to the top of ${path}`, async ({ page }) => {
+    await page.goto(path);
+    if (path === '/') await expect(page.locator('main')).toHaveClass(/is-ready/, { timeout: 30_000 });
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+    await page
+      .getByRole('contentinfo')
+      .getByRole('link', { name: /back to top/i })
+      .click();
+    await expect.poll(() => page.evaluate(() => window.scrollY), { timeout: 10_000 }).toBeLessThan(5);
+    // Clicking again from the bottom must work too, not only the first time.
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    await page
+      .getByRole('contentinfo')
+      .getByRole('link', { name: /back to top/i })
+      .click();
+    await expect.poll(() => page.evaluate(() => window.scrollY), { timeout: 10_000 }).toBeLessThan(5);
+  });
+}
+
 test('unknown addresses show the 404 page', async ({ page }) => {
   await page.goto('/404.html');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(/doesn.t exist/);
